@@ -1,0 +1,238 @@
+
+<section id="wrapper" class="login-register">
+    <div class="login-box" >
+        <div class="white-box">
+            <form class="form-horizontal form-material" style="display: block" id="loginform" #loginForm="ngForm" name="loginForm">
+                <h3 class="box-title m-b-20">Sign In</h3>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="email" name="email" required #emailId="ngModel" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$" [(ngModel)]="data.email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" name="password" required #userPass="ngModel" minlength="6" [(ngModel)]="data.password" placeholder="Password">
+                    </div>
+                    <div class="input-error" [hidden]="userPass.valid || userPass.untouched" *ngIf="environment.random.isBrowser">
+                        <div  *ngIf="userPass.errors && userPass.errors.required">
+                            Password is required
+                        </div>
+                        <div  *ngIf="userPass.errors && userPass.errors.minlength">
+                            Password need to be minimum 6 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary pull-left p-t-0">
+                            <input id="checkbox-login" type="checkbox" [(ngModel)]="data.remember" name="remember">
+                            <label for="checkbox-login"> Remember me </label>
+                        </div>
+                        <a href="javascript:void(0)" onclick="flipCom('recoverform','loginform')" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="loginMeIn(loginForm)" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Don't have an account? <a href="javascript:void(0)" class="text-primary m-l-5" onclick="flipCom('registerform','loginform')" (click)="_getCountry();"><b>Golf Course /</b></a> <a href="javascript:void(0)" class="text-primary m-l-5" onclick="flipCom('registerVForm','loginform')" (click)="_getCountry();"><b>Vendor</b></a></p>
+                    </div>
+                </div>
+
+            </form>
+            <form class="form-horizontal" id="recoverform" style="display: none">
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <h3>Recover Password</h3>
+                        <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required="" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Don't have an account? <a href="javascript:void(0)" class="text-primary m-l-5" onclick="flipCom('registerform','recoverform')"><b>Sign Up</b></a></p>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                    </div>
+                </div>
+            </form>
+
+            <form class="form-horizontal form-material" style="display: none" #registerForm="ngForm" name="registerForm" id="registerform">
+                <h3 class="box-title m-b-20">Sign In</h3>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.name" placeholder="Golf Course Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <p class="text-muted  font-13">Select Country</p>
+                        <select style="    width: 100%;" class="custom-select sources"  data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country" (change)="_getCity(data.country)">
+                            <ng-container *ngFor="let list of environment.random.countries">
+                                <option [value]="list.name">{{list.name}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <p class="text-muted  font-13">Select City</p>
+                        <select style="    width: 100%;" class="custom-select sources"  data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.city">
+
+                            <ng-container *ngFor="let list of environment.random.countries">
+
+                                <option [value]="list.name">{{list.capital}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <select class="custom-select sources" style="width:20%;float:left" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country" (change)="_getCity(data.country)">
+                            <ng-container *ngFor="let list of environment.random.countries">
+                                <option [value]="list.name">{{list.callingCodes[0]}}</option>
+                            </ng-container>
+                        </select>
+                        <input class="form-control" style="width:75%;float:right" type="text" required name="mobile" [(ngModel)]="data.mobile" placeholder="Mobile">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" #repassword type="password" required name="password" [(ngModel)]="data.password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" #newpassword type="password" required name="newpassword" [(ngModel)]="data.newpassword" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="input-error" [hidden]="newpassword.valid || newpassword.untouched">
+                    <div  *ngIf="data.newpassword != data.password">
+                        Password does not match
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input id="checkbox-register1" type="checkbox" required>
+                            <label for="checkbox-register1"> I agree to all <a href="javascript:void(0)" (click)="terms('checkbox-register1')">Terms</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="registerMeIn(registerForm)" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Already have an account? <a href="javascript:void(0)" onclick="flipCom('loginform','registerform')" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                    </div>
+                </div>
+            </form>
+
+            <form class="form-horizontal form-material" style="display: none" #registerVForm="ngForm" name="registerVForm" id="registerVForm">
+                <h3 class="box-title m-b-20">Sign In</h3>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.name" placeholder="Company Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.website_url" placeholder="Website URL">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+
+                        <select class="custom-select sources" style="width:45%" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country" >
+                            <ng-container *ngFor="let list of environment.random.countries">
+                                <option [value]="list.name">{{list.name}}</option>
+                            </ng-container>
+                        </select>
+
+
+                        <select class="custom-select sources" style="width:45%" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.city" >
+                            <ng-container *ngFor="let list of environment.random.countries">
+                                <option [value]="list.name">{{list.capital}}</option>
+                            </ng-container>
+                        </select>
+
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <select class="custom-select sources" style="width:20%;float:left" disabled data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country_code" (change)="_getCity(data.country)">
+                            <ng-container *ngFor="let list of environment.random.countries">
+                                <option [value]="list.name">{{list.callingCodes[0]}}</option>
+                            </ng-container>
+                        </select>
+                        <input class="form-control" style="width:75%;float:right" type="text" required name="mobile" [(ngModel)]="data.mobile" placeholder="Mobile">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" #repassword1 type="password" required name="password" [(ngModel)]="data.password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" #newpassword1 type="password" required name="password" [(ngModel)]="data.newpassword1" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="input-error" [hidden]="newpassword1.valid || newpassword1.untouched">
+                    <div  *ngIf="data.newpassword1 != data.password">
+                        Password does not match
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input id="checkbox-register" type="checkbox" required>
+                            <label for="checkbox-register"> I agree to all <a href="javascript:void(0)" (click)="terms('checkbox-register')">Terms</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="registerVendor(registerVForm)" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Already have an account? <a href="javascript:void(0)" onclick="flipCom('loginform','registerVform')" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>

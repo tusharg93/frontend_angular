@@ -1,0 +1,74 @@
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Section 3</h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section="ngForm" name="section" id="section">
+
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title"> No. of seasons</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+
+                                    <div class="str_rdio" *ngFor="let list of environment.random.keys.seasons;let i=index">
+                                        <input type="radio" id="control_{{i}}" name="selection_season" value="{{i+1}}" [(ngModel)]="data.noseason" (change)="setSeason()"  name="noseason">
+                                        <label for="control_{{i}}">
+                                            <h2>{{i+1}}</h2>
+                                            <!--<p>{{list.name}}</p>-->
+                                        </label>
+                                    </div>
+
+
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted">Choose </small>
+                            </div>
+
+
+                            <div class="form-group m-b-40" *ngFor="let list of data.seasonList;let i=index;">
+                                <h4 class="box-title">Season {{i+1}}</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    <select class="form-control p-0" (change)="disabledSeason(i)" style="width: 30%;float: left;" (ngInit)="initSeason(i,data.season_info[i].id)" [(ngModel)]="data.season_info[i].id" name="season_name{{i}}" required>
+                                        <ng-container *ngFor="let list of environment.random.keys.seasons;let j=index">
+                                            <option value="{{list.id}}"  class="season_cls{{list.id}}" id="season_cls{{i}}" selected="data.season_info[i].id==list.id">{{list.name}}</option>
+                                        </ng-container>
+                                    </select>
+
+                                        Start Date: <input type="text"  (change)="setEnd(i,'start_date','end_date'+i)"  (ngInit)="initFlatpicker('start_date'+i,data.season_info[i].start_date)" [(ngModel)]="data.season_info[i].start_date" class="flatpickr cls" placeholder="Select Date" name="start_time{{i}}" id="start_date{{i}}" />
+
+                                        End Date: <input type="text"   (change)="setEnd(i,'end_date','start_date'+(i+1),true)" (ngInit)="initFlatpicker('end_date'+i,data.season_info[i].end_date)" [(ngModel)]="data.season_info[i].end_date" class="flatpickr cls" placeholder="Select Date" name="end_time{{i}}" id="end_date{{i}}" />
+
+                                        <ng-container *ngIf="data.season_info[i].diff">No of Days: {{data.season_info[i].diff}}</ng-container>
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-2">Back</a></button>
+
+                                <button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info&&environment.random.userDetail.seasons_info.length == 0">Submit & Continue</button>
+
+                                <button style="    float: right;" type="submit" (click)="save(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info && environment.random.userDetail.seasons_info.length > 0">Update & Continue</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail&&environment.random.keys&&environment.random.keys['others']"></div>
+
+

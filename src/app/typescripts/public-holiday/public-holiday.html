@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Dashboard 1</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <a href="https://themeforest.net/item/elite-admin-responsive-dashboard-web-app-kit-/16750820" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Buy Now</a>
+            <ol class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+                <li class="active">Dashboard 1</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Holidays<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew()">Add New</button></h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section1="ngForm" name="section1" id="section1">
+
+
+                            <h3 class="box-title"></h3>
+
+                            <ng-container *ngFor="let list of data.holidays;let i=index">
+                                <div class="form-group m-b-5" >
+                                    <input type="text" class="form-control" style="float: left;width:45%;" placeholder="Holiday Name" [(ngModel)]="data.holidays[i].name" name="holidays_name" id="holidays_name{{i}}"><span class="highlight"></span> <span class="bar"></span>
+                                </div>
+                                <div class="form-group m-b-5" >
+                                    <input type="number" class="form-control cls" style="float: right;width:45%;" placeholder="Holiday Date" [(ngModel)]="data.holidays[i].date" name="holidays_date" rows="4" id="holidays_date{{i}}"><span class="highlight"></span> <span class="bar"></span>
+                                </div>
+
+
+                            </ng-container>
+
+                            <div style="height:100px"></div>
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-add-on">Back</a></button>
+
+                                <button style="    float: right;" type="submit" (click)="save(section1)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+
+

@@ -1,0 +1,153 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Add Ons</h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section="ngForm" name="section" id="section">
+
+                            <div class="form-group m-b-5" style="    width: 45%;float: left;">
+                                <h4 class="box-title">Price include</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    <ng-container *ngFor="let list of commodities;let i=index">
+                                        <ng-container *ngIf="i<5">
+                                            <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="{{i}}" id="{{i}}" class="js-switch" data-color="#3d3b3b" />
+
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group m-b-5" style="    width: 45%;float: right;">
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    <ng-container *ngFor="let list of commodities;let i=index">
+                                        <ng-container *ngIf="i>=5">
+                                            <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="{{5+i}}" id="{{5+i}}" class="js-switch" data-color="#3d3b3b" />
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group m-b-40" *ngIf="others">
+                                <h4 class="box-title">Others</h4>
+
+
+                                <div class="form-group m-b-40">
+                                    <input type="text" [(ngModel)]="data.others" class="form-control" id="hole_9_price" required="" name="hole_9_price">
+                                    <span class="highlight"></span> <span class="bar">Seperate by comma </span>
+                                    <label for="hole_9_price">Others</label>
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div style="height:50px"></div>
+                            <div class="form-group m-b-5">
+                                <textarea class="form-control" [(ngModel)]="data.cancel_policy" name="cancel_policy" rows="4" id="cancel_policy" required></textarea><span class="highlight"></span> <span class="bar"></span>
+                                <label for="cancel_policy">Cancellation Policy</label>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div style="height:50px"></div>
+                            <div class="form-group m-b-5">
+                                <textarea class="form-control" [(ngModel)]="data.tnc" name="tnc" rows="4" id="tnc" required></textarea><span class="highlight"></span> <span class="bar"></span>
+                                <label for="tnc">Any Other TNC</label>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title">Booking Condition</h4>
+                                <p class="text-muted  font-13"></p>
+                                <span style="width: 45%;float: left;">
+                                     Minimum Golfer Weekdays
+                                <select class="form-control p-0"   [(ngModel)]="data.min_weekdays" name="min_weekdays" required>
+                                    <ng-container *ngFor="let list of minGolf;let j=index">
+                                        <option value="{{list}}">{{list}}</option>
+                                    </ng-container>
+                                </select>
+                                </span>
+                               <span style="width: 45%;float: left;">
+                                   Minimum Golfer Weekend
+                                <select class="form-control p-0"   [(ngModel)]="data.min_weekends" name="min_weekends" required>
+                                    <ng-container *ngFor="let list of minGolf;let j=index">
+                                        <option value="{{list}}">{{list}}</option>
+                                    </ng-container>
+                                </select>
+                               </span>
+
+                            </div>
+
+                            <div style="height:100px"></div>
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-2">Back</a></button>
+
+                                <button style="    float: right;" type="submit" (click)="save(section)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Rentals<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew()">Add New</button></h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section1="ngForm" name="section1" id="section1">
+
+
+                            <h3 class="box-title"></h3>
+                            <ng-container *ngFor="let list of data.pricecommodities;let i=index">
+                                <div class="form-group m-b-5" >
+                                    <input type="text" class="form-control" disabled style="float: left;width:45%;" placeholder="Name" value="{{list.name}}" name="listdities_id{{i}}" id="listdities_id{{i}}">
+                                    <span class="highlight"></span> <span class="bar"></span>
+                                </div>
+                                <div class="form-group m-b-5" >
+                                    <input type="number" class="form-control" style="float: right;width:45%;" placeholder="Price" [(ngModel)]="data.pricecommodities[i].price" name="cancel_policy" rows="4" id="listdities_name{{i}}">
+                                    <!--<span class="highlight"></span> <span class="bar"></span>-->
+                                </div>
+
+
+                            </ng-container>
+                            <ng-container *ngFor="let list of data.newcommodities;let i=index">
+                                <div class="form-group m-b-5" >
+                                    <input type="text" class="form-control" style="float: left;width:45%;" placeholder="Name" [(ngModel)]="data.newcommodities[i].name" name="cancel_policy" rows="4" id="newcommodities_id{{i}}"><span class="highlight"></span> <span class="bar"></span>
+                                </div>
+                                <div class="form-group m-b-5" >
+                                    <input type="number" class="form-control" style="float: right;width:45%;" placeholder="Price" [(ngModel)]="data.newcommodities[i].price" name="cancel_policy" rows="4" id="newcommodities_name{{i}}"><span class="highlight"></span> <span class="bar"></span>
+                                </div>
+
+
+                            </ng-container>
+
+                            <div style="height:100px"></div>
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-4">Back</a></button>
+
+                                <button style="    float: right;" type="submit" (click)="saverental(section1)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+
+

@@ -1,0 +1,84 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Section 1</h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section_1="ngForm" name="section_1" id="section_1">
+                            <div class="form-group m-b-40">
+                                <select class="form-control p-0" id="input_6" [(ngModel)]="data.currency" name="currency" required>
+                                    <ng-container *ngFor="let list of currency">
+                                        <option value="{{list}}">{{list}}</option>
+                                    </ng-container>
+                                </select><span class="bar"></span>
+                                <small class="form-text text-muted">Select currency.</small>
+                                <label for="input_6">Currency</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <select class="form-control p-0" id="input_7" [(ngModel)]="data.timezone" name="timezone" required>
+                                    <ng-container *ngFor="let list of timezone">
+                                        <option value="{{list.offset}}" >{{list.text}}</option>
+                                    </ng-container>
+                                </select><span class="bar"></span>
+                                <small class="form-text text-muted">Select timezone.</small>
+                                <label for="input_7">Time Zone</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title">HOLES</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    9 holes <input type="checkbox" (change)="data.tee=1" [(ngModel)]="data.hole_9" [value]="true"  id="hole_9" name="9_holes" class="js-switch" data-color="#3d3b3b" />
+                                    18 holes <input type="checkbox" (change)="data.tee=1" [(ngModel)]="data.hole_18" [value]="true"  id="hole_18" name="18_holes" class="js-switch" data-color="#3d3b3b" />
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted">Type of holes you provide.</small>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <select class="form-control p-0" id="tee" [(ngModel)]="data.tee" required name="tee">
+                                    <ng-container *ngFor="let list of slotMonths">
+                                        <option value="{{list}}" *ngIf="!data.hole_18&&list<10">{{list}} Tee</option>
+                                        <option value="{{list}}" *ngIf="data.hole_18">{{list}} Tee</option>
+                                    </ng-container>
+                                </select><span class="bar"></span>
+                                <small class="form-text text-muted">Select starting tee slot.</small>
+                                <label for="tee">Start Tee</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title">PLAYER TYPES</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    Online <input type="checkbox" [(ngModel)]="data.online" [value]="true" name="online" id="online" class="js-switch" data-color="#3d3b3b" />
+                                    Member <input type="checkbox" [(ngModel)]="data.member" [value]="true" name="member" id="member" class="js-switch" data-color="#3d3b3b" />
+                                    Guest <input type="checkbox" [(ngModel)]="data.guest" [value]="true" name="guest" id="guest" class="js-switch" data-color="#3d3b3b" />
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted">Select to whom are the services provided.</small>
+                            </div>
+
+                            <div class="form-group m-b-40">
+                                <select class="form-control p-0" id="duration" name="slotMonths" [(ngModel)]="data.duration" required>
+                                    <ng-container *ngFor="let list of slotMonths">
+                                        <option value="{{list}}" *ngIf="list<13">{{list}} Months</option>
+                                    </ng-container>
+                                </select><span class="bar"></span>
+                                <small class="form-text text-muted">Slot you provide service.</small>
+                                <label for="duration">Slots</label>
+                            </div>
+
+                            <div class="form-group">
+                                <button style="    float: right;" type="submit" (click)="save_1(section_1)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.time_zone">Submit & Continue</button>
+
+                                <button style="    float: right;" type="submit" (click)="update(section_1)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.time_zone">Update & Continue</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>

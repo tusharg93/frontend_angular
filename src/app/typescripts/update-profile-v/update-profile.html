@@ -1,0 +1,116 @@
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Section 1</h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section="ngForm" name="section" id="section">
+                            <div class="form-group m-b-40">
+                                <textarea [(ngModel)]="data.about" class="form-control" id="about" required="" name="about"></textarea>
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="about">About</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <div *ngFor="let list of ">
+                                    <input type="text" [(ngModel)]="data.website_url" class="form-control" id="website_url" name="website_url">
+
+                                    <span class="bar"></span>
+                                    <small class="form-text text-muted"></small>
+                                    <label for="website_url">Website</label>
+                                </div>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <input type="text" [(ngModel)]="data.contact_name" class="form-control" id="contact_name" required="" name="contact_name">
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="contact_name">Contact Name</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <div *ngFor="let list of ">
+                                    <input type="text" [(ngModel)]="data.designation" class="form-control" id="designation"  name="designation">
+
+                                    <span class="bar"></span>
+                                    <small class="form-text text-muted"></small>
+                                    <label for="designation">Designation</label>
+                                </div>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <input type="number" [(ngModel)]="data.contact_mobile" class="form-control" id="contact_mobile" required="" name="contact_mobile">
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="contact_mobile">Mobile</label>
+                            </div>
+
+                            <div class="form-group m-b-40">
+                                <textarea [(ngModel)]="data.address_line_1" class="form-control" id="address_line_1" required="" name="address_line_1"></textarea>
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="address_line_1">Address 1</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <textarea [(ngModel)]="data.address_line_2" class="form-control" id="address_line_2"  name="address_line_2"></textarea>
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="address_line_2">Address 2</label>
+                            </div>
+
+                            <div class="form-group m-b-40">
+                                <input type="text" pattern='(^https://www.facebook.com/[A-Za-z0-9._%+-]+$|"")' [(ngModel)]="data.facebook_url" class="form-control" id="facebook_url"  name="facebook_url">
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="facebook_url">Facebook URL</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <input type="text" pattern='(^https://www.twitter.com/[A-Za-z0-9._%+-]+$|"")' [(ngModel)]="data.twitter_url" class="form-control" id="twitter_url" name="twitter_url">
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="twitter_url">Twitter URL</label>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <input type="text" pattern='(^https://www.instagram.com/[0-9A-z._-]+$|"")' [(ngModel)]="data.insta_url" class="form-control" id="insta_url" name="insta_url">
+
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                                <label for="insta_url">Instagram URL</label>
+                            </div>
+
+                            <h3 class="box-title">Week days Working Hours</h3>
+                            <div class="form-group m-b-40">
+                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekday_hrs.start_time" class="form-control cls_set" id="weekday_hrs_start_time" name="weekday_hrs_start_time">
+
+                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekday_hrs.end_time" class="form-control cls_set" id="weekday_hrs_end_time" name="weekday_hrs_end_time">
+                            </div>
+                            <h3 class="box-title">Weekend Working Hours</h3>
+                            <div class="form-group m-b-40">
+                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
+                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
+                            </div>
+                            <div class="form-group">
+                                <button style="    float: right;" type="submit" (click)="_saveAll(section)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+
+
+
+
+

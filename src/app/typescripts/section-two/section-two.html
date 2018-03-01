@@ -1,0 +1,100 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">Section 2</h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section2="ngForm" name="section2" id="section2">
+
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title">Weekdays</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    <ng-container *ngFor="let list of days">
+                                        {{list}}  <input type="checkbox" [id]="'w_'+list" (change)="clickMulti(list,'weekdays','we_')" [value]="list" name="weekdays"  id="weekdays{{list}}" class="js-switch" data-color="#3d3b3b" />
+                                    </ng-container>
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title">Weekend</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="switchery-demo m-b-30">
+                                    <ng-container *ngFor="let list of days">
+                                    {{list}} <input type="checkbox" [id]="'we_'+list" (change)="clickMulti(list,'weekends','w_')" [value]="list" name="weekdays" id="weekends{{list}}" class="js-switch" data-color="#3d3b3b" />
+                                    </ng-container>
+                                </div>
+                                <span class="bar"></span>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group m-b-40">
+                                <h4 class="box-title">Closed Days</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="str_rdio">
+                                    <input type="radio" [(ngModel)]="data.closedK"  [value]="true" name="closedK"  id="closedday" />
+                                    <label for="closedday">
+                                        <h2>Yes</h2>
+                                        <!--<p>{{list.name}}</p>-->
+                                    </label>
+                                </div>
+                                <div class="str_rdio">
+                                    <input type="radio"  [(ngModel)]="data.closedK" [value]="false"   name="closedK"  id="closedday1"  />
+                                    <label for="closedday1">
+                                        <h2>No</h2>
+                                        <!--<p>{{list.name}}</p>-->
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group m-b-40" [hidden]="!data.closedK">
+                                <select class="form-control p-0" id="input_7" [(ngModel)]="data.closed" name="closed" required>
+                                    <ng-container *ngFor="let list of days">
+                                        <option value="{{list}}" >{{list}}</option>
+                                    </ng-container>
+                                </select><span class="bar"></span>
+                                <small class="form-text text-muted">Select closeday.</small>
+                                <label for="input_7">Closed Day</label>
+                            </div>
+                            <div class="form-group m-b-40" [hidden]="!data.closedK">
+                                <h4 class="box-title">Closed For</h4>
+                                <p class="text-muted  font-13"></p>
+                                <div class="str_rdio">
+                                    <input type="radio" [(ngModel)]="data.full_day"  [value]="true" name="full_day"  id="fullday" />
+                                    <label for="fullday">
+                                        <h2>Full Day</h2>
+                                        <!--<p>{{list.name}}</p>-->
+                                    </label>
+                                </div>
+                                <div class="str_rdio">
+                                    <input type="radio" [(ngModel)]="data.full_day"  [value]="false" name="full_day"  id="halfday" />
+                                    <label for="halfday">
+                                        <h2>Half Day</h2>
+                                        <!--<p>{{list.name}}</p>-->
+                                    </label>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <button  type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-1">Back</a></button>
+                                <button style="    float: right;" type="submit" (click)="save_2(section2,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&!(environment.random.userDetail.weekends || environment.random.userDetail.gc_basic_info.weekdays)">Submit & Continue</button>
+
+                                <button style="    float: right;" type="submit" (click)="save_2(section2,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&(environment.random.userDetail.weekends || environment.random.userDetail.gc_basic_info.weekdays)">Update & Continue</button>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+
+
