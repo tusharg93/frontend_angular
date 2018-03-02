@@ -104,7 +104,7 @@ export class SectionAddOnComponent implements OnInit {
     }
     this.ApiService.postApiMc4k('api/v1/forms/rentals',{rentals:params},false,true).then((value)=>{
       if(value&&value.msg&&value.msg=="success"){
-        this._router.navigateByUrl('golf-course/update-profile');
+        this._router.navigateByUrl('golf-course/public-holiday');
       }
     });
   }

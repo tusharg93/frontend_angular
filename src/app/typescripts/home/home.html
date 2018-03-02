@@ -42,7 +42,7 @@
                 </div>
 
             </form>
-            <form class="form-horizontal" id="recoverform" style="display: none">
+            <form class="form-horizontal" id="recoverform" style="display: none" #recoverform="ngForm" name="recoverform">
                 <div class="form-group ">
                     <div class="col-xs-12">
                         <h3>Recover Password</h3>
@@ -183,7 +183,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <select class="custom-select sources" style="width:20%;float:left" disabled data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country_code" (change)="_getCity(data.country)">
+                        <select class="custom-select sources" style="width:20%;float:left"  data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country_code" (change)="_getCity(data.country)">
                             <ng-container *ngFor="let list of environment.random.countries">
                                 <option [value]="list.name">{{list.callingCodes[0]}}</option>
                             </ng-container>

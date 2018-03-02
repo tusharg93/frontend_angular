@@ -29,6 +29,7 @@ export class PublicHolidayComponent implements OnInit {
     this.environment.headerChild = [];
     this.data = new Array();
     this.data.holidays = new Array()
+    this.data.maintenance = new Array()
   }
 
   ngOnInit() {
@@ -44,20 +45,30 @@ export class PublicHolidayComponent implements OnInit {
   }
 
 
-   save(form){
-     swal('No api','pending','error');
-     let params = [];
+   save(form,type){
+     let params = {};
      if(form.valid){
-       this.ApiService.postApiMc4k('api/v1/forms/holidays',params,false,true).then((value)=>{
+       params['type'] = type?'holiday':'closed';
+        let data = type?this.data.holidays:this.data.maintenance;
+       for(var i in data){
+         if(data[i].name&&data[i].date){
+           params['data'] = params['data'] ?params['data']:[];
+           params['data'].push(data[i]);
+         }
+       }
+       this.ApiService.postApiMc4k('api/v1/slots/manage',params,false,true).then((value)=>{
 
        });
      }
 
    }
 
-  addNew(){
-    this.data.holidays.push({name:'',date:''});
-    flatpickr('.cls', {enableTime: false, minDate: new Date()});
+  addNew(type){
+    this.data[type].push({name:'',date:''});
+    setTimeout(function(){
+      flatpickr('.cls', {enableTime: false, minDate: new Date()});
+    },100)
+
   }
 
   setValue(){
@@ -66,8 +77,15 @@ export class PublicHolidayComponent implements OnInit {
     for(var i in data.holidays_info){
       this.data.holidays.push({name:data.holidays_info[i].name,date:data.holidays_info[i].date})
     }
+    for(var i in data.closed_info){
+      this.data.holidays.push({name:data.closed_info[i].name,date:data.closed_info[i].date})
+    }
+    console.log(this.data.holidays.length)
     if(this.data.holidays.length == 0){
-      this.addNew();
+      this.addNew('holidays');
+    }
+    if(this.data.maintenance.length == 0){
+      this.addNew('maintenance');
     }
   }
 

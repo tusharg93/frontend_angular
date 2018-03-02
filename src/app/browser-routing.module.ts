@@ -17,9 +17,7 @@ const routes:Routes = [
      { path: 'golf-course/section-3', loadChildren: './typescripts/section-three/section-three.module#SectionThreeModule', data: { name:'Golf', type:'Three' },pathMatch: 'full'},
 
      { path: 'golf-course/section-4', loadChildren: './typescripts/section-four/section-four.module#SectionFourModule', data: { name:'Golf', type:'Four' },pathMatch: 'full'},
-
-     { path: 'golf-course/section-5', loadChildren: './typescripts/section-five/section-five.module#SectionFiveModule', data: { name:'Golf', type:'Five' },pathMatch: 'full'},
-
+    
      { path: 'golf-course/section-add-on', loadChildren: './typescripts/section-add-on/section-add-on.module#SectionAddOnModule', data: { name:'Golf', type:'AddOn' },pathMatch: 'full'},
 
      { path: 'golf-course/dashboard', loadChildren: './typescripts/dashboard/dashboard.module#DashboardModule', data: { name:'Golf', type:'AddOn' },pathMatch: 'full'},

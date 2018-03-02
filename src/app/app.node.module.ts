@@ -16,7 +16,7 @@ import { AppComponent } from './index';
 import { HomeComponent } from './typescripts/home/home.component';
 import { CookieService } from 'angular2-cookie/core';
 import { HeaderComponent } from './typescripts/header/header.component';
-import { GolfComponent} from './typescripts/golf/golf.component';
+import { ServerCombineDirectiveModule} from './typescripts/directive-modules/server-combine.module';
 
 import { StorageService } from './typescripts/common/services/storage.service';
 
@@ -28,15 +28,17 @@ import { ApiService } from './typescripts/common/services/api.service';
 import { ServerRoutingModule } from './server-routing.module';
 
 
+
 @NgModule({
     bootstrap: [ AppComponent],
     imports: [
         UniversalModule,   
         FormsModule,
-        ServerRoutingModule
+        ServerRoutingModule,
+        ServerCombineDirectiveModule
     ],
     declarations: [
-        AppComponent, HomeComponent,HeaderComponent,GolfComponent
+        AppComponent, HomeComponent,HeaderComponent
 
     ],
     providers: [StorageService, ApiService, CookieService],

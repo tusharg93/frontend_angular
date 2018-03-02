@@ -42,11 +42,6 @@ export class UpdateProfileComponent implements OnInit {
   ngOnInit() {
     this._storage.userChecker(false).then((val)=>{
       switchMaker();
-      let time = new Date(new Date().getTime() + 4*60*60*1000).toLocaleTimeString();
-
-      flatpickr('.cls_set', {
-        noCalendar: true, enableTime: true, time_24hr: true, defaultHour: time
-      });
     })
 
 
@@ -127,14 +122,7 @@ export class UpdateProfileComponent implements OnInit {
         }
       }
     }
-    for(var i in this.course){
-      for(var j in this.data.course){
-        if(this.course[i] == this.data.course[j]){
-          $('#course'+i).click();
-        }
-      }
-
-    }
+    
   }
 
 

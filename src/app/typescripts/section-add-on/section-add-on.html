@@ -134,10 +134,10 @@
                             <div style="height:100px"></div>
 
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-4">Back</a></button>
-
-                                <button style="    float: right;" type="submit" (click)="saverental(section1)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                            <div class="form-group bk">
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="golf-course/section-4">Back</a></button>
+                                <button style="    float: right;" type="submit" (click)="saverental(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.tnc">Update & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="saverental(section1,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&!environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.tnc">Submit & Continue</button>
                             </div>
                         </form>
                     </div>

@@ -59,7 +59,7 @@ export class SectionTwoComponent implements OnInit {
 
 
   save_2(form,update){
-    console.log(this.data)
+    
     let sum = this.data.weekdays.length+this.data.weekends.length;
 
     if (form.valid&&sum== 7) {

@@ -23,21 +23,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this._storage.userChecker(false).then((val)=>{
        if(val){
-         this.ApiService.getApiMc4k('api/v1/forms/defaults',0,true).then((value)=>{
-           if(value&&value.data){
-             this.environment.random.keys = value.data;
-             this.environment.random.keys['others'] = new Array();
-             let param = [];
-             for(var i in this.environment.random.keys){
-               for(var j in this.environment.random.keys[i]){
-                 param[this.environment.random.keys[i][j].name] = this.environment.random.keys[i][j].id;
-                 param[this.environment.random.keys[i][j].id] = this.environment.random.keys[i][j].name;
-               }
-
-             }
-             this.environment.random.keys['others']  = param;
-           }
-         });
 
        }
     })
@@ -45,6 +30,21 @@ export class HeaderComponent implements OnInit {
   }
 
   dashboard(){
+    this.ApiService.getApiMc4k('api/v1/forms/defaults',0,true).then((value)=>{
+      if(value&&value.data){
+        this.environment.random.keys = value.data;
+        this.environment.random.keys['others'] = new Array();
+        let param = [];
+        for(var i in this.environment.random.keys){
+          for(var j in this.environment.random.keys[i]){
+            param[this.environment.random.keys[i][j].name] = this.environment.random.keys[i][j].id;
+            param[this.environment.random.keys[i][j].id] = this.environment.random.keys[i][j].name;
+          }
+
+        }
+        this.environment.random.keys['others']  = param;
+      }
+    });
     this.ApiService.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
       if(value&&value.data){
         this.environment.random.userDetail = value.data;

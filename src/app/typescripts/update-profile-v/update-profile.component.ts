@@ -39,11 +39,6 @@ export class UpdateProfileComponent implements OnInit {
   ngOnInit() {
     this._storage.userChecker(false).then((val)=>{
       switchMaker();
-      let time = new Date(new Date().getTime() + 4*60*60*1000).toLocaleTimeString();
-
-      flatpickr('.cls_set', {
-        noCalendar: true, enableTime: true, time_24hr: true, defaultHour: time
-      });
     })
 
 

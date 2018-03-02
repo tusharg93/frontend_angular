@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Renderer , ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef , ViewEncapsulation } from '@angular/core';
 import { ApiService } from './../common/services/api.service';
 import { StorageService } from './../common/services/storage.service';
 import { environment } from '../../../environments/environment';
@@ -29,7 +29,7 @@ export class SectionThreeComponent implements OnInit {
   days:any;
   slotTime:any;
   minGolf:any;
-  constructor(private _storage:StorageService,private _router:Router,private renderer: Renderer, private ApiService: ApiService) {
+  constructor(private ref:ChangeDetectorRef,private _storage:StorageService,private _router:Router, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
     this.data = new Array();
@@ -67,11 +67,9 @@ export class SectionThreeComponent implements OnInit {
 
       }
       if(total>364){
-        this._router.navigateByUrl('golf-course/section-4');
         if(!update){
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
-              this._storage.userDetail({season_info:this.data.season_info});
               this._router.navigateByUrl('golf-course/section-4');
             }else{
               swal('Error', value.error,'error')
@@ -80,7 +78,6 @@ export class SectionThreeComponent implements OnInit {
         }else{
           this.ApiService.putApiMc4k('api/v1/forms/3',{seasons:params},0).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
-              this._storage.userDetail({season_info:this.data.season_info});
               this._router.navigateByUrl('golf-course/section-4');
             }else{
               swal('Error', value.error,'error')
@@ -97,15 +94,38 @@ export class SectionThreeComponent implements OnInit {
   
 
   setSeason(){
+    let self = this;
+   if(this.data['noseason']){
+     swal({
+           title: "Are you sure?",
+           text: "All previous data will be erased",
+           type: "warning",
+           showCancelButton: true,
+           confirmButtonClass: "btn-danger",
+           confirmButtonText: "Yes, rewrite it!",
+           closeOnConfirm: false
+         },
+         function(){
+           self.setSeas();
+           self.setNext();
+         });
+   }else{
+     self.setSeas();
+     self.setNext();
+   }
+
+  }
+
+  setSeas(){
     this.data.seasonList = new Array();
     this.data.season_info = new Array();
     for(var i=0;i < this.data['noseason'];i++){
       this.data.seasonList.push(i);
-      this.data.season_info.push({rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}});
+      this.data.season_info.push({rates:[{day_type:1,hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:'nn',hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}});
     }
-
-    this.setNext()
   }
+
+
 
   disabledSeason(key){
     let _self=this;
@@ -154,16 +174,18 @@ export class SectionThreeComponent implements OnInit {
   }
 
   setValue(){
-    this.data['season_info'] = new Array();this.data.seasonList = new Array();
+    this.data['season_info'] = new Array();
+    this.data.seasonList = new Array();
     let data = this.environment.random.userDetail;
     for(var i in data.seasons_info){
         let pr = data.seasons_info[i];
         var d = new Date();
         var n = d.getFullYear();
-        let params = {id:pr.id,name:this.environment.random.keys['others'][pr.id],start_date:n+'-'+pr.start_date,end_date:(n+1)+'-'+pr.end_date,type:null,rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}};
+        let params = {uid:pr.id,id:pr.season_id,name:this.environment.random.keys['others'][pr.season_id],start_date:n+'-'+pr.start_date,end_date:(n+1)+'-'+pr.end_date,type:null,rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}};
         this.data['season_info'][i] = params;
         this.data.seasonList.push(i);
         this.dateDiff(this,i);
+      
     }
     this.data.noseason = this.data.seasonList.length;
   }

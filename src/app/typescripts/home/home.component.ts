@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
       this.environment.random.source ='vendor';
       let params = {name:this.data.name,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:this.data.country_code, email:this.data.email, password:this.data.password, website_url:this.data.website_url}
       this.ApiService.postApiMc4k('api/v1/vendors/register', params).then((value)=> {
-        if(value&&value.data){
+        if(value&&value.msg=='success'){
           swal("Success", value.msg, "success")
         }else{
           swal("Error", value.error, "error")

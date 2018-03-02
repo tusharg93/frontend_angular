@@ -33,20 +33,17 @@ export class SectionFourComponent implements OnInit {
   constructor(private _storage:StorageService,private _router:Router,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
     this.data = new Array();
-    this.data.season = [];
+    this.data.season = new Array();
+    this.data.season_info = new Array();
     this.slotTime = new Array(5,10,15,20);
     this.minGolf = new Array(1,2,3,4);
     this.next = 0;
   }
 
   ngOnInit() {
-      this.data = this.environment.random.userDetail;
-    
+
     this._storage.promLogIn().then((val)=>{
-      if(val){
-        let time = new Date(new Date().getTime() + 4*60*60*1000).toLocaleTimeString();
-        flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
-      }
+      
     })
   }
 
@@ -79,33 +76,36 @@ export class SectionFourComponent implements OnInit {
   }
 
 
-  setFlact(){
-
-    let time = new Date(new Date().getTime() + 4*60*60*1000).toLocaleTimeString();
-    flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
+  setFlact(id){
+    console.log(id)
+    flatpickr('#'+id, {noCalendar: true, enableTime: true, time_24hr: true});
 
   }
 
   setValue(){
-    // let data = this.environment.random.userDetail;let params =[];
-    // for(let i in data.seasons_info){
-    //   let pr = data.seasons_info[i];
-    //   params.push({id:pr.season_id,uid:pr.id,start_time:pr.start_time,end_time:pr.end_time,interval:pr.tee_interval,maintenance:{start_time:pr.maintenance_stime,end_time:pr.maintenance_etime}});
-    //   params[i].rates = [];
-    //   for(var i in data.rates_info){
-    //     let pr1 = data.rates_info[i];
-    //     if(pr1){
-    //       if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
-    //         params[i].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekday'});
-    //       }
-    //       if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
-    //         params[i].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
-    //
-    //       }
-    //     }
-    //
-    //    }
-    // }
+    let data = this.environment.random.userDetail;let params =[];
+    for(let i in data.seasons_info){
+      let pr = data.seasons_info[i];
+      params.push({id:pr.season_id,uid:pr.id,start_time:pr.start_time,end_time:pr.end_time,interval:pr.tee_interval,maintenance:{start_time:pr.maintenance_stime,end_time:pr.maintenance_etime}});
+      params[i].rates = [];
+      for(var j in data.rates_info){
+        params[j] = [];
+        params[j].rates = [];
+        let pr1 = data.rates_info[j];
+        if(pr1){
+          if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
+            params[j].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekday'});
+          }
+          if(this.environment.random.keys['others']['weekend'] == pr1.day_type){
+            params[j].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
+
+          }
+        }
+
+       }
+    }
+    this.data.season_info = params;
+    console.log(this.data.season_info)
   }
 
   
