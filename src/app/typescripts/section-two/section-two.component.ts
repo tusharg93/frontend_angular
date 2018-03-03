@@ -90,14 +90,16 @@ export class SectionTwoComponent implements OnInit {
         this.ApiService.putApiMc4k('api/v1/forms/2',params,0).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
             this._storage.userDetail(params);
-            this._router.navigateByUrl('golf-course/section-3');
+            // this._router.navigateByUrl('golf-course/section-3');
+            this.ApiService.userDetail('golf-course/section-3');
           }
         });
       }else{
         this.ApiService.postApiMc4k('api/v1/forms/2',params,false,true).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
             this._storage.userDetail(params);
-            this._router.navigateByUrl('golf-course/section-3');
+            // this._router.navigateByUrl('golf-course/section-3');
+            this.ApiService.userDetail('golf-course/section-3');
           }
         });
       }
@@ -131,20 +133,35 @@ export class SectionTwoComponent implements OnInit {
 
   setValue(){
     let data = this.environment.random.userDetail;
-    let params = {weekdays:data.gc_basic_info.weekdays.split(','),weekends:data.gc_basic_info.weekends.split(','),closed:data.gc_basic_info.maintenance_day?[{day:data.gc_basic_info.maintenance_day,fullday:data.gc_basic_info.maintenance_type}]:null};
-    for(var i in params.weekdays){
-      this.data['weekdays'].push(params.weekdays[i]);
+    let params = {};
+    if(data.gc_basic_info.weekdays){
+      params['weekdays'] = data.gc_basic_info.weekdays.split(',')
+
+    }
+  if(data.gc_basic_info.weekends){
+      params['weekends'] = data.gc_basic_info.weekends  .split(',')
+    }
+
+    if(data.gc_basic_info.maintenance_day){
+      params['closed'] = data.gc_basic_info.maintenance_day?[{day:data.gc_basic_info.maintenance_day,fullday:data.gc_basic_info.maintenance_type}]:null;
+
+  }
+  for(var i in params['weekdays']){
+      this.data['weekdays'].push(params['weekdays'][i]);
       $('#weekdays'+this.data['weekdays'][i]).click();
+      $('#weekends'+this.data['weekdays'][i]).next().addClass('disabled');
     }
-    for(var i in params.weekends){
-      this.data['weekends'].push(params.weekends[i]);
+    for(var i in params['weekends']){
+      this.data['weekends'].push(params['weekends'][i]);
       $('#weekends'+this.data['weekends'][i]).click();
+      $('#weekdays'+this.data['weekends'][i]).next().addClass('disabled');
     }
-    if(params.closed){
-      this.data['closed'] = params.closed;
+
+    if(params['closed']){
       this.data.closedK = true;
       this.data.closed = data.gc_basic_info.maintenance_day;
       this.data.full_day = data.gc_basic_info.maintenance_type;
+      
     }
 
 

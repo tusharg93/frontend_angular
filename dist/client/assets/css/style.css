@@ -219,3 +219,38 @@ input:-webkit-autofill:active {
     width: 45%;
     float: left;
 }
+
+.chk_rg{
+    float: right;
+    /* padding-right: 30px; */
+    right: 80px;
+}
+
+.chk_spn span{
+    float: right;
+    /* padding-right: 30px; */
+    right: 80px;
+}
+
+.ovrlay{
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0,.8);
+    z-index: 999999;
+    font-size: 17px;
+    height: 100%;
+    top: 0;
+    overflow-y: scroll;
+    left: 0;
+}
+
+.cropArea, .cropArea-article {
+    height: 100%;
+    overflow: hidden;
+    width: 90%;
+    margin: 65px auto;
+}
+
+.ng2-imgcrop canvas{
+    margin-left: 100px;
+}

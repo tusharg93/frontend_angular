@@ -21,6 +21,7 @@ import { DateConvertorDirectiveModule } from '../directive-modules/date-converto
 import { NgInitDirectiveModule } from '../directive-modules/ng-init.module';
 import { FormsModule } from '@angular/forms';
 
+import {ImageModule} from '../common/modules/image.module';
 @NgModule({
   imports: [
 
@@ -42,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     DateConvertorDirectiveModule,
 
     NgInitDirectiveModule,
+    ImageModule
 
   ],
   declarations: [

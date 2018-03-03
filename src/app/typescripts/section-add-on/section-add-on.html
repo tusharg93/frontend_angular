@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" id="add-on-section" style="display: block;">
         <div class="col-sm-12">
             <div class="white-box p-l-20 p-r-20">
                 <h3 class="box-title m-b-0">Add Ons</h3>
@@ -8,33 +8,36 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form class="floating-labels " #section="ngForm" name="section" id="section">
+                            <div style="height:280px">
+                                <div class="form-group m-b-5" style="    width: 45%;float: left;">
+                                    <h4 class="box-title">Price include</h4>
+                                    <p class="text-muted  font-13"></p>
+                                    <div class="switchery-demo m-b-30">
+                                        <ng-container *ngFor="let list of commodities;let i=index">
+                                            <ng-container *ngIf="i<5">
+                                                <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="ck{{i}}" id="ck{{i}}" class="js-switch" data-color="#3d3b3b" />
 
-                            <div class="form-group m-b-5" style="    width: 45%;float: left;">
-                                <h4 class="box-title">Price include</h4>
-                                <p class="text-muted  font-13"></p>
-                                <div class="switchery-demo m-b-30">
-                                    <ng-container *ngFor="let list of commodities;let i=index">
-                                        <ng-container *ngIf="i<5">
-                                            <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="{{i}}" id="{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
 
-                                        </ng-container>
-                                    </ng-container>
+                                    <span class="bar"></span>
+                                    <small class="form-text text-muted"></small>
                                 </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                            </div>
-                            <div class="form-group m-b-5" style="    width: 45%;float: right;">
-                                <p class="text-muted  font-13"></p>
-                                <div class="switchery-demo m-b-30">
-                                    <ng-container *ngFor="let list of commodities;let i=index">
-                                        <ng-container *ngIf="i>=5">
-                                            <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="{{5+i}}" id="{{5+i}}" class="js-switch" data-color="#3d3b3b" />
+                                <div class="form-group m-b-5" style="    width: 45%;float: right;">
+                                    <p class="text-muted  font-13"></p>
+                                    <div class="switchery-demo m-b-30">
+                                        <ng-container *ngFor="let list of commodities;let i=index">
+                                            <ng-container *ngIf="i>=5">
+                                                <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="{{5+i}}" id="{{5+i}}" class="js-switch" data-color="#3d3b3b" />
+                                            </ng-container>
                                         </ng-container>
-                                    </ng-container>
+                                    </div>
+                                    <span class="bar"></span>
+                                    <small class="form-text text-muted"></small>
                                 </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
                             </div>
+
                             <div class="form-group m-b-40" *ngIf="others">
                                 <h4 class="box-title">Others</h4>
 
@@ -87,9 +90,10 @@
 
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-2">Back</a></button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-4">Back</a></button>
+                                <button style="    float: right;" type="submit" (click)="save(section,true)" class="btn btn-success waves-effect waves-light m-r-10"  *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info.cancel_policy&&environment.random.userDetail.gc_basic_info.cancel_policy">Update & Continue</button>
 
-                                <button style="    float: right;" type="submit" (click)="save(section)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="save(section)" class="btn btn-success waves-effect waves-light m-r-10"  *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info.cancel_policy&&!environment.random.userDetail.gc_basic_info.cancel_policy">Submit & Continue</button>
                             </div>
                         </form>
                     </div>
@@ -97,7 +101,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="rental-section" style="display: none;">
         <div class="col-sm-12">
             <div class="white-box p-l-20 p-r-20">
                 <h3 class="box-title m-b-0">Rentals<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew()">Add New</button></h3>
@@ -108,36 +112,42 @@
 
 
                             <h3 class="box-title"></h3>
-                            <ng-container *ngFor="let list of data.pricecommodities;let i=index">
-                                <div class="form-group m-b-5" >
-                                    <input type="text" class="form-control" disabled style="float: left;width:45%;" placeholder="Name" value="{{list.name}}" name="listdities_id{{i}}" id="listdities_id{{i}}">
-                                    <span class="highlight"></span> <span class="bar"></span>
-                                </div>
-                                <div class="form-group m-b-5" >
-                                    <input type="number" class="form-control" style="float: right;width:45%;" placeholder="Price" [(ngModel)]="data.pricecommodities[i].price" name="cancel_policy" rows="4" id="listdities_name{{i}}">
-                                    <!--<span class="highlight"></span> <span class="bar"></span>-->
-                                </div>
+                            <div style="height:200px">
+                                <ng-container *ngFor="let list of data.pricecommodities;let i=index">
+                                    <div class="form-group m-b-5" style="    background-color: white;">
+                                        <input type="text" class="form-control" disabled style="float: left;width:45%;background-color: white;" placeholder="Name" value="{{list.name}}" name="listdities_id{{i}}" id="listdities_id{{i}}">
+                                        <span class="highlight"></span> <span class="bar"></span>
+                                    </div>
+                                    <div class="form-group m-b-5" >
+                                        <input type="number" class="form-control" style="float: right;width:45%;" placeholder="Price" [(ngModel)]="data.pricecommodities[i].price" name="cancel_policy" rows="4" id="listdities_name{{i}}">
+                                        <!--<span class="highlight"></span> <span class="bar"></span>-->
+                                    </div>
 
 
-                            </ng-container>
+                                </ng-container>
+
+
+
+
+                            </div>
                             <ng-container *ngFor="let list of data.newcommodities;let i=index">
                                 <div class="form-group m-b-5" >
-                                    <input type="text" class="form-control" style="float: left;width:45%;" placeholder="Name" [(ngModel)]="data.newcommodities[i].name" name="cancel_policy" rows="4" id="newcommodities_id{{i}}"><span class="highlight"></span> <span class="bar"></span>
+                                    <input type="text" class="form-control" style="float: left;width:45%;"  placeholder="Name" [(ngModel)]="data.newcommodities[i].name" name="newcommodities_name{{i}}" id="newcommodities_name{{i}}"><span class="highlight"></span> <span class="bar" style="width: 45%;"></span>
                                 </div>
                                 <div class="form-group m-b-5" >
-                                    <input type="number" class="form-control" style="float: right;width:45%;" placeholder="Price" [(ngModel)]="data.newcommodities[i].price" name="cancel_policy" rows="4" id="newcommodities_name{{i}}"><span class="highlight"></span> <span class="bar"></span>
+                                    <input type="number" class="form-control" style="float: right;width:45%;"  placeholder="Price" [(ngModel)]="data.newcommodities[i].price" name="newcommodities_price{{i}}"  id="newcommodities_price{{i}}"><span class="highlight"></span> <span class="bar" style="width: 45%;float:right"></span>
                                 </div>
 
-
+                                <div style="height:60px"></div>
                             </ng-container>
 
-                            <div style="height:100px"></div>
+
 
 
                             <div class="form-group bk">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="golf-course/section-4">Back</a></button>
-                                <button style="    float: right;" type="submit" (click)="saverental(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.tnc">Update & Continue</button>
-                                <button style="    float: right;" type="submit" (click)="saverental(section1,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&!environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.tnc">Submit & Continue</button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-4">Back</a></button>
+                                <button style="    float: right;" type="submit" (click)="saverental(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.extras_info&&environment.random.userDetail.extras_info.length>0">Update & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="saverental(section1,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.extras_info&&environment.random.userDetail.extras_info.length==0">Submit & Continue</button>
                             </div>
                         </form>
                     </div>

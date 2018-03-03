@@ -1,0 +1,30 @@
+{
+  "data":
+{
+  "seasons":[
+    {
+      "id":1,
+      "name":"summer"
+    },
+    {
+      "id":2,
+      "name":"winter"
+    },
+    {
+      "id":3,
+      "name":"autumn"
+    }
+  ],
+  "days":[
+    {
+      "id":"w1",
+      "name":"weekday"
+    },
+    {
+      "id":"w2",
+      "name":"weekend"
+    }
+  ]
+}
+
+}

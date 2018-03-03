@@ -9,12 +9,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form class="floating-labels " #section="ngForm" name="section" id="section">
-                            <div class="form-group m-b-40">
-                                <textarea [(ngModel)]="data.about" class="form-control" id="about" required="" name="about"></textarea>
-
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="about">About</label>
+                            <div class="col-sm-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">About</h3>
+                                    <div >
+                                        <input class="summernote" type="text"  [(ngModel)]="data.about" id="about" name="about" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group m-b-40">
                                 <div *ngFor="let list of ">
@@ -97,8 +98,13 @@
                                 <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
                                 <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
                             </div>
-                            <div class="form-group">
-                                <button style="    float: right;" type="submit" (click)="_saveAll(section)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                            <div class="form-group m-b-40">
+                                <input type="file" placeholder="Logo"  [(ngModel)]="image" name="logo" class="form-control">
+                            </div>
+                            <div class="form-group bk">
+                                <button style="    float: right;" type="submit" (click)="_saveAll(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.address_line_1">Update & Continue</button>
+
+                                <button style="    float: right;" type="submit" (click)="_saveAll(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.address_line_1">Submit & Continue</button>
                             </div>
                         </form>
                     </div>

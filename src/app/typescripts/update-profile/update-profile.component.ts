@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Renderer , ViewEncapsulation } from '@angular/core';
 import { ApiService } from './../common/services/api.service';
 import { StorageService } from './../common/services/storage.service';
+import { ImageComponent } from './../common/components/image.component';
 import { environment } from '../../../environments/environment';
 import {ActivatedRoute, Router} from '@angular/router';
 import { MetaComponent } from '../common/components/meta.component';
@@ -9,6 +10,7 @@ import { isBrowser } from 'angular2-universal';
 declare var $:any;
 declare var switchMaker:any;
 declare var flatpickr:any;
+declare var summernode:any;
 
 
 @Component({
@@ -21,27 +23,27 @@ declare var flatpickr:any;
 
 export class UpdateProfileComponent implements OnInit {
   @ViewChild(MetaComponent) private metaComp: MetaComponent;
-
+  @ViewChild(ImageComponent) private imageComp: ImageComponent;
   environment:any;
   data:any;
   facilities:any;
   course:any;
-  params:any;
+  image:string;
   constructor(private _storage:StorageService,private _router:Router, private ApiService: ApiService) {
     this.environment = environment;
     this.data = new Array();
     this.data.coordinates = {latitude:null,longitude:null};
     this.data.weekday_hrs = {start_time:null,end_time:null};
     this.data.weekend_hrs = {start_time:null,end_time:null};
-    let course = ['Holes','Your Built','PAR','Architect(s)','Length','Clurse Type','Slope','Grass Type'];
+    let course = [{name:'Holes',value:null},{name:'Your Built',value:null},{name:'PAR',value:null},{name:'Architect(s)',value:null},{name:'Length',value:null},{name:'Clurse Type',value:null},{name:'Slope',value:null},{name:'Grass Type',value:null}];
     this.course = course;
     let facilities = ['Club Valet','Caddy','Golf Carts','Practise FAcilities','Golf Lessons','Club/Show Rental','Golf Shop','Dining','Locker Room','Health Club','Spa','Night Golf','Accomodation'];
     this.facilities = facilities;
   }
 
   ngOnInit() {
-    this._storage.userChecker(false).then((val)=>{
-      switchMaker();
+    this._storage.promLogIn().then((val)=>{
+
     })
 
 
@@ -54,14 +56,20 @@ export class UpdateProfileComponent implements OnInit {
 
 
   _saveAll(form,update){
+
     if(form.valid){
       let params = {};
+      params['course'] = [];
       for(var i in this.data){
+
         if(this.data[i]!=''){
           params[i] = this.data[i];
         }
 
       }
+      params['about'] = $('.note-editable').html();
+      params['course'] = this.course;
+      params['logo'] = this.image;
       if(!update){
         this.ApiService.postApiMc4k('api/v1/forms/profile',params,false,true).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
@@ -95,7 +103,9 @@ export class UpdateProfileComponent implements OnInit {
     if(!removed){
       this.data[key].push(value);
     }
+
   }
+  
 
   setValue(){
 
@@ -116,14 +126,30 @@ export class UpdateProfileComponent implements OnInit {
 
     this.data = params;
     for(var i in this.facilities){
+
       for(var j in this.data.facilities){
         if(this.facilities[i] == this.data.facilities[j]){
+
           $('#facilities'+i).click();
         }
       }
     }
     
+    
+    flatpickr('.cls_date', {noCalendar: true, enableTime: true, time_24hr: true});
+    switchMaker();
+    summernode(this.data.about);
+    
   }
+
+  changeImg($event){
+    this.imageComp.fileChangeListener($event);
+  }
+
+  updateImageParent(image){
+    this.image = image;
+  }
+
 
 
 

@@ -70,7 +70,8 @@ export class SectionThreeComponent implements OnInit {
         if(!update){
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
-              this._router.navigateByUrl('golf-course/section-4');
+              // this._router.navigateByUrl('golf-course/section-4');
+              this.ApiService.userDetail('golf-course/section-4');
             }else{
               swal('Error', value.error,'error')
             }
@@ -78,7 +79,8 @@ export class SectionThreeComponent implements OnInit {
         }else{
           this.ApiService.putApiMc4k('api/v1/forms/3',{seasons:params},0).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
-              this._router.navigateByUrl('golf-course/section-4');
+              // this._router.navigateByUrl('golf-course/section-4');
+              this.ApiService.userDetail('golf-course/section-4');
             }else{
               swal('Error', value.error,'error')
             }
@@ -95,7 +97,7 @@ export class SectionThreeComponent implements OnInit {
 
   setSeason(){
     let self = this;
-   if(this.data['noseason']){
+   if(this.data.seasonList.length>0){
      swal({
            title: "Are you sure?",
            text: "All previous data will be erased",
@@ -103,7 +105,7 @@ export class SectionThreeComponent implements OnInit {
            showCancelButton: true,
            confirmButtonClass: "btn-danger",
            confirmButtonText: "Yes, rewrite it!",
-           closeOnConfirm: false
+           closeOnConfirm: true
          },
          function(){
            self.setSeas();
@@ -187,7 +189,8 @@ export class SectionThreeComponent implements OnInit {
         this.dateDiff(this,i);
       
     }
-    this.data.noseason = this.data.seasonList.length;
+
+    this.data.noseason = data.seasons_info.length;
   }
 
   initFlatpicker(id,value){

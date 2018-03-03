@@ -5,16 +5,18 @@ import { environment } from '../../../../environments/environment';
 import { TeeResponse } from './response';
 import 'rxjs/add/operator/toPromise';
 import { StorageService } from './storage.service';
-import { isBrowser } from 'angular2-universal';
+import { Router,ActivatedRoute, Params } from '@angular/router';
+
 declare var $:any;
 declare var setSelect:any;
 @Injectable()
 export class ApiService {
   userInfo:any;urlList:any;environment:any;
-  constructor(private zone:NgZone, private http: Http, private _storage:StorageService) {
+  constructor(private zone:NgZone, private http: Http, private router:Router) {
     this.environment = environment;
-    let url = [this.environment.apiUrl,''];
+    let url = ['http://13.57.212.193:8000/',''];
     this.urlList = url;
+    this.userInfo = ''
   }
 
 
@@ -28,12 +30,14 @@ export class ApiService {
     let options = new RequestOptions({ headers: headers });
     var urlReq = baseUrl?this.urlList[baseUrl]:this.urlList[0];
     urlReq = urlReq+url;
+    urlReq = baseUrl==0?urlReq+this.userInfo:urlReq;
     return this.http.get(urlReq,options)
         .toPromise()
         .then(this.returnData)
         .catch(this.handleError);
   }
-  
+
+
 
 
   postApiMc4k (url,params,formdata?,header?,baseUrl?): Promise<TeeResponse>{
@@ -46,7 +50,7 @@ export class ApiService {
     }
     let options = new RequestOptions({ headers: headers });
     var urlReq = baseUrl?this.urlList[baseUrl]:this.urlList[0];
-    urlReq = urlReq+url;
+    urlReq = urlReq+url+this.userInfo;
     return this.http.post(urlReq, params, options)
         .toPromise()
         .then(this.returnData)
@@ -63,33 +67,35 @@ export class ApiService {
     }
     let options = new RequestOptions({ headers: headers });
     var urlReq = baseUrl?this.urlList[baseUrl]:this.urlList[0];
-    urlReq = urlReq+url;
+    urlReq = urlReq+url+this.userInfo;
     return this.http.put(urlReq, params, options)
         .toPromise()
         .then(this.returnData)
         .catch(this.handleError);
   }
-  
+
 
   
 
-  deleteApiMc4k (url): Promise<TeeResponse>{
+  deleteApiMc4k (url,baseUrl): Promise<TeeResponse>{
     let headers = new Headers({ 'Content-Type': 'application/json' });
     if(this.environment.loggedIn){
       headers = new Headers({'id' :this.environment.userInfo.id,'mc4kToken':this.environment.userInfo.mc4kToken});
     }
     let options = new RequestOptions({ headers: headers });
-    var urlReq = this.environment.mc4kApiUrl+url;
+    var urlReq = baseUrl?this.urlList[baseUrl]:this.urlList[0];
+    urlReq = urlReq+url;
     return this.http.delete(urlReq, options)
         .toPromise()
         .then(this.returnData)
         .catch(this.handleError);
   }
 
-  imageApiMc4k(url,fileData): Promise<TeeResponse>{
-    let headers = new Headers({'id' :this.environment.userInfo.id,'mc4kToken':this.environment.userInfo.mc4kToken,'agent':'web'});
+  imageApi(url,fileData,baseUrl?): Promise<TeeResponse>{
+    let headers = new Headers({'id' :this.environment.random.userInfo.id,'token':this.environment.random.userInfo.token,'source':this.environment.random.source});
     let options = new RequestOptions({ headers: headers });
-    var urlReq = this.environment.mc4kApiUrl+url;
+    var urlReq = baseUrl?this.urlList[baseUrl]:this.urlList[0];
+    urlReq = urlReq+url+this.userInfo;
     return this.http.post(urlReq, fileData, options)
         .toPromise()
         .then(this.returnData)
@@ -160,6 +166,18 @@ export class ApiService {
       //   },100)
       // });
     }
+  }
+  
+  userDetail(link){
+    this.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
+      if(value&&value.data){
+        this.environment.random.userDetail = value.data;
+        if(link){
+          this.router.navigateByUrl(link);
+        }
+
+      }
+    })
   }
   
    

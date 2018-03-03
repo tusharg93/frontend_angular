@@ -8,6 +8,7 @@ import { isBrowser } from 'angular2-universal';
 
 declare var swal:any;
 declare var flatpickr:any;
+declare var switchId:any;
 
 
 @Component({
@@ -26,10 +27,9 @@ export class PublicHolidayComponent implements OnInit {
 
   constructor(private _storage:StorageService,private activeRoute:ActivatedRoute,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
-    this.environment.headerChild = [];
     this.data = new Array();
     this.data.holidays = new Array()
-    this.data.maintenance = new Array()
+   
   }
 
   ngOnInit() {
@@ -45,18 +45,18 @@ export class PublicHolidayComponent implements OnInit {
   }
 
 
-   save(form,type){
+   save(form){
      let params = {};
      if(form.valid){
-       params['type'] = type?'holiday':'closed';
-        let data = type?this.data.holidays:this.data.maintenance;
-       for(var i in data){
-         if(data[i].name&&data[i].date){
-           params['data'] = params['data'] ?params['data']:[];
-           params['data'].push(data[i]);
-         }
+       params['type'] = 'holiday';
+       params['data'] = []
+       for(var i in this.data.holidays){
+         params['data'].push({date:this.data.holidays[i].date,name:this.data.holidays[i].name,universal:this.data.holidays[i].universal?true:false})
        }
        this.ApiService.postApiMc4k('api/v1/slots/manage',params,false,true).then((value)=>{
+         if(value&&value.msg=='success'){
+           this.ApiService.userDetail('golf-course/close-days');
+         }
 
        });
      }
@@ -64,7 +64,7 @@ export class PublicHolidayComponent implements OnInit {
    }
 
   addNew(type){
-    this.data[type].push({name:'',date:''});
+    this.data[type].push({name:null,date:null});
     setTimeout(function(){
       flatpickr('.cls', {enableTime: false, minDate: new Date()});
     },100)
@@ -77,16 +77,17 @@ export class PublicHolidayComponent implements OnInit {
     for(var i in data.holidays_info){
       this.data.holidays.push({name:data.holidays_info[i].name,date:data.holidays_info[i].date})
     }
-    for(var i in data.closed_info){
-      this.data.holidays.push({name:data.closed_info[i].name,date:data.closed_info[i].date})
+  
+   if(this.data.holidays.length == 0){
+     this.data['holidays'].push({name:null,date:null});
+
     }
-    console.log(this.data.holidays.length)
-    if(this.data.holidays.length == 0){
-      this.addNew('holidays');
-    }
-    if(this.data.maintenance.length == 0){
-      this.addNew('maintenance');
-    }
+    
+  }
+  
+  
+  ngInitFlact(i){
+    flatpickr('.cls', {enableTime: false, minDate: new Date()});
   }
 
 

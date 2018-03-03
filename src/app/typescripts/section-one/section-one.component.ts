@@ -74,7 +74,8 @@ export class SectionOneComponent implements OnInit {
       this.ApiService.postApiMc4k('api/v1/forms/1',params,false,true).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
             this._storage.userDetail(params);
-            this._router.navigateByUrl('golf-course/section-2');
+            this.ApiService.userDetail('golf-course/section-2');
+            
           }
       });
     }
@@ -86,7 +87,7 @@ export class SectionOneComponent implements OnInit {
       this.ApiService.putApiMc4k('api/v1/forms/1',params,0).then((value)=>{
         if(value&&value.msg&&value.msg=="success"){
           this._storage.userDetail(params);
-          this._router.navigateByUrl('golf-course/section-2');
+          this.ApiService.userDetail('golf-course/section-2');
         }
       });
     }

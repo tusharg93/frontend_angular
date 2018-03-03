@@ -14,7 +14,7 @@
                                 <p class="text-muted  font-13"></p>
                                 <div class="switchery-demo m-b-30">
                                     <ng-container *ngFor="let list of days">
-                                        {{list}}  <input type="checkbox" [id]="'w_'+list" (change)="clickMulti(list,'weekdays','we_')" [value]="list" name="weekdays"  id="weekdays{{list}}" class="js-switch" data-color="#3d3b3b" />
+                                        {{list}}  <input type="checkbox"  (change)="clickMulti(list,'weekdays','weekends')" [value]="list" name="weekdays"  id="weekdays{{list}}" class="js-switch" data-color="#3d3b3b" />
                                     </ng-container>
                                 </div>
                                 <span class="bar"></span>
@@ -25,7 +25,7 @@
                                 <p class="text-muted  font-13"></p>
                                 <div class="switchery-demo m-b-30">
                                     <ng-container *ngFor="let list of days">
-                                    {{list}} <input type="checkbox" [id]="'we_'+list" (change)="clickMulti(list,'weekends','w_')" [value]="list" name="weekdays" id="weekends{{list}}" class="js-switch" data-color="#3d3b3b" />
+                                    {{list}} <input type="checkbox" (change)="clickMulti(list,'weekends','weekdays')" [value]="list" name="weekdays" id="weekends{{list}}" class="js-switch" data-color="#3d3b3b" />
                                     </ng-container>
                                 </div>
                                 <span class="bar"></span>

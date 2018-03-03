@@ -73,10 +73,10 @@ export class SectionAddOnComponent implements OnInit {
   }
 
   addNew(){
-    this.data.newcommodities.push({name:'',price:''})
+    this.data.newcommodities.push({name:null,price:null})
   }
 
-  save(form){
+  save(form,update){
     if (form.valid) {
       for(var i in this.data.price_includes){
         if(this.data.price_includes[i] == 'Other'){
@@ -85,28 +85,58 @@ export class SectionAddOnComponent implements OnInit {
         }
       }
       let params = {price_includes:this.data.price_includes,cancel_policy:this.data.cancel_policy,tnc:this.data.tnc,min_weekdays:this.data.min_weekdays,min_weekends:this.data.min_weekends}
-      this.ApiService.postApiMc4k('api/v1/forms/8',params,false,true).then((value)=>{
-      });
+     if(update){
+       this.ApiService.putApiMc4k('api/v1/forms/8',params,0).then((value)=>{
+         if(value&&value.msg=='success'){
+           $('#rental-section').css('display','block');
+           $('#add-on-section').css('display','none')
+         }
+
+       });
+     }else{
+       this.ApiService.postApiMc4k('api/v1/forms/8',params,false,true).then((value)=>{
+         if(value&&value.msg=='success'){
+           $('#rental-section').css('display','block');
+           $('#add-on-section').css('display','none')
+         }
+
+       });
+     }
+
     }
   }
 
-  saverental(){
+  saverental(form,update){
     let params = [];
-    for(var i in this.data.pricecommodities){
-      if(this.data.pricecommodities[i].price){
-        params.push({name:this.data.pricecommodities[i].name,price:this.data.pricecommodities[i].price.toString()})
+    if(form.valid){
+      for(var i in this.data.pricecommodities){
+        if(this.data.pricecommodities[i].price){
+          params.push({name:this.data.pricecommodities[i].name,price:this.data.pricecommodities[i].price.toString()})
+        }
+      }
+      for(var i in this.data.newcommodities){
+        if(this.data.newcommodities[i].price){
+          params.push({name:this.data.newcommodities[i].name,price:this.data.newcommodities[i].price.toString()})
+        }
+      }
+      if(update){
+        this.ApiService.putApiMc4k('api/v1/forms/rentals',{rentals:params},0).then((value)=>{
+          if(value&&value.msg&&value.msg=="success"){
+            // this._router.navigateByUrl('golf-course/public-holiday');
+            this.ApiService.userDetail('golf-course/public-holiday');
+          }
+        });
+      }else{
+        this.ApiService.postApiMc4k('api/v1/forms/rentals',{rentals:params},false,true).then((value)=>{
+          if(value&&value.msg&&value.msg=="success"){
+            // this._router.navigateByUrl('golf-course/public-holiday');
+            this.ApiService.userDetail('golf-course/public-holiday');
+          }
+        });
       }
     }
-    for(var i in this.data.newcommodities){
-      if(this.data.newcommodities[i].price){
-        params.push({name:this.data.newcommodities[i].name,price:this.data.newcommodities[i].price.toString()})
-      }
-    }
-    this.ApiService.postApiMc4k('api/v1/forms/rentals',{rentals:params},false,true).then((value)=>{
-      if(value&&value.msg&&value.msg=="success"){
-        this._router.navigateByUrl('golf-course/public-holiday');
-      }
-    });
+
+
   }
 
 
@@ -116,7 +146,6 @@ export class SectionAddOnComponent implements OnInit {
     let defaultArr = [];
     for(var i in data.extras_info){
       let defaultVal = false;
-      this.others = data.extras_info[i].name=='Others'&&!this.others?true:false;
       for(var j in this.data.pricecommodities){
         if(this.data.pricecommodities[j].name == data.extras_info[i].name){
           this.data.pricecommodities[j].price = data.extras_info[i].price;
@@ -132,19 +161,30 @@ export class SectionAddOnComponent implements OnInit {
 
     this.data.tnc = data.gc_basic_info.tnc;
     this.data.cancel_policy = data.gc_basic_info.cancel_policy;
-    this.data.price_includes = data.gc_basic_info.price_includes;
-    if(this.others){
-      // this.data.others = data.gc_basic_info.price_includes[data.gc_basic_info.price_includes.length-1];
-      // this.data.others = this.data.others.replace('Others:','');
-      this.data.price_includes.pop();
-    }
+    this.data.price_includes = data.gc_basic_info.price_includes?data.gc_basic_info.price_includes:[];
 
     for(var i in this.data.price_includes){
-      $('#'+this.data.price_includes[i]).click();
+      this.others = this.others?this.others:this.data.price_includes[i]=='Other';
+
+      for(var j in this.commodities){
+        if(this.data.price_includes[i]==this.commodities[j]){
+          $('#ck'+j).click();
+        }
+
+      }
+      
     }
+    if(this.others){
+      this.data.others = this.data.price_includes.pop();
+      this.data.others = this.data.others.replace('Others:','');
+
+    }
+
     this.data.min_weekdays = data.gc_basic_info.min_golfers_weekdays;
     this.data.min_weekends = data.gc_basic_info.min_golfers_weekends;
     this.data.newcommodities = defaultArr;
+
+    
   }
 
 

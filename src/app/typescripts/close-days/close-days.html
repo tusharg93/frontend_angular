@@ -1,217 +1,49 @@
-
-
-<!--<form #section2="ngForm" name="section2" id="section2">-->
-<!--Weekdays-->
-<!--<ng-container *ngFor="let list of days">-->
-<!--<input type="checkbox" [id]="'w_'+list" (click)="clickMulti(list,'weekdays','we_')" [value]="list" name="weekdays">{{list}}-->
-<!--</ng-container>-->
-<!--<br/>-->
-<!--Weekend-->
-<!--<ng-container *ngFor="let list of days" >-->
-    <!--<input type="checkbox" [id]="'we_'+list" (click)="clickMulti(list,'weekends','w_')" [value]="list" name="weekdays">{{list}}-->
-<!--</ng-container>-->
-
-<!--Closed Day-->
-<!--No <input type="radio" [(ngModel)]="data.closedK" [value]="false" name="closedK">-->
-<!--Yes <input type="radio" [(ngModel)]="data.closedK" [value]="true" name="closedK">-->
-
-<!--<ng-container *ngIf="data.closedK">-->
-<!--Select Day-->
-
-<!--<select name="day" [(ngModel)]="data.closed" required (change)="setMaintainance()">-->
-    <!--<ng-container *ngFor="let list of days">-->
-        <!--<option value="{{list}}" id="c_{{list}}">{{list}}</option>-->
-    <!--</ng-container>-->
-<!--</select>-->
-<!--</ng-container>-->
-<!--<ng-container *ngIf="data.closedK">-->
-    <!--Closed For-->
-    <!--Full day <input type="radio" [(ngModel)]="data.full_day" [value]="true" name="closed_day">-->
-    <!--Half Day <input type="radio" [(ngModel)]="data.full_day" [value]="false" name="closed_day">-->
-<!--</ng-container>-->
-    <!--<div (click)="save_2(section2)">SAVE</div>-->
-    <!--</form>-->
-
-<!--<form #section3="ngForm" name="section3" id="section3">-->
-    <!--No. of seasons-->
-
-        <!--1 <input type="radio" [(ngModel)]="data.noseason" (change)="setSeason()" [value]="1" name="noseason">-->
-        <!--2 <input type="radio" [(ngModel)]="data.noseason"  (change)="setSeason()" [value]="2" name="noseason">-->
-        <!--3 <input type="radio" [(ngModel)]="data.noseason"  (change)="setSeason()" [value]="3" name="noseason">-->
-        <!--4 <input type="radio" [(ngModel)]="data.noseason"  (change)="setSeason()" [value]="4" name="noseason">-->
-        <!--5 <input type="radio" [(ngModel)]="data.noseason" (change)="setSeason()" [value]="5" name="noseason">-->
-
-
-    <!--<br/>-->
-    <!--<ng-container *ngFor="let list of data.seasonList;let i=index;">-->
-        <!--Season {{i+1}}-->
-        <!--Start-->
-        <!--<input type="date" [(ngModel)]="data.season_info[i].start_date" (change)="setMax()" name="start_time" id="start_{{i}}">-->
-        <!--Stop-->
-        <!--<input type="date" [(ngModel)]="data.season_info[i].end_date"  (change)="setMax()" name="end_time" id="end_{{i}}">-->
-    <!--<br/>-->
-    <!--</ng-container>-->
-
-
-<!--</form>-->
-
-<!--<form #section4="ngForm" name="section4" id="section4">-->
-    <!--<ng-container *ngFor="let list of data.season_info;let i=index;">-->
-       <!--{{list.name}} {{list.start_time}} {{list.start_time}}<br/>-->
-        <!--Weekday Rack Rate <br/>-->
-        <!--9 Hole Price per Golfer-->
-        <!--Visitor/Online {{data.currency}}<input type="number" [(ngModel)]="data.season_info[i].rates.hole_9_price" [value]="true" name="online">-->
-        <!--<ng-container *ngIf="data.hole_18">-->
-            <!--18 Hole Price per Golfer-->
-            <!--Visitor/Online {{data.currency}}<input type="number" [(ngModel)]="data.season_info[i].rates.hole_18_price" [value]="true" name="online">-->
-        <!--</ng-container><br/>-->
-        <!--Weekend Rack Rate <br/>-->
-        <!--9 Hole Price per Golfer-->
-        <!--Visitor/Online {{data.currency}}<input type="number" [(ngModel)]="data.maintainance.rates.hole_9_price" [value]="true" name="online">-->
-        <!--<ng-container *ngIf="data.hole_18">-->
-            <!--18 Hole Price per Golfer-->
-            <!--Visitor/Online {{data.currency}}<input type="number" [(ngModel)]="data.maintainance.rates.hole_18_price" [value]="true" name="online">-->
-        <!--</ng-container><br/>-->
-        <!--Slot Details<br/>-->
-        <!--Weekday & Weekend-->
-        <!--First Tee Time:<input type="time" [(ngModel)]="data.season_info[i].start_time" required name="start_time">-->
-        <!--Last Tee Time:<input type="time" [(ngModel)]="data.season_info[i].end_time"  required name="end_time">-->
-        <!--Slot Time-->
-        <!--<select name="day" [(ngModel)]="data.season_info[i].interval" required>-->
-        <!--<ng-container *ngFor="let list of slotTime">-->
-            <!--<option value="{{list}}" id="s_{{list}}">{{list}} Mins</option>-->
-        <!--</ng-container>-->
-        <!--<br/>-->
-        <!--<ng-container *ngIf="data.closed">-->
-            <!--Maintainance Day-->
-            <!--First Tee Time:<input type="time" [(ngModel)]="data.maintainance.start_time" required name="start_time">-->
-            <!--Last Tee Time:<input type="time" [(ngModel)]="data.maintainance.end_time" required name="end_time">-->
-            <!--Slot Time-->
-            <!--<select name="day" [(ngModel)]="data.maintainance.interval" required>-->
-            <!--<ng-container *ngFor="let list of slotTime">-->
-                <!--<option value="{{list}}" >{{list}} Mins</option>-->
-            <!--</ng-container>-->
-                <!--</select>-->
-            <!--<br/>-->
-        <!--</ng-container>-->
-
-
-    <!--</select>-->
-
-     <!--</ng-container>-->
-<!--</form>-->
-
-<!--<form #section5="ngForm" name="section5" id="section5">-->
-<!--Price Includes-->
-    <!--Green Fee<input type="checkbox"  [(ngModel)]="data.price_includes.green_fee">-->
-    <!--Taxes <input type="checkbox"  [(ngModel)]="data.price_includes.taxes">-->
-    <!--Golf Cart<input type="checkbox"  [(ngModel)]="data.price_includes.golf_cart">-->
-    <!--Caddy Fee <input type="checkbox"  [(ngModel)]="data.price_includes.caddy_fee">-->
-    <!--Range Balls <input type="checkbox"  [(ngModel)]="data.price_includes.range_balls">-->
-    <!--Bottled Water<input type="checkbox"  [(ngModel)]="data.price_includes.bottled_water">-->
-    <!--Member Guest<input type="checkbox"  [(ngModel)]="data.price_includes.member_guest">-->
-    <!--Driving Range Access<input type="checkbox"  [(ngModel)]="data.price_includes.driving_range_access">-->
-    <!--Others<input type="checkbox"  [(ngModel)]="data.price_includes.others">-->
-
-    <!--Cancellation Policy-->
-    <!--<textarea [(ngModel)]="data.cancel_policy"></textarea>-->
-    <!--Any other TNC-->
-    <!--<textarea [(ngModel)]="data.tnc"></textarea>-->
-    <!--Booking Condition-->
-    <!--Minimum Golfer Weekdays-->
-    <!--<select name="day" [(ngModel)]="data.min_weekdays" required>-->
-        <!--<ng-container *ngFor="let list of minGolf">-->
-            <!--<option value="{{list}}" >{{list}}</option>-->
-        <!--</ng-container>-->
-    <!--</select>-->
-    <!--Minimum Golfer Weekend-->
-    <!--<select name="day" [(ngModel)]="data.min_weekends" required>-->
-        <!--<ng-container *ngFor="let list of minGolf">-->
-            <!--<option value="{{list}}" >{{list}}</option>-->
-        <!--</ng-container>-->
-    <!--</select>-->
-<!--</form>-->
-<!--<form #section6="ngForm" name="section6" id="section6">-->
-  <!--Rentals & Add Ons-->
-  <!--Golf Course(Price per item)  {{data.currency}}<input type="number" [(ngModel)]="data.rentals.golf_course">-->
-    <!--Caddy (Price per item)  {{data.currency}}<input type="number" [(ngModel)]="data.rentals.caddy">-->
-    <!--Golf Shoes(Price per item)  {{data.currency}}<input type="number" [(ngModel)]="data.rentals.golf_shoes">-->
-    <!--Golf clubs (Price per item)  {{data.currency}}<input type="number" [(ngModel)]="data.rentals.golf_clubs">-->
-    <!--<div (click)="newRental()">Add New</div>-->
-    <!--<input type="number" [(ngModel)]="data.rentals">-->
-<!--</form>-->
-
 <div class="container-fluid">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Dashboard 1</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <a href="https://themeforest.net/item/elite-admin-responsive-dashboard-web-app-kit-/16750820" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Buy Now</a>
+            <ol class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+                <li class="active">Dashboard 1</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box p-l-20 p-r-20">
-                <h3 class="box-title m-b-0">Section 1</h3>
+                <h3 class="box-title m-b-0">Closed<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew('maintenance')">Add New</button></h3>
                 <p class="text-muted m-b-30 font-13"></p>
                 <div class="row">
                     <div class="col-md-12">
-                        <form class="floating-labels " #section_1="ngForm" name="section_1" id="section_1">
-                            <div class="form-group m-b-40">
-                                <select class="form-control p-0" id="input_6" [(ngModel)]="data.currency" name="currency" required>
-                                    <ng-container *ngFor="let list of currency">
-                                        <option value="{{list}}">{{list}}</option>
-                                    </ng-container>
-                                </select><span class="bar"></span>
-                                <small class="form-text text-muted">Select currency.</small>
-                                <label for="input_6">Currency</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <select class="form-control p-0" id="input_7" [(ngModel)]="data.currency" name="currency" required>
-                                    <ng-container *ngFor="let list of timezone">
-                                        <option value="{{list.offset}}" >{{list.text}}</option>
-                                    </ng-container>
-                                </select><span class="bar"></span>
-                                <small class="form-text text-muted">Select time zone.</small>
-                                <label for="input_7">Time Zone</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <h4 class="box-title">HOLES</h4>
-                                <p class="text-muted  font-13"></p>
-                                <div class="switchery-demo m-b-30">
-                                    9 holes <input type="checkbox" [(ngModel)]="data.hole_9" [value]="true"  id="9_holes" name="9_holes" class="js-switch" data-color="#3d3b3b" />
-                                    18 holes <input type="checkbox" [(ngModel)]="data.hole_18" [value]="true"  id="18_holes" name="18_holes" class="js-switch" data-color="#3d3b3b" />
-                                </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted">Type of holes you provide.</small>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <select class="form-control p-0" id="tee" [(ngModel)]="data.tee" required name="tee">
-                                    <ng-container *ngFor="let list of slotMonths">
-                                        <option value="{{list}}" *ngIf="!data.hole_18&&list<10">{{list}} Tee</option>
-                                        <option value="{{list}}" *ngIf="data.hole_18">{{list}} Tee</option>
-                                    </ng-container>
-                                </select><span class="bar"></span>
-                                <small class="form-text text-muted">Select starting tee slot.</small>
-                                <label for="tee">Start Tee</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <h4 class="box-title">PLAYER TYPES</h4>
-                                <p class="text-muted  font-13"></p>
-                                <div class="switchery-demo m-b-30">
-                                    Online <input type="checkbox" [(ngModel)]="data.online" [value]="true" name="online" class="js-switch" data-color="#3d3b3b" />
-                                    Member <input type="checkbox" [(ngModel)]="data.member" [value]="true" name="member" class="js-switch" data-color="#3d3b3b" />
-                                    Guest <input type="checkbox" [(ngModel)]="data.guest" [value]="true" name="guest" class="js-switch" data-color="#3d3b3b" />
-                                </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted">Select to whom are the services provided.</small>
-                            </div>
+                        <form class="floating-labels " #section1="ngForm" name="section1" id="section1">
 
-                            <div class="form-group m-b-40">
-                                <select class="form-control p-0" id="duration" name="slotMonths" [(ngModel)]="data.duration" required>
-                                    <ng-container *ngFor="let list of slotMonths">
-                                        <option value="{{list}}" *ngIf="list<13">{{list}} Months</option>
-                                    </ng-container>
-                                </select><span class="bar"></span>
-                                <small class="form-text text-muted">Slot you provide service.</small>
-                                <label for="duration">Slots</label>
-                            </div>
+
+                            <h3 class="box-title"></h3>
+
+                            <ng-container *ngFor="let list of data.maintenance;let i=index">
+                                <div class="form-group m-b-5" >
+                                    <input type="text" class="form-control cls" (ngInit)="ngInitFlact(i)" style="float:left;width:30%;background-color:white" placeholder="Date" [(ngModel)]="data.maintenance[i].date" name="holidays_date{{i}}"  id="holidays_date{{i}}">
+                                    <span style="width:10px"></span>
+                                    <input type="text" [hidden]="data.maintenance[i].full_day" class="form-control cls_date"  style="float:left;width:30%;background-color:white" placeholder="Time" [(ngModel)]="data.maintenance[i].start_time" name="maintenance{{i}}"  id="maintenance{{i}}">
+                                    <span style="width:10px"></span>
+                                    Full day  <input  type="checkbox"  [(ngModel)]="data.maintenance[i].full_day"  value="true" name="{{5+i}}" id="{{5+i}}" class="cdd{{i}}" data-color="#3d3b3b" />
+
+                                </div>
+                                <div style="height:100px"></div>
+                            </ng-container>
+
+
+
 
                             <div class="form-group">
-                                <button style="    float: right;" type="submit" (click)="save_1(section_1)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                                <button type="submit" (click)="save(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" ><a routerLink="golf-course/public-holiday">Back</a></button>
+                                <button style="    float: right;" type="submit" (click)="save(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.closed_info&&environment.random.userDetail.closed_info.length>0">Update & Continue</button>
+
+                                <button style="    float: right;" type="submit" (click)="save(section1)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.closed_info&&environment.random.userDetail.closed_info.length==0">Submit & Continue</button>
                             </div>
                         </form>
                     </div>
@@ -221,4 +53,7 @@
     </div>
 
 </div>
+
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+
 

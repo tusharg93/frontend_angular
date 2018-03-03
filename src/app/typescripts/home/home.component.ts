@@ -64,30 +64,56 @@ export class HomeComponent implements OnInit {
   loginMeIn(form){
     if(form.valid){
       this.environment.random.source = this.data.vendor?'vendor':'golf_course';
-      this.ApiService.postApiMc4k('api/v1/auth/login',"login_id="+this.data.email+"&password="+this.data.password+'&source='+this.environment.random.source,true).then((value)=>{
-        if(value&&value.data&&this.environment.random.source==value.data['source']){
-          this.environment.random.userInfo = {id:value.data['id'],token:value.data['token'],source:this.environment.random.source};
-          let d = new Date();
-          if(this.data.remember){
-            d.setTime(d.getTime() + (12*30*24*60*60*1000));
-            this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
-            this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
-            this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
-          }else {
-            d.setTime(d.getTime() + (1*60*60*1000));
-            this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
-            this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
-            this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
-          }
-          this._router.navigateByUrl('golf-course/dashboard');
-          
-        }else if(value&&value.data&&this.environment.random.userInfo.source!=value.data['source']){
-          swal("Error", 'You are not a '+this.environment.random.source, "error")
-        }else{
-          swal("Error", value.error, "error")
-        }
-      });
+      var _self = this;
+      swal({
+            title: "Register Type",
+            text: "Check user type",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Golf Course",
+            cancelButtonText: "Vendor",
+            closeOnConfirm: true,
+            closeOnCancel: true
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              _self.environment.random.source ='golf_course';
+              _self.login()
+            } else {
+              _self.environment.random.source ='vendor';
+              _self.login()
+            }
+          });
     }
+
+  }
+
+  login(){
+    this.ApiService.postApiMc4k('api/v1/auth/login',"login_id="+this.data.email+"&password="+this.data.password+'&source='+this.environment.random.source,true).then((value)=>{
+
+      if(value&&value.data&&this.environment.random.source==value.data['source']){
+        this.environment.random.userInfo = {id:value.data['id'],token:value.data['token'],source:this.environment.random.source};
+        let d = new Date();
+        if(this.data.remember){
+          d.setTime(d.getTime() + (12*30*24*60*60*1000));
+          this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
+          this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
+          this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
+        }else {
+          d.setTime(d.getTime() + (1*60*60*1000));
+          this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
+          this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
+          this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
+        }
+        this._router.navigateByUrl('golf-course/dashboard');
+
+      }else if(value&&value.data&&this.environment.random.userInfo.source!=value.data['source']){
+        swal("Error", 'You are not a '+this.environment.random.source, "error")
+      }else{
+        swal("Error", value.error, "error")
+      }
+    });
 
   }
 
@@ -95,7 +121,7 @@ export class HomeComponent implements OnInit {
     if(form.valid){
       this.environment.random.source ='golf_course';
       this.ApiService.postApiMc4k('api/v1/forms/register',{email:this.data.email,password:this.data.password}).then((value)=>{
-        if(value&&value.data){
+        if(value&&value.msg=='success'){
           swal("Success", value.msg, "success")
         }else{
           swal("Error", value.error, "error")

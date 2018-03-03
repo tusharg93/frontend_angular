@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import {ParserPipeModule} from '../pipe-modules/parse.module';
 
 import {LimitPipeModule} from '../pipe-modules/limit.module';
-import {NumberPipeModule} from '../pipe-modules/number.module';
+import {ImageModule} from '../common/modules/image.module';
 import {SafePipeModule} from '../pipe-modules/safe.module';
 
 import { DateConvertorDirectiveModule } from '../directive-modules/date-convertor.module';
@@ -35,7 +35,7 @@ import { FormsModule } from '@angular/forms';
 
     LimitPipeModule,
 
-    NumberPipeModule,
+    ImageModule,
 
     SafePipeModule,
 

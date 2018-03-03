@@ -36,13 +36,13 @@
                                 <div class="switchery-demo m-b-30">
                                     <select class="form-control p-0" (change)="disabledSeason(i)" style="width: 30%;float: left;" (ngInit)="initSeason(i,data.season_info[i].id)" [(ngModel)]="data.season_info[i].id" name="season_name{{i}}" required>
                                         <ng-container *ngFor="let list of environment.random.keys.seasons;let j=index">
-                                            <option value="{{list.id}}"  class="season_cls{{list.id}}" id="season_cls{{i}}" selected="data.season_info[i].id==list.id">{{list.name}}</option>
+                                            <option required value="{{list.id}}"  class="season_cls{{list.id}}" id="season_cls{{i}}" selected="data.season_info[i].id==list.id">{{list.name}}</option>
                                         </ng-container>
                                     </select>
 
-                                        Start Date: <input type="text"  (change)="setEnd(i,'start_date','end_date'+i)"  (ngInit)="initFlatpicker('start_date'+i,data.season_info[i].start_date)" [(ngModel)]="data.season_info[i].start_date" class="flatpickr cls" placeholder="Select Date" name="start_time{{i}}" id="start_date{{i}}" />
+                                        Start Date: <input type="text" required (change)="setEnd(i,'start_date','end_date'+i)"  (ngInit)="initFlatpicker('start_date'+i,data.season_info[i].start_date)" [(ngModel)]="data.season_info[i].start_date" class="flatpickr cls" placeholder="Select Date" name="start_time{{i}}" id="start_date{{i}}" />
 
-                                        End Date: <input type="text"   (change)="setEnd(i,'end_date','start_date'+(i+1),true)" (ngInit)="initFlatpicker('end_date'+i,data.season_info[i].end_date)" [(ngModel)]="data.season_info[i].end_date" class="flatpickr cls" placeholder="Select Date" name="end_time{{i}}" id="end_date{{i}}" />
+                                        End Date: <input type="text" required  (change)="setEnd(i,'end_date','start_date'+(i+1),true)" (ngInit)="initFlatpicker('end_date'+i,data.season_info[i].end_date)" [(ngModel)]="data.season_info[i].end_date" class="flatpickr cls" placeholder="Select Date" name="end_time{{i}}" id="end_date{{i}}" />
 
                                         <ng-container *ngIf="data.season_info[i].diff">No of Days: {{data.season_info[i].diff}}</ng-container>
                                 </div>

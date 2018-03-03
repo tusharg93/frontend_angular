@@ -45,11 +45,7 @@ export class HeaderComponent implements OnInit {
         this.environment.random.keys['others']  = param;
       }
     });
-    this.ApiService.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
-      if(value&&value.data){
-        this.environment.random.userDetail = value.data;
-      }
-    })
+    this.ApiService.userDetail(false);
   }
 
   vdahboard(){
@@ -68,7 +64,11 @@ export class HeaderComponent implements OnInit {
     this._storage.storeCookies('source',false,date1);
     this.environment.random.userDetail = new Array();
     this.environment.random.userInfo = new Array();
-    this.router.navigateByUrl('/');
+    var _self = this;
+    setTimeout(function(){
+      _self.router.navigateByUrl('/');
+    },300)
+
   }
     
    

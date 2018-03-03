@@ -26,22 +26,22 @@
 
                             <ng-container *ngFor="let list of data.holidays;let i=index">
                                 <div class="form-group m-b-5" >
-                                    <input type="text" class="form-control" style="float: left;width:45%;" placeholder="Holiday Name" [(ngModel)]="data.holidays[i].name" name="holidays_name" id="holidays_name{{i}}"><span class="highlight"></span> <span class="bar"></span>
-                                </div>
-                                <div class="form-group m-b-5" >
-                                    <input type="number" class="form-control cls" style="float: right;width:45%;" placeholder="Holiday Date" [(ngModel)]="data.holidays[i].date" name="holidays_date" rows="4" id="holidays_date{{i}}"><span class="highlight"></span> <span class="bar"></span>
-                                </div>
+                                    <input type="text" class="form-control" style="float:left;width:50%;" placeholder="Holiday Name" [(ngModel)]="data.holidays[i].name" name="holidays_name{{i}}" id="holidays_name{{i}}">
+                                    <input type="text" class="form-control cls" (ngInit)="ngInitFlact(5+i)" style="float:left;width:30%;" placeholder="Holiday Date" [(ngModel)]="data.holidays[i].date" name="holidays_date{{i}}"  id="holidays_date{{i}}">
+                                    All Years  <input  type="checkbox"  [(ngModel)]="data.holidays[i].universal" value="true" name="{{5+i}}" id="{{5+i}}" class="js-switch" data-color="#3d3b3b" />
 
-
+                                </div>
+                                <div style="height:100px"></div>
                             </ng-container>
 
-                            <div style="height:100px"></div>
+
 
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-add-on">Back</a></button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-add-on">Back</a></button>
+                                <button style="    float: right;" type="submit" (click)="save(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.holidays_info&&environment.random.userDetail.holidays_info.length>0">Update & Continue</button>
 
-                                <button style="    float: right;" type="submit" (click)="save(section1,true)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="save(section1,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.holidays_info&&environment.random.userDetail.holidays_info.length==0">Submit & Continue</button>
                             </div>
                         </form>
                     </div>
@@ -49,44 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="white-box p-l-20 p-r-20">
-                <h3 class="box-title m-b-0">Closed<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew('maintenance')">Add New</button></h3>
-                <p class="text-muted m-b-30 font-13"></p>
-                <div class="row">
-                    <div class="col-md-12">
-                        <form class="floating-labels " #section1="ngForm" name="section1" id="section1">
 
-
-                            <h3 class="box-title"></h3>
-
-                            <ng-container *ngFor="let list of data.maintenance;let i=index">
-                                <div class="form-group m-b-5" >
-                                    <input type="text" class="form-control" style="float: left;width:40%;" placeholder="Name" [(ngModel)]="data.maintenance[i].name" name="maintenance_name" id="maintenance_name{{i}}"><span class="highlight"></span> <span class="bar"></span>
-                                </div>
-                                <div class="form-group m-b-5" >
-                                    <input type="number" class="form-control cls" style="float: right;width:30%;" placeholder="Closed Date" [(ngModel)]="data.maintenance[i].date" name="maintenance_date" rows="4" id="maintenance_date{{i}}"><span class="highlight"></span> <span class="bar"></span>
-                                </div>
-                                Full Day  <input type="checkbox" style="float: right;width:20%;" [(ngModel)]="data.maintenance[i].fullday" [value]="list" id="fullday{{i}}" name="fullday{{i}}" class="js-switch" data-color="#3d3b3b" />
-
-
-                            </ng-container>
-
-                            <div style="height:100px"></div>
-
-
-                            <div class="form-group bk">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a [routerLink]="golf-course/section-add-on">Back</a></button>
-
-                                <button style="    float: right;" type="submit" (click)="save(section1,true)" class="btn btn-success waves-effect waves-light m-r-10">Submit & Continue</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>
 

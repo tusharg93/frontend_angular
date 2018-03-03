@@ -34,7 +34,6 @@ export class SectionFourComponent implements OnInit {
     this.environment = environment;
     this.data = new Array();
     this.data.season = new Array();
-    this.data.season_info = new Array();
     this.slotTime = new Array(5,10,15,20);
     this.minGolf = new Array(1,2,3,4);
     this.next = 0;
@@ -54,14 +53,15 @@ export class SectionFourComponent implements OnInit {
 
   save(form,i){
     if (form.valid){
-       if(this.data.season_info.length == this.next){
+       if(this.data.length == this.next+1){
          let params = [];
-         for(let i in this.data.season_info){
-           params.push({id:this.data.season_info[i].id,start_time:this.data.season_info[i].start_time,end_time:this.data.season_info[i].end_time,interval:this.data.season_info[i].interval,rates:this.data.season_info[i].rates,maintenance:this.data.season_info[i].maintenance})
+         for(let i in this.data){
+           params.push({id:this.data[i].id,start_time:this.data[i].start_time,end_time:this.data[i].end_time,interval:this.data[i].interval,rates:this.data[i].rates,maintenance:this.data[i].maintenance})
          }
          this.ApiService.postApiMc4k('api/v1/forms/4',{seasons_info:params},false,true).then((value)=>{
            if(value&&value.msg&&value.msg=="success"){
-             this._router.navigateByUrl('golf-course/section-add-on');
+             // this._router.navigateByUrl('golf-course/section-add-on');
+             this.ApiService.userDetail('golf-course/section-add-on');
            }else{
              swal('Error', value.error,'error')
            }
@@ -77,7 +77,6 @@ export class SectionFourComponent implements OnInit {
 
 
   setFlact(id){
-    console.log(id)
     flatpickr('#'+id, {noCalendar: true, enableTime: true, time_24hr: true});
 
   }
@@ -86,26 +85,35 @@ export class SectionFourComponent implements OnInit {
     let data = this.environment.random.userDetail;let params =[];
     for(let i in data.seasons_info){
       let pr = data.seasons_info[i];
-      params.push({id:pr.season_id,uid:pr.id,start_time:pr.start_time,end_time:pr.end_time,interval:pr.tee_interval,maintenance:{start_time:pr.maintenance_stime,end_time:pr.maintenance_etime}});
+      params.push({id:pr.season_id,uid:pr.id,start_date:pr.start_date,end_date:pr.end_date,start_time:pr.start_time,end_time:pr.end_time,interval:pr.tee_interval,maintenance:{start_time:pr.maintenance_stime,end_time:pr.maintenance_etime}});
       params[i].rates = [];
-      for(var j in data.rates_info){
-        params[j] = [];
-        params[j].rates = [];
-        let pr1 = data.rates_info[j];
-        if(pr1){
-          if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
-            params[j].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekday'});
-          }
-          if(this.environment.random.keys['others']['weekend'] == pr1.day_type){
-            params[j].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
+      if(data.rates_info&& data.rates_info.length == 0){
+        params[i].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'});
+        params[i].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'});
 
+      }else{
+        for(var j in data.rates_info){
+
+          let pr1 = data.rates_info[j];
+          if(pr1){
+            if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
+              params[i].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekday'});
+              break;
+            }
+            if(this.environment.random.keys['others']['weekend'] == pr1.day_type){
+              params[i].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
+              break;
+            }
           }
+
         }
+      }
 
-       }
+
     }
-    this.data.season_info = params;
-    console.log(this.data.season_info)
+    this.data= params;
+    console.log(this.data)
+
   }
 
   

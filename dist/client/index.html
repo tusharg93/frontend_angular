@@ -38,6 +38,7 @@
   <script src="../assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
   <!--slimscroll JavaScript -->
   <script src="../assets/js/jquery.slimscroll.js"></script>
+    <script src="../assets/plugins/bower_components/summernote/dist/summernote.min.js"></script>
 
     <link href="../assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
     <link href="../assets/plugins/bower_components/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
@@ -45,7 +46,9 @@
     <link href="../assets/plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
     <script src="../assets/js/flatpicker.js"></script>
     <link href="../assets/css/flatpicker.css" rel="stylesheet">
-  <!--Wave Effects -->
+    <link href="../assets/plugins/bower_components/summernote/dist/summernote.css" rel="stylesheet" />
+
+    <!--Wave Effects -->
   <!--<script src="../assets/js/waves.js"></script>-->
   <!--&lt;!&ndash;Counter js &ndash;&gt;-->
   <!--<script src="../assets/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>-->
@@ -128,13 +131,19 @@
         $("#"+to).slideUp();
         $("#"+from).fadeIn();
     }
-   function switchMaker(){
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+   function switchMaker(id){
+        var val = id?'.'+id:'.js-switch';
+        var elems = Array.prototype.slice.call(document.querySelectorAll(val));
 
-            $('.js-switch').each(function () {
+            $(val).each(function () {
                 new Switchery($(this)[0], $(this).data());
 
             });
+    }
+
+    function switchId(id){
+        var val = $('#'+id);
+        new Switchery(val[0]);
     }
 
     function imgError(image,type) {
@@ -143,7 +152,33 @@
         return true;
     }
 
+    function summernode(val){
+        $('.summernote').summernote({
+            height: 200, // set editor height
+            minHeight: null, // set minimum height of editor
+            maxHeight: null, // set maximum height of editor
+            focus: false, // set focus to editable area after initializing summernote
+            toolbar: [
+                [ 'style', [ 'style' ] ],
+                [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+                [ 'fontname', [ 'fontname' ] ],
+                [ 'fontsize', [ 'fontsize' ] ],
+                [ 'color', [ 'color' ] ],
+                [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+                [ 'table', [ 'table' ] ],
+                [ 'insert', [ 'link'] ],
+                [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+            ]
+        });
+
+        $('[rel=tooltip]').tooltip()
+        $('[rel=tooltip]').tooltip('disable')
+        $('[rel=tooltip]').tooltip('enable')
+        $('[rel=tooltip]').tooltip('destroy');
+        $('.note-editable').html(val)
+    }
+
 
 </script>
-<script type="text/javascript" src="inline.1520010168450.bundle.js" defer></script><script type="text/javascript" src="styles.d41d8cd98f00b204e980.bundle.map" defer></script><script type="text/javascript" src="vendor.1520010168450.bundle.js" defer></script><script type="text/javascript" src="client.1520010168450.bundle.js" defer></script></body>
+<script type="text/javascript" src="inline.1520108224641.bundle.js" defer></script><script type="text/javascript" src="styles.d41d8cd98f00b204e980.bundle.map" defer></script><script type="text/javascript" src="vendor.1520108224641.bundle.js" defer></script><script type="text/javascript" src="client.1520108224641.bundle.js" defer></script></body>
 </html>

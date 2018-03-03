@@ -1,4 +1,4 @@
-
+<image-tee (updateImage)="updateImageParent($event)"></image-tee>
 
 <div class="container-fluid">
     <div class="row">
@@ -9,25 +9,34 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form class="floating-labels " #section="ngForm" name="section" id="section">
-                            <div class="form-group m-b-40">
-                                <textarea [(ngModel)]="data.about" class="form-control" id="about" required="" name="about"></textarea>
-
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="about">About</label>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="white-box">
+                                        <h3 class="box-title">About</h3>
+                                        <div >
+                                            <input class="summernote" type="text"  [(ngModel)]="data.about" id="about" name="about" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
                             <h3 class="box-title">Course Info</h3>
-                            <div class="switchery-demo m-b-30">
+                            <div class="form-group m-b-40" style="    height: 100px;">
                                 <ng-container *ngFor="let list of course;let i=index;">
-                                    {{list}}  <input type="text"  [(ngModel)]="data.course_info[list]" id="course{{i}}" name="course{{i}}" />
-                                </ng-container>
+                                    <div [class]="i%2==0?'lf_45':'rg_45'">
+                                        {{list.name}}  <input type="text"  class="chk_rg"  [(ngModel)]="course[i].value"   id="course{{i}}" name="course{{i}}" />
+
+                                    </div>
+                                     </ng-container>
                             </div>
                             <h3 class="box-title">FACILITIES</h3>
-                            <div class="switchery-demo m-b-30">
+                            <div class="form-group m-b-40" style="    height: 230px;">
                                 <ng-container *ngFor="let list of facilities;let i=index;">
-                                    {{list}}  <input type="checkbox"  (change)="clickMulti(list,'facilities')" [value]="list" id="facilities{{i}}" name="facilities{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                    <div [class]="i%2==0?'lf_45 chk_spn':'rg_45 chk_spn'">
+                                        {{list}}  <input type="checkbox"  (change)="clickMulti(list,'facilities')" [value]="list" id="facilities{{i}}" name="facilities{{i}}" class="js-switch chk_rg" data-color="#3d3b3b" />
+
+                                    </div>
                                 </ng-container>
                             </div>
                             <div class="form-group m-b-40">
@@ -108,14 +117,17 @@
                             </div>
                             <h3 class="box-title">Week days Working Hours</h3>
                             <div class="form-group m-b-40">
-                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekday_hrs.start_time" class="form-control cls_set" id="weekday_hrs_start_time" name="weekday_hrs_start_time">
+                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekday_hrs.start_time" class="form-control cls_set cls_date" id="weekday_hrs_start_time" name="weekday_hrs_start_time">
 
-                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekday_hrs.end_time" class="form-control cls_set" id="weekday_hrs_end_time" name="weekday_hrs_end_time">
+                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekday_hrs.end_time" class="form-control cls_set cls_date" id="weekday_hrs_end_time" name="weekday_hrs_end_time">
                             </div>
                             <h3 class="box-title">Weekend Working Hours</h3>
                             <div class="form-group m-b-40">
-                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
-                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
+                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set cls_date" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
+                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set cls_date" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
+                            </div>
+                            <div class="form-group m-b-40">
+                                <input type="file" name="logo" placeholder="Logo"   [(ngModel)]="image"  (change)="changeImg($event)">
                             </div>
                             <div class="form-group bk">
                                 <button style="    float: right;" type="submit" (click)="_saveAll(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.address_line_1">Update & Continue</button>
