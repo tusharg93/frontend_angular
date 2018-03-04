@@ -8,7 +8,8 @@ import { isBrowser } from 'angular2-universal';
 
 declare var swal:any;
 declare var flatpickr:any;
-declare var switchId:any;
+declare var $:any;
+declare var switchMaker:any;
 
 
 @Component({
@@ -51,7 +52,7 @@ export class PublicHolidayComponent implements OnInit {
        params['type'] = 'holiday';
        params['data'] = []
        for(var i in this.data.holidays){
-         params['data'].push({date:this.data.holidays[i].date,name:this.data.holidays[i].name,universal:this.data.holidays[i].universal?true:false})
+         params['data'].push({date:this.data.holidays[i].date,name:this.data.holidays[i].name,universal:this.data.holidays[i].universal?true:false,id:this.data.holidays[i].id})
        }
        this.ApiService.postApiMc4k('api/v1/slots/manage',params,false,true).then((value)=>{
          if(value&&value.msg=='success'){
@@ -64,9 +65,11 @@ export class PublicHolidayComponent implements OnInit {
    }
 
   addNew(type){
-    this.data[type].push({name:null,date:null});
+    this.data[type].push({name:null,date:null,universal:false});
+    var _self = this;
     setTimeout(function(){
-      flatpickr('.cls', {enableTime: false, minDate: new Date()});
+      flatpickr('.cls', {enableTime: false});
+      _self.clickTheCheck()
     },100)
 
   }
@@ -75,19 +78,41 @@ export class PublicHolidayComponent implements OnInit {
     this.data.holidays = new Array()
     let data = this.environment.random.userDetail;
     for(var i in data.holidays_info){
-      this.data.holidays.push({name:data.holidays_info[i].name,date:data.holidays_info[i].date})
+      this.data.holidays.push({universal:data.holidays_info[i].universal,name:data.holidays_info[i].name,date:data.holidays_info[i].date,id:data.holidays_info[i].id})
     }
   
    if(this.data.holidays.length == 0){
-     this.data['holidays'].push({name:null,date:null});
-
+     this.data['holidays'].push({name:null,date:null,universal:false});
     }
-    
+    var _self = this;
+    setTimeout(function(){
+      _self.clickTheCheck();
+      switchMaker();
+    },100)
+  }
+
+
+  clickTheCheck(){
+    let holidays = this.data.holidays;
+    this.data.holidays = new Array();
+    var _self = this;
+    setTimeout(function(){
+      _self.data.holidays = holidays;
+    },50)
+
+    setTimeout(function(){
+      switchMaker();
+      for(var i in holidays){
+        if(holidays[i].universal){
+          $('#'+(i+5)).click();
+        }
+      }
+    },500)
   }
   
   
   ngInitFlact(i){
-    flatpickr('.cls', {enableTime: false, minDate: new Date()});
+    flatpickr('.cls', {enableTime: false});
   }
 
 

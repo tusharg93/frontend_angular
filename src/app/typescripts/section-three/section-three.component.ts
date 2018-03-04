@@ -66,7 +66,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }
-      if(total>364){
+      if(total==365){
         if(!update){
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
@@ -88,7 +88,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }else{
-        swal('Error', 'Please select atleast 365 days','error')
+        swal('Error', 'Please select  365 days','error')
       }
 
     }
@@ -107,9 +107,14 @@ export class SectionThreeComponent implements OnInit {
            confirmButtonText: "Yes, rewrite it!",
            closeOnConfirm: true
          },
-         function(){
-           self.setSeas();
-           self.setNext();
+         function(isConfirm){
+           if(isConfirm){
+             self.setSeas();
+             self.setNext();
+           }else{
+             self.setValue();
+           }
+
          });
    }else{
      self.setSeas();
@@ -144,24 +149,34 @@ export class SectionThreeComponent implements OnInit {
   }
 
   setEnd(key,fromkey,tokey,end?){
-    var _self = this;
-    setTimeout(function() {
-      var startDate = new Date(_self.data.season_info[key][fromkey])
-      var day = 60 * 60 * 24  * 1000;
-      var newMinCallDate = new Date(startDate.getTime() + day);
-      flatpickr('#'+tokey, {enableTime: false, minDate: newMinCallDate});
-      if(end){
-        _self.dateDiff(_self,key);
-      }
-    },50);
+    if(key+1 < this.data.season_info.length){
+      this.setSeason();
+    }else{
+      var _self = this;
+      setTimeout(function() {
+        var startDate = new Date(_self.data.season_info[key][fromkey])
+        var day = 60 * 60 * 24  * 1000;
+        var newMinCallDate = new Date(startDate.getTime() + day);
+        if(end){
+          flatpickr('#'+tokey, {enableTime: false});
+          _self.dateDiff(_self,key);
+        }else{
+          flatpickr('#'+tokey, {enableTime: false,minDate:_self.data.season_info[key]['start_date']});
+          _self.data.season_info[key]['end_date'] = null
+        }
+      },50);
+    }
+    
   }
+
+  
 
   setNext(){
     var _self = this;
     setTimeout(function(){
       for(var i=0;i < _self.data['noseason'];i++){
-        flatpickr('#start_date'+i, {enableTime:false,minDate:new Date()});
-        flatpickr('#end_date'+i, {enableTime:false,minDate:new Date()});
+        flatpickr('#start_date'+i, {enableTime:false});
+        flatpickr('#end_date'+i, {enableTime:false});
       }
     },100)
 
@@ -179,11 +194,25 @@ export class SectionThreeComponent implements OnInit {
     this.data['season_info'] = new Array();
     this.data.seasonList = new Array();
     let data = this.environment.random.userDetail;
+    let lastYr;
     for(var i in data.seasons_info){
         let pr = data.seasons_info[i];
         var d = new Date();
         var n = d.getFullYear();
-        let params = {uid:pr.id,id:pr.season_id,name:this.environment.random.keys['others'][pr.season_id],start_date:n+'-'+pr.start_date,end_date:(n+1)+'-'+pr.end_date,type:null,rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}};
+        let firstMonth = pr.start_date;
+        let secondMonth = pr.end_date;
+        let firstMonth_arr = firstMonth.split('-');
+        let secondMonth_arr = secondMonth.split('-');
+        if(lastYr){
+          n = lastYr;
+        }
+        let endYear = n;
+        if(firstMonth_arr[0]>=secondMonth_arr[0]){
+          endYear = n+1;
+        }
+
+        lastYr=endYear
+        let params = {uid:pr.id,id:pr.season_id,name:this.environment.random.keys['others'][pr.season_id],start_date:n+'-'+pr.start_date,end_date:endYear+'-'+pr.end_date,type:null,rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}};
         this.data['season_info'][i] = params;
         this.data.seasonList.push(i);
         this.dateDiff(this,i);
@@ -193,9 +222,13 @@ export class SectionThreeComponent implements OnInit {
     this.data.noseason = data.seasons_info.length;
   }
 
-  initFlatpicker(id,value){
-    if(value){
-      flatpickr('.cls', {enableTime: false, minDate: new Date()});
+  initFlatpicker(id,key){
+    let dateTime = this.data.season_info[key][id]?new Date(this.data.season_info[key][id]):new Date();
+    if(this.data.season_info[key][id]){
+      setTimeout(function(){
+        flatpickr('#'+id+key, {enableTime:false, minDate:dateTime});
+      },10)
+
     }
 
   }

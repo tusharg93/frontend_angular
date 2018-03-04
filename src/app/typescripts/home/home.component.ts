@@ -106,6 +106,7 @@ export class HomeComponent implements OnInit {
           this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
           this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
         }
+
         this._router.navigateByUrl('golf-course/dashboard');
 
       }else if(value&&value.data&&this.environment.random.userInfo.source!=value.data['source']){

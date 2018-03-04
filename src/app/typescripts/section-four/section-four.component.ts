@@ -30,6 +30,8 @@ export class SectionFourComponent implements OnInit {
   slotTime:any;
   minGolf:any;
   next:number;
+  closed:boolean;
+  is_hole_18:boolean;
   constructor(private _storage:StorageService,private _router:Router,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
     this.data = new Array();
@@ -51,21 +53,32 @@ export class SectionFourComponent implements OnInit {
   }
 
 
-  save(form,i){
+  save(form,i,update){
     if (form.valid){
        if(this.data.length == this.next+1){
          let params = [];
          for(let i in this.data){
-           params.push({id:this.data[i].id,start_time:this.data[i].start_time,end_time:this.data[i].end_time,interval:this.data[i].interval,rates:this.data[i].rates,maintenance:this.data[i].maintenance})
+           params.push({uid:this.data[i].id,id:this.data[i].season_id,start_time:this.data[i].start_time,end_time:this.data[i].end_time,interval:this.data[i].interval,rates:this.data[i].rates,maintenance:this.data[i].maintenance})
          }
-         this.ApiService.postApiMc4k('api/v1/forms/4',{seasons_info:params},false,true).then((value)=>{
-           if(value&&value.msg&&value.msg=="success"){
-             // this._router.navigateByUrl('golf-course/section-add-on');
-             this.ApiService.userDetail('golf-course/section-add-on');
-           }else{
-             swal('Error', value.error,'error')
-           }
-         });
+         if(update){
+           this.ApiService.putApiMc4k('api/v1/forms/4',{seasons_info:params},0).then((value)=>{
+             if(value&&value.msg&&value.msg=="success"){
+               this.ApiService.userDetail('golf-course/section-add-on');
+             }else{
+               swal('Error', value.error,'error')
+             }
+           });
+         }else{
+           this.ApiService.postApiMc4k('api/v1/forms/4',{seasons_info:params},false,true).then((value)=>{
+             if(value&&value.msg&&value.msg=="success"){
+               // this._router.navigateByUrl('golf-course/section-add-on');
+               this.ApiService.userDetail('golf-course/section-add-on');
+             }else{
+               swal('Error', value.error,'error')
+             }
+           });
+         }
+
        }else{
          this.next = i +1;
        }
@@ -112,7 +125,9 @@ export class SectionFourComponent implements OnInit {
 
     }
     this.data= params;
-    console.log(this.data)
+    this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
+    this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&!this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
+    
 
   }
 

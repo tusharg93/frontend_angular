@@ -72,6 +72,7 @@ export class CloseDaysComponent implements OnInit {
 
   addNew(type){
     this.data[type].push({name:null,date:null,full_day:false});
+    this.clickTheCheck();
 
   }
 
@@ -87,6 +88,12 @@ export class CloseDaysComponent implements OnInit {
       this.data['maintenance'].push({start_time:null,date:null,full_day:false});
     }
 
+    var _self = this;
+    setTimeout(function(){
+      _self.clickTheCheck();
+      switchMaker();
+    },100)
+
     
   }
 
@@ -94,6 +101,25 @@ export class CloseDaysComponent implements OnInit {
     flatpickr('.cls', {enableTime: false, minDate: new Date()});
     flatpickr('.cls_date', {noCalendar: true, enableTime: true, time_24hr: true});
     switchMaker('cdd'+i)
+  }
+
+
+  clickTheCheck(){
+    let holidays = this.data.maintenance;
+    this.data.maintenance = new Array();
+    var _self = this;
+    setTimeout(function(){
+      _self.data.maintenance = holidays;
+    },50)
+
+    setTimeout(function(){
+      switchMaker();
+      for(var i in holidays){
+        if(holidays[i].full_day){
+          $('#'+(i+5)).click();
+        }
+      }
+    },500)
   }
 
 

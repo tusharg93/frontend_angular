@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form class="floating-labels " #section="ngForm" name="section" id="section">
-                            <div style="height:280px">
+                            <div style="height:310px">
                                 <div class="form-group m-b-5" style="    width: 45%;float: left;">
                                     <h4 class="box-title">Price include</h4>
                                     <p class="text-muted  font-13"></p>
@@ -38,8 +38,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group m-b-40" *ngIf="others">
-                                <h4 class="box-title">Others</h4>
+                            <div class="form-group m-b-40" [hidden]="!others">
+
 
 
                                 <div class="form-group m-b-40">
