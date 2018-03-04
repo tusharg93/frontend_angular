@@ -31,8 +31,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
       this._storage.userChecker(false).then((val)=>{
-          if(val){
+          if(val&&this.environment.random.source == 'golf_course'){
             this._router.navigateByUrl('golf-course/dashboard');
+          }else if (val&&this.environment.random.source =='vendor'){
+            this._router.navigateByUrl('vendor/dashboard');
           }
       })
     this.activeRoute.params.subscribe((params:Params) => {

@@ -1,6 +1,12 @@
 
 
 <div class="container-fluid">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">SECTION FOUR</h4>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box p-l-20 p-r-20">
@@ -14,7 +20,7 @@
 
                             <form class="floating-labels " style="width: 100%;" #section="ngForm" name="section" id="section" >
                                 <ng-container *ngFor="let rates of list.rates;let j=index" >
-                                    <p class="text-muted m-b-30 font-13">{{rates.type}} Rack Rate <code>Visitor/Online</code></p>
+                                    <p class="text-muted m-b-30 font-13">{{rates.type | uppercase}} Rack Rate <code>Visitor/Online</code></p>
 
                                     <div class="form-group m-b-40">
                                         <input type="number" [(ngModel)]="data[i].rates[j].hole_9_price" class="form-control" id="hole_9{{j}}_price" required="" name="hole_9_price">
@@ -26,25 +32,25 @@
                                         <span class="highlight"></span> <span class="bar"></span>
                                         <label for="hole_18{{j}}_price">18 Hole in  {{environment.random.userDetail.currency}}</label>
                                     </div>
-                                    <h3 class="box-title">Slot Detail</h3>
-                                    <p class="text-muted m-b-30 font-13">Weekdays/Weekend Days</p>
-                                    <div class="form-group m-b-40">
-                                        <p class="text-muted  font-13"></p>
-                                        <div class="switchery-demo m-b-30">
-                                            First Tee Time: <input type="text" [(ngModel)]="data[i].start_time"  class="flatpickr cls_set cls" (ngInit)="setFlact('start_time_slot'+i)" placeholder="Select Time" id="start_time_slot{{i}}" name="start_time_slot{{i}}"  />
+                                    <!--<h3 class="box-title">Slot Detail</h3>-->
+                                    <!--<p class="text-muted m-b-30 font-13">Weekend Days</p>-->
+                                    <!--<div class="form-group m-b-40">-->
+                                        <!--<p class="text-muted  font-13"></p>-->
+                                        <!--<div class="switchery-demo m-b-30">-->
+                                            <!--First Tee Time: <input type="text" [(ngModel)]="data[i].start_time"  class="flatpickr cls_set cls" (ngInit)="setFlact('start_time_slot'+i)" placeholder="Select Time" id="start_time_slot{{i}}" name="start_time_slot{{i}}"  />-->
 
-                                            Last Tee Time: <input type="text" [(ngModel)]="data[i].end_time" class="flatpickr cls_set cls" (ngInit)="setFlact('end_time_slot'+i)" placeholder="Select Time" id="end_time_slot{{i}}" name="end_time_slot{{i}}"/>
+                                            <!--Last Tee Time: <input type="text" [(ngModel)]="data[i].end_time" class="flatpickr cls_set cls" (ngInit)="setFlact('end_time_slot'+i)" placeholder="Select Time" id="end_time_slot{{i}}" name="end_time_slot{{i}}"/>-->
 
-                                            Per slot Time
-                                            <select class="form-control p-0"  style="width: 30%;float: right;" [(ngModel)]="data[i].interval" name="season{{i}}" required>
-                                                <ng-container *ngFor="let list of slotTime;let j=index">
-                                                    <option value="{{list}}">{{list}}</option>
-                                                </ng-container>
-                                            </select>
-                                        </div>
-                                        <span class="bar"></span>
-                                        <small class="form-text text-muted"></small>
-                                    </div>
+                                            <!--Per slot Time-->
+                                            <!--<select class="form-control p-0"  style="width: 30%;float: right;" [(ngModel)]="data[i].interval" name="season{{i}}" required>-->
+                                                <!--<ng-container *ngFor="let list of slotTime;let j=index">-->
+                                                    <!--<option value="{{list}}">{{list}}</option>-->
+                                                <!--</ng-container>-->
+                                            <!--</select>-->
+                                        <!--</div>-->
+                                        <!--<span class="bar"></span>-->
+                                        <!--<small class="form-text text-muted"></small>-->
+                                    <!--</div>-->
                                     <p class="text-muted m-b-30 font-13" [hidden]="!closed">Maintenance Days</p>
                                     <div class="form-group m-b-40" [hidden]="!closed">
                                         <p class="text-muted  font-13"></p>
@@ -64,8 +70,8 @@
                                 <div class="form-group bk" *ngIf="next==i">
                                     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-3">Back</a></button>
 
-                                    <button style="float: right;" type="submit" (click)="save(section,i,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length > 0"><span *ngIf="i==next">Update &</span> Continue</button>
-                                    <button style="float: right;" type="submit" (click)="save(section,i,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length == 0"><span *ngIf="i==next">Submit &</span> Continue</button>
+                                    <button style="float: right;" type="submit" (click)="save(section,i,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length > 0"><span *ngIf="i+1==next">Update &</span> Continue</button>
+                                    <button style="float: right;" type="submit" (click)="save(section,i,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length == 0"><span *ngIf="i+1==next">Submit &</span> Continue</button>
 
                                 </div>
 

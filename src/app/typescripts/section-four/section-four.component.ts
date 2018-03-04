@@ -58,7 +58,7 @@ export class SectionFourComponent implements OnInit {
        if(this.data.length == this.next+1){
          let params = [];
          for(let i in this.data){
-           params.push({uid:this.data[i].id,id:this.data[i].season_id,start_time:this.data[i].start_time,end_time:this.data[i].end_time,interval:this.data[i].interval,rates:this.data[i].rates,maintenance:this.data[i].maintenance})
+           params.push({uid:this.data[i].uid,id:this.data[i].id,start_time:this.data[i].start_time,end_time:this.data[i].end_time,interval:this.data[i].interval,rates:this.data[i].rates,maintenance:this.data[i].maintenance})
          }
          if(update){
            this.ApiService.putApiMc4k('api/v1/forms/4',{seasons_info:params},0).then((value)=>{
@@ -109,14 +109,14 @@ export class SectionFourComponent implements OnInit {
 
           let pr1 = data.rates_info[j];
           if(pr1){
-            if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
-              params[i].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekday'});
-              break;
+            if(pr.season_id == pr1.season_id){
+              params[i].rates.push({day_type:pr1.day_type,hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:this.environment.random.keys['others'][pr1.day_type],uid:pr1.id});
+
             }
-            if(this.environment.random.keys['others']['weekend'] == pr1.day_type){
-              params[i].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
-              break;
-            }
+            // if(this.environment.random.keys['others']['weekend'] == pr1.day_type){
+            //   params[i].rates.push({day_type:pr1.day_type,hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
+            //
+            // }
           }
 
         }
@@ -124,7 +124,9 @@ export class SectionFourComponent implements OnInit {
 
 
     }
-    this.data= params;
+    this.data = params;
+    
+    
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
     this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&!this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
     

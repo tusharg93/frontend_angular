@@ -112,7 +112,7 @@ export class UpdateProfileComponent implements OnInit {
     let data = this.environment.random.userDetail;
     let weekday_operating_hrs = data.gc_basic_info.weekday_operating_hrs?data.gc_basic_info.weekday_operating_hrs.split('to'):null;
     let weekend_operating_hrs = data.gc_basic_info.weekend_operating_hrs?data.gc_basic_info.weekend_operating_hrs.split('to'):null;
-    let params = {about:data.gc_basic_info.about,
+    let params = {about:data.gc_basic_info.about,logo:this.image,
       address_line_1:data.gc_basic_info.address_line_1,
       address_line_2:data.gc_basic_info.address_line_2,
       contact_mobile:data.gc_basic_info.person_mobile,

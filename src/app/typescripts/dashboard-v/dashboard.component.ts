@@ -12,8 +12,8 @@ declare var switchMaker:any;
 
 @Component({
   encapsulation:ViewEncapsulation.None,
-  selector:'golf',
-  templateUrl: './golf.html',
+  selector:'vendor',
+  templateUrl: './dashboard.html',
   providers: [ApiService,StorageService],
 })
 
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._storage.userChecker(false).then((val)=>{
+      this._storage.promLogIn().then((val)=>{
         switchMaker();
       })
     this._section_1();

@@ -8,6 +8,7 @@ import { isBrowser } from 'angular2-universal';
 
 declare var $:any;
 declare var switchMaker:any;
+declare var swal:any;
 
 
 @Component({
@@ -30,7 +31,7 @@ export class ManageVendorsComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._storage.userChecker(false).then((val)=>{
+      this._storage.promLogIn().then((val)=>{
         switchMaker();
       })
     
@@ -41,7 +42,84 @@ export class ManageVendorsComponent implements OnInit {
   }
   
   setValue(){
-    this.data.vendor_info = this.environment.random.userDetail.vendor_info;
+    let data = this.environment.random.userDetail.vendor_info;
+    for(var i in data.all){
+      data.all[i].accepted = false;
+      data.all[i].declined = false;
+      data.all[i].pending = false;
+      for(var j in data.accepted){
+         if(data.accepted[j].v_id == data.all[i].v_id){
+           data.all[i].accepted = true;
+         }
+      }
+      for(var j in data.declined){
+        if(data.declined[j].v_id == data.all[i].v_id){
+          data.all[i].declined = true;
+        }
+      }
+      for(var j in data.pending){
+        if(data.pending[j].v_id == data.all[i].v_id){
+          data.all[i].pending = true;
+        }
+      }
+    }
+    var _self = this;
+    _self.data.vendor_info = data.all;
+    setTimeout(function(){
+      switchMaker();
+      for(var i in data.all){
+        if(data.all[i].accepted){
+          $('#accepted'+i).click()
+        }
+        if(data.all[i].declined){
+          $('#declined'+i).click()
+        }
+        if(data.all[i].pending){
+          $('#pending'+i).click()
+        }
+      }
+    })
+
+  }
+
+  changeAll(i,key,fr,sc){
+    var _self = this;
+    setTimeout(function(){
+      if(_self.data.vendor_info[i][key]){
+        if(_self.data.vendor_info[i][fr]){
+          _self.data.vendor_info[i][fr] = false;
+          $('#'+fr+i).click()
+        }
+        if(_self.data.vendor_info[i][sc]){
+          _self.data.vendor_info[i][sc] = false;
+          $('#'+sc+i).click()
+        }
+      }
+      _self.save(i);
+    },50)
+
+
+
+  }
+
+  save(i){
+    let params = {id:this.data.vendor_info[i].id,v_id:this.data.vendor_info[i].v_id}
+    let status = 'ACCEPTED';
+
+    if(this.data.vendor_info[i].declined){
+      status = 'DECLINED';
+    }
+    if(this.data.vendor_info[i].pending){
+      status = 'PENDING';
+    }
+    params['status'] = status;
+    this.ApiService.postApiMc4k('/api/v1/vendors/request',params,false,true).then((value)=>{
+      if(value&&value.msg=='success'){
+        swal('Status changed','','success')
+      }
+
+    });
+
   }
 
   

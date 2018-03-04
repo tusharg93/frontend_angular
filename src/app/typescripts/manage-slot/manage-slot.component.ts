@@ -8,7 +8,7 @@ import { isBrowser } from 'angular2-universal';
 
 declare var $:any;
 declare var swal:any;
-
+declare var flatpickr:any;
 
 @Component({
   encapsulation:ViewEncapsulation.None,
@@ -23,12 +23,15 @@ export class ManageSlotComponent implements OnInit {
     
   environment:any;
   data:any;
- 
+  current:any;
+  days:any;
+  slots:any;
   constructor(private _storage:StorageService,private router:Router,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
     this.data = new Array();
-    
+    this.current = new Array();
+    this.days = new Array();
   }
 
   ngOnInit() {
@@ -47,19 +50,15 @@ export class ManageSlotComponent implements OnInit {
     this.data.season_info = new Array();
     for(let i in data.seasons_info){
       let pr = data.seasons_info[i];
-      params.push({status:pr.status?pr.status:false,holes:"9",id:pr.season_id,uid:pr.id,start_date:pr.start_date,end_date:pr.end_date,start_time:pr.start_time,end_time:pr.end_time,interval:pr.tee_interval,maintenance:{start_time:pr.maintenance_stime,end_time:pr.maintenance_etime}});
+      params.push({name:this.environment.random.keys['others'][pr.season_id],slot_status:pr.slot_status?pr.slot_status:false,id:pr.season_id,uid:pr.id,start_date:pr.start_date,end_date:pr.end_date,start_time:pr.start_time,end_time:pr.end_time,interval:pr.tee_interval,maintenance:{start_time:pr.maintenance_stime,end_time:pr.maintenance_etime}});
       params[i].rates = [];
       for(var j in data.rates_info){
         
         let pr1 = data.rates_info[j];
         if(pr1){
-          if(this.environment.random.keys['others']['weekday'] == pr1.day_type){
-            params[i].rates.push({day_type:this.environment.random.keys['others']['weekday'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekday'});
-            break;
-          }
-          if(this.environment.random.keys['others']['weekend'] == pr1.day_type){
-            params[i].rates.push({day_type:this.environment.random.keys['others']['weekend'],hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:'weekend'});
-            break;
+          if(pr.season_id == pr1.season_id){
+            params[i].rates.push({day_type:pr1.day_type,hole_18_price:pr1.hole_18_price,hole_9_price:pr1.hole_9_price,type:this.environment.random.keys['others'][pr1.day_type]});
+
           }
         }
 
@@ -67,17 +66,111 @@ export class ManageSlotComponent implements OnInit {
 
      this.data.season_info.push(params[i])
     }
+    if(data.gc_basic_info.weekdays){
+      this.data['weekdays'] = data.gc_basic_info.weekdays.split(',')
+
+    }
+    if(data.gc_basic_info.weekends){
+      this.data['weekends'] = data.gc_basic_info.weekends  .split(',')
+    }
+    
     if(this.data.season_info.length==0){
       this.router.navigateByUrl('golf-course/section-3');
       swal('Error','You need to add slots first','error')
+    }else{
+      this.data.type = 'seasons';
+      this.current = {date:this.environment.random.keys['others']['weekend'],name:this.data.season_info[0].id,day:this.data['weekends'][0],hole:"9",date_val:null,days:[],holes:"9"};
+      this.days = [{id:this.environment.random.keys['others']['weekend'],name:"Weekend"},{id:this.environment.random.keys['others']['weekday'],name:"Weekday"}]
+      this.getdata(false);
     }
-    this.data.type = 2;
+
+    flatpickr('.cls',{enableTime:false});
+
   }
 
-  updateSlots(){
-    
+  save(i){
+      let params = {};
+      let holes_9 = this.slots[i].holes == "9"?true:false;
+      let holes_18 = this.slots[i].holes == "18"?true:false;
+      params['type'] = this.data.type;
+      if(params['type']=='seasons'){
+        params['day_type'] = this.current.date
+        params['season_id'] = this.current.name;
+
+        let days = (this.current.date==this.environment.random.keys['others']['weekend'])?this.data['weekends']:this.data['weekdays']
+        this.current.days = this.current.days.length>0?this.current.days:days;
+        params['days'] = this.current.days;
+        params['days'] = params['days'];
+        params['slots'] = [{tee_time:this.slots[i].tee_time,hole_9_price:this.slots[i].hole_9_price[0],hole_18_price:this.slots[i].hole_18_price[0],hole_18_flag:holes_18,hole_9_flag:holes_9,slot_status:this.slots[i].slot_status}];
+      }else{
+        params['slots'] = [{id:this.slots[i].id,hole_9_price:this.slots[i].hole_9_price,hole_18_price:this.slots[i].hole_18_price,hole_18_flag:holes_18,hole_9_flag:holes_9,slot_status:this.slots[i].slot_status}]
+
+      }
+
+
+      this.ApiService.putApiMc4k('api/v1/slots/filter',params,0).then((value)=>{
+        if(value&&value.msg&&value.msg=="success"){
+          this.data.type = 'seasons';
+          this.getdata(false);
+        }else{
+          swal('Error', value.error,'error')
+        }
+      });
+
+      
+
   }
 
+
+
+
+
+  getdata(val){
+    let param = 'type=seasons&season_id='+this.current.name+'&day_type='+this.current.date;
+
+    this.slots = new Array();
+    var _self = this;
+    setTimeout(function(){
+      if(_self.data.type == 'date'){
+        param = 'type=date&date='+_self.current.date_val;
+      }
+      _self.ApiService.getApiMc4k('api/v1/slots/filter?'+param,0,true).then((value)=>{
+        if(value&&value.data){
+          let data = value.data;
+          for(var i in data){
+            data[i].holes = '9';
+            data[i].slot_status = data[i].slot_status=='OPEN'?'OPEN':'CLOSED';
+          }
+          _self.slots = data;
+        }
+      })
+    },100)
+  }
+
+
+  showCheckboxes(id) {
+  var checkboxes = document.getElementById(id);
+  if (checkboxes.style.display=='block') {
+    checkboxes.style.display = "none";
+  } else {
+    checkboxes.style.display = "block";
+  }
+}
+
+  checkMultiple(val) {
+    let removed;let days =[]
+    for(var i in this.current.days){
+      if(val == this.current.days[i]){
+        this.current.days.splice(i,0);
+        removed = true;
+        break;
+      }
+    }
+
+    if(!removed){
+      this.current.days.push(val);
+    }
+  }
 
 
 }

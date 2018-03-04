@@ -40,10 +40,10 @@ export class ManageGolfCourseComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._storage.userChecker(false).then((val)=>{
-        switchMaker();
+      this._storage.promLogIn().then((val)=>{
+        
       })
-    this._section_1();
+    
    
   }
 
@@ -51,95 +51,85 @@ export class ManageGolfCourseComponent implements OnInit {
 
   }
 
-  _section_1(){
-    //currency
-    this.ApiService.getApiMc4k('assets/json/currency.json',1).then((value)=>{
-        this.currency = value.data;
-      
-    });
-    //time zone
-    this.ApiService.getApiMc4k('assets/json/time-zone.json',1).then((value)=>{
-      this.timezone = value.data;
-      this.data['timezone'] = this.timezone[0].offset;
-    });
-    let slots = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-    this.slotMonths = slots;
-  }
-
-  _section_2(){
-     let days = ['Mon','Tue','Wed','Thur','Fri','Sat','Sun'];
-     this.days = days;
-  }
-
-  save_1(form) {
-    if (form.valid) {
-      let params = {currency:this.data.currency,timezone:this.data.timezone,hole_9:this.data.hole_9?this.data.hole_9:false,hole_18:this.data.hole_18?this.data.hole_18:false, member:this.data.member?this.data.member:false,online:this.data.online?this.data.online:false,guest:this.data.guest?this.data.guest:false,duration:this.data.duration,tee:this.data.tee};
-      this._saveAll(1,params);
-      this._section_2();
-    }
-  }
-
-  save_2(form){
-    if (form.valid) {
-      let params = {weekdays:this.data.weekdays,weekends:this.data.weekends,closed:{day:this.data.closed,day_type:this.data.day_type,fullday:this.data.full_day}};
-      this._saveAll(2,params);
-    }
-  }
-  
-
-   _saveAll(form,params){
-     this.ApiService.postApiMc4k('api/v1/forms/'+form,params,false,true).then((value)=>{
-
-     });
-   }
-
-  clickMulti(key,value,disabled){
-    let removed;
-    this.data[value] = this.data[value]?this.data[value]:[];
-    for(var i in this.data[value]){
-      if(key == this.data[value][i]){
-        this.data[value].splice(i,0);
-        removed = true;
-        $('#'+disabled+key).attr('disabled', false);
-        $('#c_'+key).attr('disabled', false);
-        break;
+  setValue(){
+    let data = this.environment.random.userDetail.vendor_info;
+    for(var i in data.all){
+      data.all[i].accepted = false;
+      data.all[i].declined = false;
+      data.all[i].pending = false;
+      for(var j in data.accepted){
+        if(data.accepted[j].v_id == data.all[i].v_id){
+          data.all[i].accepted = true;
+        }
+      }
+      for(var j in data.declined){
+        if(data.declined[j].v_id == data.all[i].v_id){
+          data.all[i].declined = true;
+        }
+      }
+      for(var j in data.pending){
+        if(data.pending[j].v_id == data.all[i].v_id){
+          data.all[i].pending = true;
+        }
       }
     }
+    var _self = this;
+    _self.data.vendor_info = data.all;
+    setTimeout(function(){
+      switchMaker();
+      for(var i in data.all){
+        if(data.all[i].accepted){
+          $('#accepted'+i).click()
+        }
+        if(data.all[i].declined){
+          $('#declined'+i).click()
+        }
+        if(data.all[i].pending){
+          $('#pending'+i).click()
+        }
+      }
+    })
 
-    if(!removed){
-      this.data[value].push(key);
-      $('#'+disabled+key).attr('disabled', true);
-      $('#c_'+key).attr('disabled', true);
+  }
+
+  changeAll(i,key,fr,sc){
+    var _self = this;
+    setTimeout(function(){
+      if(_self.data.vendor_info[i][key]){
+        if(_self.data.vendor_info[i][fr]){
+          _self.data.vendor_info[i][fr] = false;
+          $('#'+fr+i).click()
+        }
+        if(_self.data.vendor_info[i][sc]){
+          _self.data.vendor_info[i][sc] = false;
+          $('#'+sc+i).click()
+        }
+      }
+      _self.save(i);
+    },50)
+
+
+
+  }
+
+  save(i){
+    let params = {id:this.data.vendor_info[i].id,v_id:this.data.vendor_info[i].v_id}
+    let status = 'ACCEPTED';
+
+    if(this.data.vendor_info[i].declined){
+      status = 'DECLINED';
     }
-
-  }
-
-  setSeason(){
-    this.data.seasonList = new Array();
-    this.data.season_info = new Array();
-    for(var i=0;i < this.data['noseason'];i++){
-      this.data.seasonList.push(i);
-      this.data.season_info.push({id:i,name:'Season '+(i+1),rates:{hole_9_price:"",hole_18_price:""}});
+    if(this.data.vendor_info[i].pending){
+      status = 'PENDING';
     }
-  }
+    params['status'] = status;
+    this.ApiService.postApiMc4k('/api/v1/vendors/request',params,false,true).then((value)=>{
+      if(value&&value.msg=='success'){
+        swal('Status changed','','success')
+      }
 
-  // setMax(key){
-  //   $('#'+disabled+key).attr('disabled', true);
-  // }
+    });
 
-  setMaintainance(){
-    let main = {rates:{hole_9_price:"",hole_18_price:""}};
-    this.data.maintainance = new Array();
-    this.data.maintainance = main;
-  }
-
-
-  _getCountry(){
-    this.ApiService._getCountry();
-  }
-  
-  _getCity(country){
-    this.ApiService._getCity(country);
   }
 
 

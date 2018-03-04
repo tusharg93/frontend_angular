@@ -35,7 +35,7 @@ export class CategorySelectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._storage.userChecker(false).then((val)=>{
+    this._storage.promLogIn().then((val)=>{
       if(val){
       
         if((this.environment.userInfo.id && !this.environment.userInfo.followCategories) || (this.environment.userInfo.followCategories && this.environment.userInfo.followCategories.length < 4)){

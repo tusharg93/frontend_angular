@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._storage.userChecker(false).then((val)=>{
+    this._storage.promLogIn().then((val)=>{
        if(val){
 
        }
@@ -49,11 +49,11 @@ export class HeaderComponent implements OnInit {
   }
 
   vdahboard(){
-    // this.ApiService.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
-    //   if(value&&value.data){
-    //     this.environment.random.userDetail = value.data;
-    //   }
-    // })
+    this.ApiService.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
+      if(value&&value.data){
+        this.environment.random.userDetail = value.data;
+      }
+    })
   }
 
 

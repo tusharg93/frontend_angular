@@ -1,6 +1,12 @@
 
 
 <div class="container-fluid">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">UPDATE PROFILE</h4>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box p-l-20 p-r-20">
@@ -102,9 +108,9 @@
                                 <input type="file" placeholder="Logo"  [(ngModel)]="image" name="logo" class="form-control">
                             </div>
                             <div class="form-group bk">
-                                <button style="    float: right;" type="submit" (click)="_saveAll(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.address_line_1">Update & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="_saveAll(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info">Update & Continue</button>
 
-                                <button style="    float: right;" type="submit" (click)="_saveAll(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.address_line_1">Submit & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="_saveAll(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&!environment.random.userDetail.gc_basic_info">Submit & Continue</button>
                             </div>
                         </form>
                     </div>

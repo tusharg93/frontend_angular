@@ -5,40 +5,55 @@
         </div>
 
     </div>
-    <div class="row">
+    <div class="row" >
         <div class="col-sm-12">
-            <div class="white-box p-l-20 p-r-20">
-                <!--<h3 class="box-title m-b-0">Holidays<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew('holidays')">Add New</button></h3>-->
-                <!--<p class="text-muted m-b-30 font-13"></p>-->
-                <div class="row">
-                    <div class="col-md-12">
-                        <form class="floating-labels " #section1="ngForm" name="section1" id="section1">
+            <form class="floating-labels " #section="ngForm" name="section" id="section">
+
+                <div class="white-box">
+                    <!--<h3 class="box-title m-b-0">Data Table</h3>-->
+                    <!--<p class="text-muted m-b-30">Data table example</p>-->
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Accepted</th>
+                                <th>Declined</th>
+                                <th>Pending</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let list of data.vendor_info;let i=index">
+
+                                    <td>{{list.v_name}}</td>
+                                    <td>
+                                        <input type="checkbox" [(ngModel)]="data.vendor_info[i].accepted" (change)="changeAll(i,'accepted','declined','pending')" [value]="true" name="accepted"  id="accepted{{i}}" class="js-switch" data-color="#3d3b3b" />
+
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"  [(ngModel)]="data.vendor_info[i].declined" (change)="changeAll(i,'declined','pending','accepted')" [value]="true" name="declined"  id="declined{{i}}" class="js-switch" data-color="#3d3b3b" />
+
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"  [(ngModel)]="data.vendor_info[i].pending" (change)="changeAll(i,'pending','accepted','declined')" [value]="true" name="pending"  id="pending{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                    </td>
 
 
-                            <h3 class="box-title">VENDORS</h3>
-
-                            <ng-container *ngFor="let list of data.vendor_info;let i=index">
-                                <div class="form-group m-b-5" >
-                                    <input type="text" class="form-control" style="float: left;width:45%;" placeholder="Holiday Name" [(ngModel)]="data.vendor_info[i].name" name="holidays_name" id="holidays_name{{i}}"><span class="highlight"></span> <span class="bar"></span>
-                                </div>
-                                <div class="form-group m-b-5" >
-                                    <input type="number" class="form-control cls" style="float: right;width:45%;" placeholder="Holiday Date" [(ngModel)]="data.vendor_info[i].date" name="holidays_date" rows="4" id="holidays_date{{i}}"><span class="highlight"></span> <span class="bar"></span>
-                                </div>
 
 
-                            </ng-container>
-
-                            <div style="height:100px"></div>
 
 
-                        </form>
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
+
     </div>
-
-
 </div>
 
 <div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>

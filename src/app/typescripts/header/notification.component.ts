@@ -78,7 +78,7 @@ export class NotificationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._storage.userChecker(false).then((val)=>{
+        this._storage.promLogIn().then((val)=>{
             if(val){
                 this._getNotifyCount();
             }

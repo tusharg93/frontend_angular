@@ -140,13 +140,17 @@ export class ImageComponent implements OnInit {
 
   sendReq(file){
     var fileData = new FormData();
-    fileData.append('type', file);
-    fileData.append('key', 'image');
-    this.ApiService.imageApi('/api/v1/forms/image',fileData).then((value)=>{
-      if(value && value['data'] && value['data'] && value['data']['result']){
-        this._storage.showMessage(value['data']['msg'],'success');
+    fileData.append('image', file);
+    fileData.append('key', this.name);
+    let link = '/api/v1/forms/image';
+    if(this.environment.random.source =='vendor'){
+      link = '/api/v1/vendors/image'
+    }
+    this.ApiService.imageApi(link,fileData).then((value)=>{
+      if(value && value['data'] && value['data'] && value['data']){
         $('#ImgCrop').css('display','none');
-        this.updateImage.emit(value['data']['result']['url']);
+        $('#logoImg').attr('src',value['data']['url'])
+        this.updateImage.emit(value['data']['url']);
 
       }else{
         

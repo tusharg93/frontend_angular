@@ -1,15 +1,9 @@
 <div class="container-fluid">
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Dashboard 1</h4>
+            <h4 class="page-title">MANAGE SLOTS</h4>
         </div>
-        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <a href="https://themeforest.net/item/elite-admin-responsive-dashboard-web-app-kit-/16750820" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Buy Now</a>
-            <ol class="breadcrumb">
-                <li><a href="#">Dashboard</a></li>
-                <li class="active">Dashboard 1</li>
-            </ol>
-        </div>
+
         <!-- /.col-lg-12 -->
     </div>
     <div class="row">
@@ -26,21 +20,21 @@
                                 <h4 class="box-title"> SLOT TYPE</h4>
                                 <p class="text-muted  font-13"></p>
                                 <div class="switchery-demo m-b-30">
-
                                     <div class="str_rdio">
-                                        <input type="radio" [(ngModel)]="data.type"  value="1" name="type"  id="type_date1" />
-                                        <label for="type_date1">
-                                            <h2>Date</h2>
-                                            <!--<p>{{list.name}}</p>-->
-                                        </label>
-                                    </div>
-                                    <div class="str_rdio">
-                                        <input type="radio" [(ngModel)]="data.type"  value="2" name="type"  id="type_season2" />
+                                        <input type="radio" [(ngModel)]="data.type"  value="seasons" name="type"  id="type_season2" />
                                         <label for="type_season2">
                                             <h2>Season</h2>
                                             <!--<p>{{list.name}}</p>-->
                                         </label>
                                     </div>
+                                    <div class="str_rdio">
+                                        <input type="radio" [(ngModel)]="data.type"  value="date" name="type"  id="type_date1" />
+                                        <label for="type_date1">
+                                            <h2>Date</h2>
+                                            <!--<p>{{list.name}}</p>-->
+                                        </label>
+                                    </div>
+
 
 
                                 </div>
@@ -50,6 +44,71 @@
 
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-sm-12">
+            <div class="white-box p-l-20 p-r-20">
+                <h3 class="box-title m-b-0">MANAGE SLOTS</h3>
+                <p class="text-muted m-b-30 font-13"></p>
+                <div class="row" [hidden]="data.type=='date'">
+                    <div class="col-md-12">
+                        <form class="floating-labels " #section2="ngForm" name="section2" id="section2">
+
+
+                            <div class="form-group m-b-40" *ngIf="data.season_info">
+                                <select class="form-control p-0" (change)="getdata()" style="width: 40%;float: left;" ([ngModel])="current.name" name="season_name" required>
+                                    <ng-container *ngFor="let list of data.season_info;let j=index">
+                                        <option required value="{{list.id}}"  class="season_cls">{{list.name}}</option>
+                                    </ng-container>
+                                </select>
+                                <select class="form-control p-0"  (change)="getdata()" style="width: 30%;float: left;"  ([ngModel])="current.date" name="season_name1" required>
+                                    <ng-container *ngFor="let list of days;let j=index">
+                                        <option required value="{{list.id}}"  class="season_cls">{{list.name}}</option>
+                                    </ng-container>
+                                </select>
+
+                                <div class="multiselect" [hidden]="current.date==environment.random.keys['others']['weekend']" >
+                                    <div class="selectBox" (click)="showCheckboxes('checkboxes1')">
+                                        <select>
+                                            <option>Select Days</option>
+                                        </select>
+                                        <div class="overSelect"></div>
+                                    </div>
+                                    <div id="checkboxes1">
+                                        <ng-container *ngFor="let list of data['weekdays'];let j=index">
+                                            <label for="{{list}}">
+                                                <input type="checkbox"  (click)="checkMultiple(list)" id="{{list}}" />{{list}}</label><br/>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                                <div class="multiselect">
+                                    <div class="selectBox" (click)="showCheckboxes('checkboxes2')">
+                                        <select>
+                                            <option>Select Days</option>
+                                        </select>
+                                        <div class="overSelect"></div>
+                                    </div>
+                                    <div id="checkboxes2">
+                                        <ng-container *ngFor="let list of data['weekends'];let j=index">
+                                            <label for="{{list}}">
+                                                <input type="checkbox"  (click)="checkMultiple(list)" id="{{list}}" />{{list}}</label><br/>
+                                        </ng-container>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="row" [hidden]="data.type=='seasons'">
+                    <input type="text" required  (change)="getdata(true);"  [(ngModel)]="current.date_val" class="flatpickr cls " placeholder="Select Date" name="end_time" id="end_date" />
+
                 </div>
             </div>
         </div>
@@ -68,32 +127,34 @@
                         <tr>
                             <th>Slot Time</th>
                             <th>Slot For</th>
-                            <th>9 Hole Time(Weekdays)</th>
-                            <th>18 Hole Time(Weekdays)</th>
-                            <th>9 Hole Time(Weekend)</th>
-                            <th>18 Hole Time(Weekend)</th>
+                            <th>9 Hole Time</th>
+                            <th>18 Hole Time</th>
                             <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let list of data.season_info;let i=index">
-                            <td>{{list.start_time}}</td>
-                            <td>
-                                <select class="form-control p-0"  [(ngModel)]="data.season_info[i].holes" name="holes" required>
-                                    <option value="9" >9</option>
-                                    <option value="18" >18</option>
-                                </select>
-                            </td>
-                            <td>{{list.rates[0].hole_9_price}}</td>
-                            <td>{{list.rates[0].hole_18_price}}</td>
-                            <td>{{list.rates[1]?list.rates[1].hole_9_price:'0'}}</td>
-                            <td>{{list.rates[1]?list.rates[1].hole_18_price:'0'}}</td>
-                            <td>
-                                <select class="form-control p-0"  [(ngModel)]="data.season_info[i].status" name="status" required>
-                                    <option value="true" >Open</option>
-                                    <option value="false" >Closed</option>
-                                </select>
-                            </td>
+                        <tr *ngFor="let list of slots;let i=index">
+                            <ng-container >
+                                <td>{{list.tee_time}}</td>
+                                <td>
+                                    <select class="form-control p-0"  [(ngModel)]="slots[i].holes" name="holes" required>
+                                        <option value="9" >9</option>
+                                        <option value="18" >18</option>
+                                    </select>
+                                </td>
+                                <td >{{list.hole_9_price?list.hole_9_price:0}}</td>
+                                <td >{{list.hole_18_price?list.hole_18_price:0}}</td>
+
+
+                                <td >
+                                    <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status" name="status" required (change)="save(i)">
+                                        <option value="OPEN" >Open</option>
+                                        <option value="CLOSED" >Closed</option>
+                                    </select>
+                                </td>
+
+                            </ng-container>
+
 
                         </tr>
 
@@ -107,6 +168,6 @@
     </div>
 </div>
 
-<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail&&environment.random.keys&&environment.random.keys['others']"></div>
 
 
