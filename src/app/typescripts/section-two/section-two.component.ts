@@ -111,7 +111,7 @@ export class SectionTwoComponent implements OnInit {
   
 
 
-  clickMulti(key,value,disabled,clickMe){
+  clickMulti(key,value,disabled,clickMe?){
     let removed;
     this.data[value] = this.data[value]?this.data[value]:[];
     for(var i in this.data[value]){
@@ -129,28 +129,11 @@ export class SectionTwoComponent implements OnInit {
     if(!removed){
       this.data[value].push(key);
       $('#'+disabled+key).next().addClass('disabled');
-      this.clickMulti(key,disabled,value,true);
+      // this.clickMulti(key,disabled,value,true);
     }
   }
 
 
-  clickMultiNext(key,value,disabled){
-    let removed;
-    this.data[value] = this.data[value]?this.data[value]:[];
-    for(var i in this.data[value]){
-      if(key == this.data[value][i]){
-        this.data[value].splice(i,0);
-        removed = true;
-        $('#'+disabled+key).next().removeClass('disabled');
-        break;
-      }
-    }
-
-    if(!removed){
-      this.data[value].push(key);
-      $('#'+disabled+key).next().addClass('disabled');
-    }
-  }
 
 
   setValue(){

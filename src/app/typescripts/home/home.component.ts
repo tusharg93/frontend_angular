@@ -153,7 +153,7 @@ export class HomeComponent implements OnInit {
     vendor = vendor?vendor:'';
     this.environment.random.source = vendor==''?'golf_course':'vendor';
     this.ApiService.getApiMc4k('api/v1/forms/verify-email?token='+token+vendor,0).then((value)=>{
-      if(value&&value.data){
+      if(value&&value.msg){
         swal("Success", value.msg, "success")
       }else{
         swal("Error", value.error, "error")
