@@ -63,7 +63,7 @@
 
                                 <button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info&&environment.random.userDetail.seasons_info.length == 0">Submit & Continue</button>
 
-                                <button style="    float: right;" type="submit" (click)="save(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info && environment.random.userDetail.seasons_info.length > 0">Update & Continue</button>
+                                <button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info && environment.random.userDetail.seasons_info.length > 0">Update & Continue</button>
 
                             </div>
                         </form>
