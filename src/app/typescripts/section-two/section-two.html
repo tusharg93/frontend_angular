@@ -20,7 +20,7 @@
                                 <p class="text-muted  font-13"></p>
                                 <div class="switchery-demo m-b-30">
                                     <ng-container *ngFor="let list of days">
-                                        {{list}}  <input type="checkbox"  (change)="clickMulti(list,'weekdays','weekends')" [value]="list" name="weekdays"  id="weekdays{{list}}" class="js-switch" data-color="#3d3b3b" />
+                                        {{list}}  <input type="checkbox"  (change)="clickMulti(list,'weekdays','weekends');" [value]="list" name="weekdays"  id="weekdays{{list}}" class="js-switch" data-color="#3d3b3b" />
                                     </ng-container>
                                 </div>
                                 <span class="bar"></span>

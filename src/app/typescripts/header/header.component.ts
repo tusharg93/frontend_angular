@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._storage.promLogIn().then((val)=>{
+    this._storage.userChecker(false).then((val)=>{
        if(val){
 
        }

@@ -36,7 +36,7 @@ export class SectionFourComponent implements OnInit {
     this.environment = environment;
     this.data = new Array();
     this.data.season = new Array();
-    this.slotTime = new Array(5,10,15,20);
+    this.slotTime = new Array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
     this.minGolf = new Array(1,2,3,4);
     this.next = 0;
   }
@@ -125,11 +125,13 @@ export class SectionFourComponent implements OnInit {
 
     }
     this.data = params;
-    
+
     
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
     this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&!this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
-    
+    setTimeout(function(){
+      flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
+    },50)
 
   }
 

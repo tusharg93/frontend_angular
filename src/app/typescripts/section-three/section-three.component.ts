@@ -66,7 +66,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }
-      if(total==365){
+      if(total==364){
         if(!update){
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
@@ -149,23 +149,33 @@ export class SectionThreeComponent implements OnInit {
   }
 
   setEnd(key,fromkey,tokey,end?){
-    if(key+1 < this.data.season_info.length){
-      this.setSeason();
-    }else{
+
+    if(key+1 < this.data.season_info.length && this.data.season_info[key][fromkey]){
+      for(var i in this.data.season_info){
+        if(i>key){
+          this.data.season_info[i]['start_date'] = null
+          this.data.season_info[i]['end_date'] = null
+          this.data.season_info[i]['diff'] = null
+        }
+      }
+    }
       var _self = this;
       setTimeout(function() {
         var startDate = new Date(_self.data.season_info[key][fromkey])
         var day = 60 * 60 * 24  * 1000;
         var newMinCallDate = new Date(startDate.getTime() + day);
         if(end){
-          flatpickr('#'+tokey, {enableTime: false});
+          flatpickr('#'+tokey, {enableTime: false,minDate:newMinCallDate});
           _self.dateDiff(_self,key);
         }else{
-          flatpickr('#'+tokey, {enableTime: false,minDate:_self.data.season_info[key]['start_date']});
+
+          flatpickr('#'+tokey, {enableTime: false,minDate:newMinCallDate});
           _self.data.season_info[key]['end_date'] = null
+          _self.data.season_info[key]['diff'] = null;
+          
         }
       },50);
-    }
+
     
   }
 
@@ -211,7 +221,7 @@ export class SectionThreeComponent implements OnInit {
           endYear = n+1;
         }
 
-        lastYr=endYear
+        lastYr=endYear;
         let params = {uid:pr.id,id:pr.season_id,name:this.environment.random.keys['others'][pr.season_id],start_date:n+'-'+pr.start_date,end_date:endYear+'-'+pr.end_date,type:null,rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}};
         this.data['season_info'][i] = params;
         this.data.seasonList.push(i);

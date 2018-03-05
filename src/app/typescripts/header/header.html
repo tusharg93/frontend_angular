@@ -46,9 +46,12 @@
                         <li> <a routerLink="/golf-course/section-4">Section 4</a> </li>
                         <li role="separator" class="divider"></li>
                         <li> <a routerLink="/golf-course/section-add-on">Add on Rentals</a> </li>
-                        <li> <a routerLink="/golf-course/public-holiday">Holidays</a> </li>
-                        <li> <a routerLink="/golf-course/manage-slot">Manage Slots</a> </li>
-                        <li> <a routerLink="/golf-course/manage-vendors">Manage Vendors</a> </li>
+                        <ng-container *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length>0">
+                            <li> <a routerLink="/golf-course/public-holiday">Holidays</a> </li>
+                            <li> <a routerLink="/golf-course/manage-slot">Manage Slots</a> </li>
+                            <li> <a routerLink="/golf-course/manage-vendors">Manage Vendors</a> </li>
+                        </ng-container>
+
 
                     </ul>
                 </li>

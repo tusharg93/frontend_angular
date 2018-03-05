@@ -174,8 +174,17 @@ export class ApiService {
         this.environment.random.userDetail = value.data;
         if(link){
           this.router.navigateByUrl(link);
+        } else if(this.environment.random.userDetail&&this.environment.random.userDetail.gc_basic_info&&!this.environment.random.userDetail.gc_basic_info.time_zone){
+          this.router.navigateByUrl('golf-course/section-1');
+        }else if(this.environment.random.userDetail&&!(this.environment.random.userDetail.weekends || this.environment.random.userDetail.gc_basic_info.weekdays)){
+          this.router.navigateByUrl('golf-course/section-2');
+        }else if(this.environment.random.userDetail&&this.environment.random.userDetail.seasons_info&&this.environment.random.userDetail.seasons_info.length == 0){
+          this.router.navigateByUrl('golf-course/section-3');
+        }else if(this.environment.random.userDetail&&this.environment.random.userDetail.rates_info&&this.environment.random.userDetail.rates_info.length == 0){
+          this.router.navigateByUrl('golf-course/section-4');
+        }else{
+          this.router.navigateByUrl('golf-course/dashboard');
         }
-
       }
     })
   }

@@ -95,7 +95,7 @@ export class SectionOneComponent implements OnInit {
 
   setValue(){
     let data = this.environment.random.userDetail;
-    let params = {currency:data.gc_basic_info.currency,timezone:data.gc_basic_info.time_zone,hole_9:data.gc_basic_info.is_hole_9,hole_18:data.gc_basic_info.is_hole_18, member:data.gc_basic_info.member,online:data.gc_basic_info.online,guest:data.gc_basic_info.guest,duration:data.gc_basic_info.duration,tee:data.gc_basic_info.tee};
+    let params = {currency:data.gc_basic_info.currency,timezone:data.gc_basic_info.time_zone,hole_9:data.gc_basic_info.is_hole_9,hole_18:data.gc_basic_info.is_hole_18, member:data.gc_basic_info.member,online:data.gc_basic_info.online,guest:data.gc_basic_info.guest,duration:data.gc_basic_info.duration,tee:data.gc_basic_info.tee_avl};
     for(var i in params){
       this.data[i] = params[i];
       if(typeof this.data[i] == 'boolean' && this.data[i]){

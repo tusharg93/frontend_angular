@@ -184,7 +184,7 @@ export class SectionAddOnComponent implements OnInit {
     this.data.min_weekends = data.gc_basic_info.min_golfers_weekends;
     this.data.newcommodities = defaultArr;
 
-    
+    console.log(this.data)
   }
 
 

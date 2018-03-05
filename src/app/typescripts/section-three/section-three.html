@@ -22,7 +22,7 @@
                                 <div class="switchery-demo m-b-30">
 
                                     <div class="str_rdio" *ngFor="let list of environment.random.keys.seasons;let i=index">
-                                        <input type="radio" [(ngModel)]="data.noseason"  [value]="i+1" name="full_day"  id="selection_season{{i}}" (change)="setSeason()"/>
+                                        <input type="radio" [(ngModel)]="data.noseason"  [value]="i+1" name="full_day"  id="selection_season{{i}}" (change)="setSeason(i)"/>
                                         <label for="selection_season{{i}}">
                                             <h2>{{i+1}}</h2>
                                             <!--<p>{{list.name}}</p>-->
