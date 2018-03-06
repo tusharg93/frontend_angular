@@ -88,7 +88,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }else{
-        swal('Error', 'Please select  365 days','error')
+        swal('Error', 'Please complete a year','error')
       }
 
     }
@@ -172,7 +172,7 @@ export class SectionThreeComponent implements OnInit {
           flatpickr('#'+tokey, {enableTime: false,minDate:newMinCallDate});
           _self.data.season_info[key]['end_date'] = null
           _self.data.season_info[key]['diff'] = null;
-          
+
         }
       },50);
 
@@ -217,9 +217,17 @@ export class SectionThreeComponent implements OnInit {
           n = lastYr;
         }
         let endYear = n;
-        if(firstMonth_arr[0]>=secondMonth_arr[0]){
+
+        if(firstMonth_arr[0]>secondMonth_arr[0]){
+            endYear = n+1;
+
+        }
+
+      if(firstMonth_arr[0]==secondMonth_arr[0]){
+        if(firstMonth_arr[1]>=secondMonth_arr[1]){
           endYear = n+1;
         }
+      }
 
         lastYr=endYear;
         let params = {uid:pr.id,id:pr.season_id,name:this.environment.random.keys['others'][pr.season_id],start_date:n+'-'+pr.start_date,end_date:endYear+'-'+pr.end_date,type:null,rates:[{day_type:this.environment.random.keys['others']['weekday'],hole_18_price:null,hole_9_price:null,type:'weekday'},{day_type:this.environment.random.keys['others']['weekend'],hole_18_price:null,hole_9_price:null,type:'weekend'}],maintenance:{start_time:'',end_time:''}};

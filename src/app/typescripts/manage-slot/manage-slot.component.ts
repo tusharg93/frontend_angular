@@ -81,7 +81,7 @@ export class ManageSlotComponent implements OnInit {
       this.data.type = 'seasons';
       this.current = {date:this.environment.random.keys['others']['weekend'],name:this.data.season_info[0].id,day:this.data['weekends'][0],hole:"9",date_val:null,days:[],holes:"9"};
       this.days = [{id:this.environment.random.keys['others']['weekend'],name:"Weekend"},{id:this.environment.random.keys['others']['weekday'],name:"Weekday"}]
-      this.getdata(false);
+      this.getdata();
     }
 
     flatpickr('.cls',{enableTime:false});
@@ -89,35 +89,68 @@ export class ManageSlotComponent implements OnInit {
   }
 
   save(i){
-      let params = {};
-      let holes_9 = this.slots[i].holes == "9"?true:false;
-      let holes_18 = this.slots[i].holes == "18"?true:false;
-      params['type'] = this.data.type;
-      if(params['type']=='seasons'){
-        params['day_type'] = this.current.date
-        params['season_id'] = this.current.name;
 
-        let days = (this.current.date==this.environment.random.keys['others']['weekend'])?this.data['weekends']:this.data['weekdays']
-        this.current.days = this.current.days.length>0?this.current.days:days;
-        params['days'] = this.current.days;
-        params['days'] = params['days'];
-        params['slots'] = [{tee_time:this.slots[i].tee_time,hole_9_price:this.slots[i].hole_9_price[0],hole_18_price:this.slots[i].hole_18_price[0],hole_18_flag:holes_18,hole_9_flag:holes_9,slot_status:this.slots[i].slot_status}];
+    let params = {};
+    let holes_9 = true;
+    let holes_18 = true;
+
+
+    if(this.slots[i].holes == "9" && this.slots[i].slot_status =="CLOSED"){
+      holes_18 = !this.slots[i].hole_18_price||this.slots[i].hole_18_price==0||this.slots[i].slot_status1=='CLOSED'?false:true;
+      holes_9 = false;
+
+    }
+    if(this.slots[i].holes == "9"&& this.slots[i].slot_status=="OPEN"){
+      holes_18 = !this.slots[i].hole_18_price||this.slots[i].hole_18_price==0||this.slots[i].slot_status1=='CLOSED'?false:true;
+      holes_9 = false
+
+    }
+
+    if(this.slots[i].holes == "18" && this.slots[i].slot_status1=="OPEN"){
+      holes_18 = true;
+      holes_9 = !this.slots[i].hole_9_price||this.slots[i].hole_9_price==0||this.slots[i].slot_status=='CLOSED'?false:true;
+
+    }
+
+    if(this.slots[i].holes == "18"&& this.slots[i].slot_status1=="CLOSED"){
+      holes_18 = !this.slots[i].hole_9_price||this.slots[i].hole_9_price==0||this.slots[i].slot_status=='CLOSED'?false:true;
+      holes_9 = true;
+
+    }
+
+
+
+    params['type'] = this.data.type;
+    let statusVal = holes_9&&holes_18?'CLOSED':null;
+    statusVal = !holes_9&&!holes_18?'OPEN':null;
+    if(params['type']=='seasons'){
+      params['day_type'] = this.current.date
+      params['season_id'] = this.current.name;
+      let days = (this.current.date==this.environment.random.keys['others']['weekend'])?this.data['weekends']:this.data['weekdays']
+      this.current.days = this.current.days.length>0?this.current.days:days;
+      params['days'] = this.current.days;
+      params['days'] = params['days'];
+      params['slots'] = [{tee_time:this.slots[i].tee_time,hole_9_price:this.slots[i].hole_9_price,hole_18_price:this.slots[i].hole_18_price,hole_18_flag:holes_18,hole_9_flag:holes_9}];
+    }else{
+      params['slots'] = [{id:this.slots[i].id,hole_9_price:this.slots[i].hole_9_price,hole_18_price:this.slots[i].hole_18_price,hole_18_flag:holes_18,hole_9_flag:holes_9}]
+
+    }
+    if(statusVal){
+      params['slots'][0]['slot_status'] = statusVal;
+    }
+    
+
+    this.ApiService.putApiMc4k('api/v1/slots/filter',params,0).then((value)=>{
+      if(value&&value.msg&&value.msg=="success"){
+        this.getdata();
       }else{
-        params['slots'] = [{id:this.slots[i].id,hole_9_price:this.slots[i].hole_9_price,hole_18_price:this.slots[i].hole_18_price,hole_18_flag:holes_18,hole_9_flag:holes_9,slot_status:this.slots[i].slot_status}]
-
+        swal('Error', value.error,'error')
       }
+    });
 
+  }
 
-      this.ApiService.putApiMc4k('api/v1/slots/filter',params,0).then((value)=>{
-        if(value&&value.msg&&value.msg=="success"){
-          this.data.type = 'seasons';
-          this.getdata(false);
-        }else{
-          swal('Error', value.error,'error')
-        }
-      });
-
-      
+  saveAll(i){
 
   }
 
@@ -125,7 +158,7 @@ export class ManageSlotComponent implements OnInit {
 
 
 
-  getdata(val){
+  getdata(){
     let param = 'type=seasons&season_id='+this.current.name+'&day_type='+this.current.date;
 
     this.slots = new Array();
@@ -139,7 +172,14 @@ export class ManageSlotComponent implements OnInit {
           let data = value.data;
           for(var i in data){
             data[i].holes = '9';
-            data[i].slot_status = data[i].slot_status=='OPEN'?'OPEN':'CLOSED';
+            if(_self.data.type == 'date'){
+              data[i].slot_status = data[i].slot_status=='CLOSED'?'CLOSED':'OPEN';
+              data[i].slot_status1 = data[i].slot_status=='CLOSED'?'CLOSED':'OPEN';
+            }else{
+              data[i].slot_status = data[i].hole_9_price<=0?'CLOSED':'OPEN';
+              data[i].slot_status1 = data[i].hole_18_price<=0?'CLOSED':'OPEN';
+            }
+
           }
           _self.slots = data;
         }

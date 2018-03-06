@@ -46,7 +46,7 @@ export class PublicHolidayComponent implements OnInit {
   }
 
 
-   save(form){
+   save(form,update){
      let params = {};
      if(form.valid){
        params['type'] = 'holiday';
@@ -54,12 +54,22 @@ export class PublicHolidayComponent implements OnInit {
        for(var i in this.data.holidays){
          params['data'].push({date:this.data.holidays[i].date,name:this.data.holidays[i].name,universal:this.data.holidays[i].universal?true:false,id:this.data.holidays[i].id})
        }
-       this.ApiService.postApiMc4k('api/v1/slots/manage',params,false,true).then((value)=>{
-         if(value&&value.msg=='success'){
-           this.ApiService.userDetail('golf-course/close-days');
-         }
+       if(!update){
+         this.ApiService.postApiMc4k('api/v1/slots/manage',params,false,true).then((value)=>{
+           if(value&&value.msg=='success'){
+             this.ApiService.userDetail('golf-course/close-days');
+           }
 
-       });
+         });
+       }else{
+         this.ApiService.putApiMc4k('api/v1/slots/manage',params,0).then((value)=>{
+           if(value&&value.msg=='success'){
+             this.ApiService.userDetail('golf-course/close-days');
+           }
+
+         });
+       }
+
      }
 
    }
@@ -68,7 +78,7 @@ export class PublicHolidayComponent implements OnInit {
     this.data[type].push({name:null,date:null,universal:false});
     var _self = this;
     setTimeout(function(){
-      flatpickr('.cls', {enableTime: false});
+      flatpickr('.cls', {enableTime: false,minDate:new Date()});
       _self.clickTheCheck()
     },100)
 
@@ -112,7 +122,7 @@ export class PublicHolidayComponent implements OnInit {
   
   
   ngInitFlact(i){
-    flatpickr('.cls', {enableTime: false});
+    flatpickr('.cls', {enableTime: false,minDate:new Date()});
   }
 
 

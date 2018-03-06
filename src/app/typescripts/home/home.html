@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <div class="col-xs-12">
                         <p class="text-muted  font-13">Select City</p>
-                        <select style="    width: 100%;" class="custom-select sources"  data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.city">
+                        <select style="    width: 100%;" class="custom-select sources"  data-style="btn-primary btn-outline" required name="city" [(ngModel)]="data.city">
 
                             <ng-container *ngFor="let list of environment.random.countries">
 
@@ -97,7 +97,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <select class="custom-select sources" style="width:20%;float:left" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country" (change)="_getCity(data.country)">
+                        <select class="custom-select sources" style="width:20%;float:left" data-style="btn-primary btn-outline" required name="call" [(ngModel)]="data.country" (change)="_getCity(data.country)">
                             <ng-container *ngFor="let list of environment.random.countries">
                                 <option [value]="list.name">{{list.callingCodes[0]}}</option>
                             </ng-container>
@@ -107,12 +107,12 @@
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email" placeholder="Email">
+                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email1" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" #repassword type="password" required name="password" [(ngModel)]="data.password" placeholder="Password">
+                        <input class="form-control" #repassword type="password" required name="password" [(ngModel)]="data.password1" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <div class="input-error" [hidden]="newpassword.valid || newpassword.untouched">
-                    <div  *ngIf="data.newpassword != data.password">
+                    <div  *ngIf="data.newpassword != data.password1">
                         Password does not match
                     </div>
                 </div>
@@ -152,26 +152,26 @@
                 <h3 class="box-title m-b-20">Sign In</h3>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.name" placeholder="Company Name">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.name2" placeholder="Company Name">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.website_url" placeholder="Website URL">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.website_url2" placeholder="Website URL">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-12">
 
-                        <select class="custom-select sources" style="width:45%" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country" >
+                        <select class="custom-select sources" style="width:45%" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country2" >
                             <ng-container *ngFor="let list of environment.random.countries">
                                 <option [value]="list.name">{{list.name}}</option>
                             </ng-container>
                         </select>
 
 
-                        <select class="custom-select sources" style="width:45%" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.city" >
+                        <select class="custom-select sources" style="width:45%" data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.city2" >
                             <ng-container *ngFor="let list of environment.random.countries">
                                 <option [value]="list.name">{{list.capital}}</option>
                             </ng-container>
@@ -183,22 +183,22 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <select class="custom-select sources" style="width:20%;float:left"  data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country_code" (change)="_getCity(data.country)">
+                        <select class="custom-select sources" style="width:20%;float:left"  data-style="btn-primary btn-outline" required name="country" [(ngModel)]="data.country_code2" (change)="_getCity(data.country)">
                             <ng-container *ngFor="let list of environment.random.countries">
                                 <option [value]="list.name">{{list.callingCodes[0]}}</option>
                             </ng-container>
                         </select>
-                        <input class="form-control" style="width:75%;float:right" type="text" required name="mobile" [(ngModel)]="data.mobile" placeholder="Mobile">
+                        <input class="form-control" style="width:75%;float:right" type="text" required name="mobile" [(ngModel)]="data.mobile2" placeholder="Mobile">
                     </div>
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email" placeholder="Email">
+                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email2" placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control" #repassword1 type="password" required name="password" [(ngModel)]="data.password" placeholder="Password">
+                        <input class="form-control" #repassword1 type="password" required name="password" [(ngModel)]="data.password2" placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group">
@@ -207,7 +207,7 @@
                     </div>
                 </div>
                 <div class="input-error" [hidden]="newpassword1.valid || newpassword1.untouched">
-                    <div  *ngIf="data.newpassword1 != data.password">
+                    <div  *ngIf="data.newpassword1 != data.password2">
                         Password does not match
                     </div>
                 </div>

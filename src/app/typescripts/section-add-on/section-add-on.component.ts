@@ -59,7 +59,7 @@ export class SectionAddOnComponent implements OnInit {
     let removed;
     for(var i in this.commodities){
       if(key == this.data.price_includes[i]){
-        this.data.price_includes.splice(i,0);
+        this.data.price_includes.splice(i,1);
         this.others = key=='Other'?false:true;
         removed = true;
         break;
@@ -70,6 +70,7 @@ export class SectionAddOnComponent implements OnInit {
       this.others = key=='Other'?true:false;
       this.data.price_includes.push(key);
     }
+
   }
 
   addNew(){
@@ -162,21 +163,27 @@ export class SectionAddOnComponent implements OnInit {
     this.data.tnc = data.gc_basic_info.tnc;
     this.data.cancel_policy = data.gc_basic_info.cancel_policy;
     this.data.price_includes = data.gc_basic_info.price_includes?data.gc_basic_info.price_includes:[];
+    this.data.price_includes1 = data.gc_basic_info.price_includes?data.gc_basic_info.price_includes:[];
 
-    for(var i in this.data.price_includes){
-      this.others = this.others?this.others:this.data.price_includes[i]=='Other';
+    var _self =this;
+    setTimeout(function(){
 
-      for(var j in this.commodities){
-        if(this.data.price_includes[i]==this.commodities[j]){
-          $('#ck'+j).click();
+
+
+      for(var i in _self.data.price_includes){
+      for(var j in _self.commodities) {
+        _self.others = _self.others ? _self.others : _self.data.price_includes[i] == 'Other';
+        if (_self.data.price_includes[i] == _self.commodities[j]) {
+          $('#ck' + j).click();
         }
-
       }
-      
-    }
+      }
+
+    },50)
+
     if(this.others){
       this.data.others = this.data.price_includes.pop();
-      this.data.others = this.data.others.replace('Others:','');
+      this.data.others = this.data.others?this.data.others.replace('Others:',''):null;
 
     }
 
@@ -184,7 +191,10 @@ export class SectionAddOnComponent implements OnInit {
     this.data.min_weekends = data.gc_basic_info.min_golfers_weekends;
     this.data.newcommodities = defaultArr;
 
-    console.log(this.data)
+
+    setTimeout(function(){
+      _self.data.price_includes = _self.data.price_includes1;
+    },400)
   }
 
 

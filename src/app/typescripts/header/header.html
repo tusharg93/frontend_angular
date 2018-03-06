@@ -11,7 +11,7 @@
     <div class="sidebar-nav navbar-collapse slimscrollsidebar">
         <div class="user-profile" *ngIf="environment.random.userInfo&&environment.random.userInfo.source=='golf_course'" >
             <div class="dropdown user-pro-body" *ngIf="environment.random.userDetail">
-                <div><img id="logoImg" src="{{environment.random.userDetail.gc_basic_info.logo_url?environment.random.userDetail.gc_basic_info.logo_url:'/assets/css/icons/user.png'}}" alt="user-img" class="img-circle"></div>
+                <div><img id="logoImg" src="{{environment.random.userDetail.gc_basic_info.logo_url?environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.logo_url:'/assets/css/icons/user.png'}}" alt="user-img" class="img-circle"></div>
                 <a href="javascript:void(0)" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{environment.random.userDetail.gc_basic_info.name}} <span class="caret"></span></a>
                 <ul class="dropdown-menu animated flipInY">
                     <li><a routerLink="/golf-course/dashboard"><i class="ti-user"></i> Dashboard</a></li>
@@ -23,8 +23,8 @@
         </div>
         <div class="user-profile" *ngIf="environment.random.userInfo&&environment.random.userInfo.source=='vendor'" >
             <div class="dropdown user-pro-body" *ngIf="environment.random.userDetail">
-                <div><img id="logoImg" src="{{environment.random.userDetail.gc_basic_info.logo_url?environment.random.userDetail.gc_basic_info.logo_url:'/assets/css/icons/user.png'}}" alt="user-img" class="img-circle"></div>
-                <a href="javascript:void(0)" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{environment.random.userDetail.gc_basic_info.name}} <span class="caret"></span></a>
+                <div><img id="logoImg" src="{{environment.random.userDetail.basic_info.logo_url?environment.random.userDetail.basic_info.logo_url:'/assets/css/icons/user.png'}}" alt="user-img" class="img-circle"></div>
+                <a href="javascript:void(0)" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{environment.random.userDetail.basic_info.company_name}} <span class="caret"></span></a>
                 <ul class="dropdown-menu animated flipInY">
                     <li><a routerLink="/vendor/dashboard"><i class="ti-user"></i> Dashboard</a></li>
                     <li><a routerLink="/vendor/update-profile"><i class="ti-user"></i> Update Profile</a></li>
@@ -48,6 +48,7 @@
                         <li> <a routerLink="/golf-course/section-add-on">Add on Rentals</a> </li>
                         <ng-container *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length>0">
                             <li> <a routerLink="/golf-course/public-holiday">Holidays</a> </li>
+                            <li> <a routerLink="/golf-course/close-days">Closed Days</a> </li>
                             <li> <a routerLink="/golf-course/manage-slot">Manage Slots</a> </li>
                             <li> <a routerLink="/golf-course/manage-vendors">Manage Vendors</a> </li>
                         </ng-container>

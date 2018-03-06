@@ -189,6 +189,17 @@ export class ApiService {
     })
   }
   
+  userDetailVendor(link){
+    this.getApiMc4k('api/v1/vendors/dashboard',0,true).then((value)=>{
+      if(value&&value.data){
+        this.environment.random.userDetail = value.data;
+        if(link){
+          this.router.navigateByUrl(link);
+        }
+      }
+    })
+  }
+  
    
   
 }

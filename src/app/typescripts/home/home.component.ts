@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
     this.ApiService.postApiMc4k('api/v1/auth/login',"login_id="+this.data.email+"&password="+this.data.password+'&source='+this.environment.random.source,true).then((value)=>{
 
       if(value&&value.data&&this.environment.random.source==value.data['source']){
-        this.environment.random.userInfo = {id:value.data['id'],token:value.data['token'],source:this.environment.random.source};
+        this.environment.random.userInfo = {activated:value.data.activated,id:value.data['id'],token:value.data['token'],source:this.environment.random.source};
         let d = new Date();
         if(this.data.remember){
           d.setTime(d.getTime() + (12*30*24*60*60*1000));
@@ -108,8 +108,8 @@ export class HomeComponent implements OnInit {
           this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
           this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
         }
-
-        this._router.navigateByUrl('golf-course/dashboard');
+        
+        
 
       }else if(value&&value.data&&this.environment.random.userInfo.source!=value.data['source']){
         swal("Error", 'You are not a '+this.environment.random.source, "error")
@@ -123,7 +123,8 @@ export class HomeComponent implements OnInit {
   registerMeIn(form){
     if(form.valid){
       this.environment.random.source ='golf_course';
-      this.ApiService.postApiMc4k('api/v1/forms/register',{email:this.data.email,password:this.data.password}).then((value)=>{
+      let params = {name:this.data.name,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:this.data.country_code, email:this.data.email1, password:this.data.password1}
+      this.ApiService.postApiMc4k('api/v1/forms/register',params).then((value)=>{
         if(value&&value.msg=='success'){
           swal("Success", value.msg, "success")
         }else{
@@ -137,7 +138,7 @@ export class HomeComponent implements OnInit {
   registerVendor(form){
     if(form.valid) {
       this.environment.random.source ='vendor';
-      let params = {name:this.data.name,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:this.data.country_code, email:this.data.email, password:this.data.password, website_url:this.data.website_url}
+      let params = {name:this.data.name2,country:this.data.country2, city:this.data.city2, mobile:this.data.mobile2, country_code:this.data.country_code2, email:this.data.email2, password:this.data.password2, website_url:this.data.website_url2}
       this.ApiService.postApiMc4k('api/v1/vendors/register', params).then((value)=> {
         if(value&&value.msg=='success'){
           swal("Success", value.msg, "success")

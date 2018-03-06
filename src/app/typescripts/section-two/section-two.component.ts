@@ -49,6 +49,8 @@ export class SectionTwoComponent implements OnInit {
     this.days = days;
     this.data.weekdays = [];
     this.data.weekends = [];
+    this.data.weekdays1 = [];
+    this.data.weekends1 = [];
    
   }
 
@@ -116,12 +118,10 @@ export class SectionTwoComponent implements OnInit {
     this.data[value] = this.data[value]?this.data[value]:[];
     for(var i in this.data[value]){
       if(key == this.data[value][i]){
-        this.data[value].splice(i,0);
+        this.data[value].splice(i,1);
         removed = true;
         $('#'+disabled+key).next().removeClass('disabled');
-        if(clickMe){
-          $('#'+disabled+key).click();
-        }
+       
         break;
       }
     }
@@ -129,7 +129,7 @@ export class SectionTwoComponent implements OnInit {
     if(!removed){
       this.data[value].push(key);
       $('#'+disabled+key).next().addClass('disabled');
-      // this.clickMulti(key,disabled,value,true);
+      
     }
   }
 
@@ -151,16 +151,29 @@ export class SectionTwoComponent implements OnInit {
       params['closed'] = data.gc_basic_info.maintenance_day?[{day:data.gc_basic_info.maintenance_day,fullday:data.gc_basic_info.maintenance_type}]:null;
 
   }
-  for(var i in params['weekdays']){
+     for(var i in params['weekdays']){
       this.data['weekdays'].push(params['weekdays'][i]);
-      $('#weekdays'+this.data['weekdays'][i]).click();
-      $('#weekends'+this.data['weekdays'][i]).next().addClass('disabled');
+       this.data['weekdays1'].push(params['weekdays'][i]);
     }
     for(var i in params['weekends']){
       this.data['weekends'].push(params['weekends'][i]);
-      $('#weekends'+this.data['weekends'][i]).click();
-      $('#weekdays'+this.data['weekends'][i]).next().addClass('disabled');
+      this.data['weekends1'].push(params['weekends'][i]);
     }
+    var _self = this;
+    setTimeout(function(){
+      for(var i in params['weekdays']){
+        $('#weekdays'+params['weekdays'][i]).click();
+
+      }
+      for(var i in params['weekends']){
+        $('#weekends'+params['weekends'][i]).click();
+      }
+    },50);
+
+    setTimeout(function(){
+      _self.data['weekends'] = _self.data['weekends1'];
+      _self.data['weekdays'] = _self.data['weekdays1']
+    },1000)
 
     if(params['closed']){
       this.data.closedK = true;

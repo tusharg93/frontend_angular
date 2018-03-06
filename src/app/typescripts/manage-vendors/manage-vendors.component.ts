@@ -43,28 +43,24 @@ export class ManageVendorsComponent implements OnInit {
   
   setValue(){
     let data = this.environment.random.userDetail.vendor_info;
-    for(var i in data.all){
-      data.all[i].accepted = false;
-      data.all[i].declined = false;
-      data.all[i].pending = false;
-      for(var j in data.accepted){
-         if(data.accepted[j].v_id == data.all[i].v_id){
-           data.all[i].accepted = true;
-         }
-      }
-      for(var j in data.declined){
-        if(data.declined[j].v_id == data.all[i].v_id){
-          data.all[i].declined = true;
-        }
-      }
-      for(var j in data.pending){
-        if(data.pending[j].v_id == data.all[i].v_id){
-          data.all[i].pending = true;
-        }
-      }
+    let alldata = [];
+    for(var j in data.accepted){
+      data.all[j].accepted = true;
+      alldata.push(data.all[j]);
+
+    }
+    for(var j in data.declined){
+      data.all[j].declined = true;
+      alldata.push(data.all[j]);
+
+    }
+    for(var j in data.pending){
+      data.all[j].pending = true;
+      alldata.push(data.all[j]);
+
     }
     var _self = this;
-    _self.data.vendor_info = data.all;
+    _self.data.vendor_info = alldata;
     setTimeout(function(){
       switchMaker();
       for(var i in data.all){

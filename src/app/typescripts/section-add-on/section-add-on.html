@@ -34,7 +34,7 @@
                                     <div class="switchery-demo m-b-30">
                                         <ng-container *ngFor="let list of commodities;let i=index">
                                             <ng-container *ngIf="i>=5">
-                                                <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="{{5+i}}" id="{{5+i}}" class="js-switch" data-color="#3d3b3b" />
+                                                <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="ck{{i}}" id="ck{{i}}" class="js-switch" data-color="#3d3b3b" />
                                             </ng-container>
                                         </ng-container>
                                     </div>

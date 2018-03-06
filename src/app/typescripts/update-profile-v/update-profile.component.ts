@@ -56,7 +56,6 @@ export class UpdateProfileComponent implements OnInit {
 
     if(form.valid){
       let params = {};
-      params['course'] = [];
       for(var i in this.data){
 
         if(this.data[i]!=''){
@@ -64,18 +63,23 @@ export class UpdateProfileComponent implements OnInit {
         }
 
       }
+
+      params['weekday_hrs']['start_time'] = params['weekday_hrs']['start_time']>12?params['weekday_hrs']['start_time']-12+'pm':params['weekday_hrs']['start_time']+'am';
+      params['weekday_hrs']['end_time'] =params['weekday_hrs']['end_time']>12?params['weekday_hrs']['end_time']-12+'pm':params['weekday_hrs']['end_time']+'am';
+      params['weekend_hrs']['start_time'] =params['weekend_hrs']['start_time']>12?params['weekend_hrs']['start_time']-12+'pm':params['weekend_hrs']['start_time']+'am';
+      params['weekend_hrs']['end_time'] =params['weekend_hrs']['end_time']>12?params['weekend_hrs']['end_time']-12+'pm':params['weekend_hrs']['end_time']+'am';
       params['about'] = $('.note-editable').html();
       params['logo'] = this.image;
       if(!update){
         this.ApiService.postApiMc4k('api/v1/vendors/profile',params,false,true).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
-            this._router.navigateByUrl('golf-course/dashboard');
+            this.ApiService.userDetailVendor('vendor/dashboard');
           }
         });
       }else{
         this.ApiService.putApiMc4k('api/v1/vendors/profile',params,0).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
-            this._router.navigateByUrl('golf-course/dashboard');
+            this.ApiService.userDetailVendor('vendor/dashboard');
           }
         });
       }
@@ -89,25 +93,26 @@ export class UpdateProfileComponent implements OnInit {
   setValue(){
 
     let data = this.environment.random.userDetail;
-    data['gc_basic_info'] = data['gc_basic_info']?data['gc_basic_info']:[];
-    let weekday_operating_hrs = data.gc_basic_info.weekday_operating_hrs?data.gc_basic_info.weekday_operating_hrs.split('to'):null;
-    let weekend_operating_hrs = data.gc_basic_info.weekend_operating_hrs?data.gc_basic_info.weekend_operating_hrs.split('to'):null;
-    let params = {about:data.gc_basic_info.about,
-      address_line_1:data.gc_basic_info.address_line_1,
-      address_line_2:data.gc_basic_info.address_line_2,
-      contact_mobile:data.gc_basic_info.person_mobile,
-      contact_name:data.gc_basic_info.person_name,
-      facebook_url:data.gc_basic_info.facebook_url, facilities:data.gc_basic_info.facilities,
-      twitter_url:data.gc_basic_info.twiter_url, instagram_url:data.gc_basic_info.instagram_url,weekday_hrs:
+    let weekday_operating_hrs = data.basic_info.weekday_operating_hrs?data.basic_info.weekday_operating_hrs.split('to'):null;
+    let weekend_operating_hrs = data.basic_info.weekend_operating_hrs?data.basic_info.weekend_operating_hrs.split('to'):null;
+    let params = {about:data.basic_info.about,
+      address_line_1:data.basic_info.address_line_1,
+      address_line_2:data.basic_info.address_line_2,
+      mobile:data.basic_info.mobile,
+      company_name:data.basic_info.company_name,
+      facebook_url:data.basic_info.facebook_url, facilities:data.basic_info.facilities,
+      twitter_url:data.basic_info.twiter_url, instagram_url:data.basic_info.instagram_url,weekday_hrs:
       {start_time:weekday_operating_hrs?weekday_operating_hrs[0]:null, end_time:weekday_operating_hrs?weekday_operating_hrs[1]:null},
       weekend_hrs: {start_time: weekend_operating_hrs?weekend_operating_hrs[0]:null, end_time:weekend_operating_hrs?weekend_operating_hrs[1]:null}}
 
     this.data = params;
     
 
+    setTimeout(function(){
+      flatpickr('.cls', {noCalendar: true, enableTime: true, time_12hr: true});
+    },50)
 
-    flatpickr('.cls_date', {noCalendar: true, enableTime: true, time_24hr: true});
-    switchMaker();
+
     summernode(this.data.about);
 
   }

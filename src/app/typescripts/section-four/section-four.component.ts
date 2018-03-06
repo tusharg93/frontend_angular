@@ -81,6 +81,9 @@ export class SectionFourComponent implements OnInit {
 
        }else{
          this.next = i +1;
+         setTimeout(function(){
+           flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
+         },50)
        }
 
       }

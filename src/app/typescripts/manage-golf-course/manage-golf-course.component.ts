@@ -8,12 +8,13 @@ import { isBrowser } from 'angular2-universal';
 
 declare var $:any;
 declare var switchMaker:any;
+declare var swal:any;
 
 
 @Component({
   encapsulation:ViewEncapsulation.None,
   selector:'golf',
-  templateUrl: './golf.html',
+  templateUrl: './manage-golf-course.html',
   providers: [ApiService,StorageService],
 })
 
@@ -52,43 +53,38 @@ export class ManageGolfCourseComponent implements OnInit {
   }
 
   setValue(){
-    let data = this.environment.random.userDetail.vendor_info;
-    for(var i in data.all){
-      data.all[i].accepted = false;
-      data.all[i].declined = false;
-      data.all[i].pending = false;
-      for(var j in data.accepted){
-        if(data.accepted[j].v_id == data.all[i].v_id){
-          data.all[i].accepted = true;
-        }
-      }
-      for(var j in data.declined){
-        if(data.declined[j].v_id == data.all[i].v_id){
-          data.all[i].declined = true;
-        }
-      }
-      for(var j in data.pending){
-        if(data.pending[j].v_id == data.all[i].v_id){
-          data.all[i].pending = true;
-        }
-      }
+    let data = this.environment.random.userDetail.manage_course;
+    let alldata = []
+    for(var j in data.accepted){
+      data.accepted[j].accepted = true;
+      alldata.push(data.accepted[j]);
+
     }
+    for(var j in data.declined){
+      data.declined[j].declined = true;
+      alldata.push(data.declined[j]);
+
+    }
+    for(var j in data.pending){
+      data.pending[j].pending = true;
+      alldata.push(data.pending[j]);
+
+    }
+
     var _self = this;
-    _self.data.vendor_info = data.all;
+    _self.data.vendor_info = alldata;
     setTimeout(function(){
       switchMaker();
-      for(var i in data.all){
-        if(data.all[i].accepted){
+      for(var i in data){
+        if(data[i].accepted){
           $('#accepted'+i).click()
         }
-        if(data.all[i].declined){
+        if(data[i].declined){
           $('#declined'+i).click()
         }
-        if(data.all[i].pending){
-          $('#pending'+i).click()
-        }
+
       }
-    })
+    },10)
 
   }
 
@@ -113,7 +109,7 @@ export class ManageGolfCourseComponent implements OnInit {
   }
 
   save(i){
-    let params = {id:this.data.vendor_info[i].id,v_id:this.data.vendor_info[i].v_id}
+    let params = {id:this.data.vendor_info[i].id,gc_id:this.data.vendor_info[i].gc_id}
     let status = 'ACCEPTED';
 
     if(this.data.vendor_info[i].declined){
@@ -125,7 +121,7 @@ export class ManageGolfCourseComponent implements OnInit {
     params['status'] = status;
     this.ApiService.postApiMc4k('/api/v1/vendors/request',params,false,true).then((value)=>{
       if(value&&value.msg=='success'){
-        swal('Status changed','','success')
+        // swal('Status changed','','success')
       }
 
     });

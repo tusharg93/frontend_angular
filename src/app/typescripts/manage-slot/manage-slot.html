@@ -146,13 +146,19 @@
                                 <td >{{list.hole_18_price?list.hole_18_price:0}}</td>
 
 
-                                <td >
+                                <td [hidden]="slots[i].holes=='18'">
                                     <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status" name="status" required (change)="save(i)">
                                         <option value="OPEN" >Open</option>
                                         <option value="CLOSED" >Closed</option>
                                     </select>
                                 </td>
 
+                                <td [hidden]="slots[i].holes=='9'">
+                                    <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status1" name="status" required (change)="save(i)">
+                                        <option value="OPEN" >Open</option>
+                                        <option value="CLOSED" >Closed</option>
+                                    </select>
+                                </td>
                             </ng-container>
 
 

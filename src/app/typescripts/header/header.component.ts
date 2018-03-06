@@ -45,15 +45,17 @@ export class HeaderComponent implements OnInit {
         this.environment.random.keys['others']  = param;
       }
     });
-    this.ApiService.userDetail(false);
+    if(this.environment.random.userInfo.activated){
+      this.ApiService.userDetail('golf-course/dashboard');
+    }else{
+      this.ApiService.userDetail(false);
+    }
+
+
   }
 
   vdahboard(){
-    this.ApiService.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
-      if(value&&value.data){
-        this.environment.random.userDetail = value.data;
-      }
-    })
+    this.ApiService.userDetailVendor('vendor/dashboard');
   }
 
 
@@ -67,7 +69,7 @@ export class HeaderComponent implements OnInit {
     var _self = this;
     setTimeout(function(){
       _self.router.navigateByUrl('/');
-    },300)
+    },500)
 
   }
     

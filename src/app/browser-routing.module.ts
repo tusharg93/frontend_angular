@@ -8,7 +8,7 @@ const routes:Routes = [
     //home
      { path: '', loadChildren: './typescripts/home/home.module#HomeModule', data: { name:'Home', type:'Page' },pathMatch: 'full'},
 
-     { path: 'verify-email/:token', loadChildren: './typescripts/home/home.module#HomeModule', data: { name:'Email', type:'Verification' },pathMatch: 'full'},
+     { path: 'verify/:token', loadChildren: './typescripts/home/home.module#HomeModule', data: { name:'Email', type:'Verification' },pathMatch: 'full'},
 
      { path: 'golf-course/section-1', loadChildren: './typescripts/section-one/section-one.module#SectionOneModule', data: { name:'Golf', type:'One' },pathMatch: 'full'},
 

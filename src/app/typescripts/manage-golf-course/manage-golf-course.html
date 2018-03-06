@@ -19,24 +19,24 @@
                                 <th>Name</th>
                                 <th>Accepted</th>
                                 <th>Declined</th>
-                                <th>Pending</th>
+                                <th>Status</th>
 
                             </tr>
                             </thead>
                             <tbody>
                             <tr *ngFor="let list of data.vendor_info;let i=index">
 
-                                <td>{{list.v_name}}</td>
+                                <td>{{list.gc_name}}</td>
                                 <td>
-                                    <input type="checkbox" [(ngModel)]="data.vendor_info[i].accepted" (change)="changeAll(i,'accepted','declined','pending')" [value]="true" name="accepted"  id="accepted{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                    <input type="checkbox" [disabled]="data.vendor_info[i].declined" [(ngModel)]="data.vendor_info[i].accepted" (change)="changeAll(i,'accepted','declined','pending')" [value]="true" name="accepted"  id="accepted{{i}}" class="js-switch" data-color="#3d3b3b" />
 
                                 </td>
                                 <td>
-                                    <input type="checkbox"  [(ngModel)]="data.vendor_info[i].declined" (change)="changeAll(i,'declined','pending','accepted')" [value]="true" name="declined"  id="declined{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                    <input type="checkbox" [disabled]="data.vendor_info[i].accepted" [(ngModel)]="data.vendor_info[i].declined" (change)="changeAll(i,'declined','pending','accepted')" [value]="true" name="declined"  id="declined{{i}}" class="js-switch" data-color="#3d3b3b" />
 
                                 </td>
                                 <td>
-                                    <input type="checkbox"  [(ngModel)]="data.vendor_info[i].pending" (change)="changeAll(i,'pending','accepted','declined')" [value]="true" name="pending"  id="pending{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                    {{list.status}}
                                 </td>
 
 
