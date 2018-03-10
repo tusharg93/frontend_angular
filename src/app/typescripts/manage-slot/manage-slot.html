@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box p-l-20 p-r-20">
-                <h3 class="box-title m-b-0">MANAGE SLOTS<button style="    float: right;"  class="btn btn-success waves-effect waves-light m-r-10" (click)="addNew('holidays')">Add New</button></h3>
+                <h3 class="box-title m-b-0">MANAGE SLOTS</h3>
                 <p class="text-muted m-b-30 font-13"></p>
                 <div class="row">
                     <div class="col-md-12">
@@ -39,7 +39,7 @@
 
                                 </div>
                                 <span class="bar"></span>
-                                <small class="form-text text-muted">Choose </small>
+                                <small class="form-text text-muted"> </small>
                             </div>
 
                         </form>
@@ -60,43 +60,43 @@
 
 
                             <div class="form-group m-b-40" *ngIf="data.season_info">
-                                <select class="form-control p-0" (change)="getdata()" style="width: 40%;float: left;" ([ngModel])="current.name" name="season_name" required>
+                                <select class="form-control p-0" (change)="getdata()" style="width: 40%;float: left;" [(ngModel)]="current.name" name="season_name" required>
                                     <ng-container *ngFor="let list of data.season_info;let j=index">
                                         <option required value="{{list.id}}"  class="season_cls">{{list.name}}</option>
                                     </ng-container>
                                 </select>
-                                <select class="form-control p-0"  (change)="getdata()" style="width: 30%;float: left;"  ([ngModel])="current.date" name="season_name1" required>
+                                <select class="form-control p-0"  (change)="getdata();setCheck(current.date==environment.random.keys['others']['weekend']?data['weekdays']:data['weekends']);" style="width: 30%;float: left;"  [(ngModel)]="current.date" name="season_name1" required>
                                     <ng-container *ngFor="let list of days;let j=index">
                                         <option required value="{{list.id}}"  class="season_cls">{{list.name}}</option>
                                     </ng-container>
                                 </select>
 
                                 <div class="multiselect" [hidden]="current.date==environment.random.keys['others']['weekend']" >
-                                    <div class="selectBox" (click)="showCheckboxes('checkboxes1')">
+                                    <div class="selectBox" onclick="showCheckboxes('checkboxes1')">
                                         <select>
-                                            <option>Select Days</option>
+                                            <option>Select Weekday Days</option>
                                         </select>
                                         <div class="overSelect"></div>
                                     </div>
                                     <div id="checkboxes1">
                                         <ng-container *ngFor="let list of data['weekdays'];let j=index">
                                             <label for="{{list}}">
-                                                <input type="checkbox"  (click)="checkMultiple(list)" id="{{list}}" />{{list}}</label><br/>
+                                                <input type="checkbox"  (click)="checkMultiple(list);getdata()" id="{{list}}" />{{list}}</label><br/>
                                         </ng-container>
                                     </div>
                                 </div>
 
-                                <div class="multiselect">
-                                    <div class="selectBox" (click)="showCheckboxes('checkboxes2')">
+                                <div class="multiselect" [hidden]="current.date!=environment.random.keys['others']['weekend']">
+                                    <div class="selectBox" onclick="showCheckboxes('checkboxes2')">
                                         <select>
-                                            <option>Select Days</option>
+                                            <option>Select Weekend Days</option>
                                         </select>
                                         <div class="overSelect"></div>
                                     </div>
                                     <div id="checkboxes2">
                                         <ng-container *ngFor="let list of data['weekends'];let j=index">
                                             <label for="{{list}}">
-                                                <input type="checkbox"  (click)="checkMultiple(list)" id="{{list}}" />{{list}}</label><br/>
+                                                <input type="checkbox"  (click)="checkMultiple(list);getdata()" id="{{list}}" />{{list}}</label><br/>
                                         </ng-container>
                                     </div>
                                 </div>
@@ -126,10 +126,11 @@
                         <thead>
                         <tr>
                             <th>Slot Time</th>
-                            <th>Slot For</th>
-                            <th>9 Hole Time</th>
-                            <th>18 Hole Time</th>
+                            <th>Holes</th>
+                            <th>9 Hole Price</th>
+                            <th>18 Hole Price</th>
                             <th>Status</th>
+                            <th>Save Changes</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -137,27 +138,31 @@
                             <ng-container >
                                 <td>{{list.tee_time}}</td>
                                 <td>
-                                    <select class="form-control p-0"  [(ngModel)]="slots[i].holes" name="holes" required>
+                                    <select class="form-control p-0"  [(ngModel)]="slots[i].holes" name="holes{{i}}" required>
                                         <option value="9" >9</option>
                                         <option value="18" >18</option>
                                     </select>
                                 </td>
-                                <td >{{list.hole_9_price?list.hole_9_price:0}}</td>
-                                <td >{{list.hole_18_price?list.hole_18_price:0}}</td>
 
+                                <td><input type="number"  class="mnge_input" required="{{slots[i].slot_status=='OPEN'?true:false}}" [(ngModel)]="slots[i].hole_9_price"  placeholder="Add a Price" name="price_9{{i}}" /></td>
+
+                                <td><input type="number"  class="mnge_input" required="{{slots[i].slot_status1=='OPEN'?true:false}}" [(ngModel)]="slots[i].hole_18_price"  placeholder="Add a Price" name="price_18{{i}}" /></td>
 
                                 <td [hidden]="slots[i].holes=='18'">
-                                    <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status" name="status" required (change)="save(i)">
+                                    <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status" name="status{{i}}" required>
+                                        <option value="OPEN" >Open</option>
+                                        <option value="CLOSED" >Closed</option>
+                                    </select>
+                                </td>
+                                <td [hidden]="slots[i].holes=='9'">
+                                    <select  class="form-control p-0"  [(ngModel)]="slots[i].slot_status1" name="status_price{{i}}" required >
                                         <option value="OPEN" >Open</option>
                                         <option value="CLOSED" >Closed</option>
                                     </select>
                                 </td>
 
-                                <td [hidden]="slots[i].holes=='9'">
-                                    <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status1" name="status" required (change)="save(i)">
-                                        <option value="OPEN" >Open</option>
-                                        <option value="CLOSED" >Closed</option>
-                                    </select>
+                                <td>
+                                    <a href="javascript:void(0);" style="text-align: center;" (click)="save(i)">SAVE</a>
                                 </td>
                             </ng-container>
 

@@ -1,7 +1,7 @@
-/* iCheck plugin Flat skin, green
+/* iCheck plugin Flat skin, #03a9f3
 ----------------------------------- */
-.icheckbox_flat-green,
-.iradio_flat-green {
+.icheckbox_flat-#03a9f3,
+.iradio_flat-#03a9f3 {
     display: inline-block;
     *display: inline;
     vertical-align: middle;
@@ -9,44 +9,44 @@
     padding: 0;
     width: 20px;
     height: 20px;
-    background: url(green.png) no-repeat;
+    background: url(#03a9f3.png) no-repeat;
     border: none;
     cursor: pointer;
 }
 
-.icheckbox_flat-green {
+.icheckbox_flat-#03a9f3 {
     background-position: 0 0;
 }
-    .icheckbox_flat-green.checked {
+    .icheckbox_flat-#03a9f3.checked {
         background-position: -22px 0;
     }
-    .icheckbox_flat-green.disabled {
+    .icheckbox_flat-#03a9f3.disabled {
         background-position: -44px 0;
         cursor: default;
     }
-    .icheckbox_flat-green.checked.disabled {
+    .icheckbox_flat-#03a9f3.checked.disabled {
         background-position: -66px 0;
     }
 
-.iradio_flat-green {
+.iradio_flat-#03a9f3 {
     background-position: -88px 0;
 }
-    .iradio_flat-green.checked {
+    .iradio_flat-#03a9f3.checked {
         background-position: -110px 0;
     }
-    .iradio_flat-green.disabled {
+    .iradio_flat-#03a9f3.disabled {
         background-position: -132px 0;
         cursor: default;
     }
-    .iradio_flat-green.checked.disabled {
+    .iradio_flat-#03a9f3.checked.disabled {
         background-position: -154px 0;
     }
 
 /* HiDPI support */
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi), (min-resolution: 1.25dppx) {
-    .icheckbox_flat-green,
-    .iradio_flat-green {
-        background-image: url(green@2x.png);
+    .icheckbox_flat-#03a9f3,
+    .iradio_flat-#03a9f3 {
+        background-image: url(#03a9f3@2x.png);
         -webkit-background-size: 176px 22px;
         background-size: 176px 22px;
     }

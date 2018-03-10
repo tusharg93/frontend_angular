@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 
 import {ParserPipeModule} from '../pipe-modules/parse.module';
 
-import {LimitPipeModule} from '../pipe-modules/limit.module';
+import {KeysPipeModule} from '../pipe-modules/key.module';
 import {NumberPipeModule} from '../pipe-modules/number.module';
 import {SafePipeModule} from '../pipe-modules/safe.module';
 
@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
 
     ParserPipeModule,
 
-    LimitPipeModule,
+    KeysPipeModule,
 
     NumberPipeModule,
 

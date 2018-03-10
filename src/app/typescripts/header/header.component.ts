@@ -6,7 +6,7 @@ import { Router,ActivatedRoute, Params } from '@angular/router';
 
 import { isBrowser, isNode } from 'angular2-universal';
 
-
+declare var $:any;
 @Component({
   encapsulation:ViewEncapsulation.None,
   selector: 'tee-header',
@@ -22,14 +22,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this._storage.userChecker(false).then((val)=>{
-       if(val){
 
-       }
     })
 
   }
 
   dashboard(){
+    // $('#page-wrapper').addClass('loggedIn');
     this.ApiService.getApiMc4k('api/v1/forms/defaults',0,true).then((value)=>{
       if(value&&value.data){
         this.environment.random.keys = value.data;
@@ -55,6 +54,7 @@ export class HeaderComponent implements OnInit {
   }
 
   vdahboard(){
+    // $('#page-wrapper').addClass('loggedIn');
     this.ApiService.userDetailVendor('vendor/dashboard');
   }
 
@@ -68,6 +68,7 @@ export class HeaderComponent implements OnInit {
     this.environment.random.userInfo = new Array();
     var _self = this;
     setTimeout(function(){
+      // $('#page-wrapper').removeClass('loggedIn');
       _self.router.navigateByUrl('/');
     },500)
 

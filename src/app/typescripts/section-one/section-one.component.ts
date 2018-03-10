@@ -8,7 +8,7 @@ import { isBrowser } from 'angular2-universal';
 
 declare var $:any;
 declare var switchMaker:any;
-
+declare var swal:any;
 
 
 @Component({
@@ -75,9 +75,10 @@ export class SectionOneComponent implements OnInit {
           if(value&&value.msg&&value.msg=="success"){
             this._storage.userDetail(params);
             this.ApiService.userDetail('golf-course/section-2');
-            
+
           }
       });
+     
     }
   }
 
@@ -90,6 +91,7 @@ export class SectionOneComponent implements OnInit {
           this.ApiService.userDetail('golf-course/section-2');
         }
       });
+
     }
   }
 
@@ -103,6 +105,51 @@ export class SectionOneComponent implements OnInit {
       }
 
     }
+    params.tee = params.tee?params.tee.split(','):[];
+
+    for(var i in params.tee){
+      params.tee[i] = params.tee[i].replace('{','');
+      params.tee[i] = params.tee[i].replace('}','');
+    }
+    this.data['tee'] = params.tee
   }
+
+  setCheckBox(type){
+    var _self=this;
+    this.data.tee = type?[1]:this.data.tee;
+    setTimeout(function(){
+      if(type){
+        for(var i in _self.slotMonths){
+          $('#slots_'+_self.slotMonths[i]).prop('checked',false);
+        }
+      }
+      for(var i in _self.data.tee){
+        $('#slots_'+_self.data.tee[i]).prop('checked',true);
+      }
+    },100)
+
+
+  }
+
+  clickMulti(key){
+    let removed;
+
+    this.data.tee = this.data.tee?this.data.tee:[];
+    for(var i in this.data.tee){
+      if(key == this.data.tee[i]||this.data.tee[i]==''){
+        this.data.tee.splice(i,1);
+        removed = true;
+        break;
+      }
+    }
+
+    if(!removed&&this.data.tee.length<2) {
+      this.data.tee.push(key);
+    }else if(!removed&&this.data.tee.length==2){
+      swal('You can select max 2 tee','','error');
+      $('#slots_'+key).attr('checked',false);
+    }
+  }
+
 
 }

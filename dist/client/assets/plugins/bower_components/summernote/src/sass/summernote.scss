@@ -31,7 +31,7 @@ $background-color: #f5f5f5 !default;
   position: relative;
 
   /* dropzone */
-  $dropzone-color: lightskyblue;
+  $dropzone-color: lightsky#337ab7;
   $dropzone-active-color: darken($dropzone-color, 30);
   .note-dropzone {
     position: absolute;
@@ -281,7 +281,7 @@ $background-color: #f5f5f5 !default;
 
     /* dropdown-menu for selectbox */
     li a i {
-      color: deepskyblue;
+      color: deepsky#337ab7;
       visibility: hidden;
     }
     li a.checked i {

@@ -81,8 +81,8 @@ ul.wysihtml5-toolbar div[data-wysihtml5-command-value="purple"] {
   background: purple !important;
 }
 
-ul.wysihtml5-toolbar div[data-wysihtml5-command-value="green"] {
-  background: green !important;
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value="#03a9f3"] {
+  background: #03a9f3 !important;
 }
 
 ul.wysihtml5-toolbar div[data-wysihtml5-command-value="olive"] {
@@ -93,8 +93,8 @@ ul.wysihtml5-toolbar div[data-wysihtml5-command-value="navy"] {
   background: navy !important;
 }
 
-ul.wysihtml5-toolbar div[data-wysihtml5-command-value="blue"] {
-  background: blue !important;
+ul.wysihtml5-toolbar div[data-wysihtml5-command-value="#337ab7"] {
+  background: #337ab7 !important;
 }
 
 ul.wysihtml5-toolbar div[data-wysihtml5-command-value="orange"] {

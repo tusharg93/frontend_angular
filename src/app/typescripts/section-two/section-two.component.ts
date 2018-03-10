@@ -113,7 +113,7 @@ export class SectionTwoComponent implements OnInit {
   
 
 
-  clickMulti(key,value,disabled,clickMe?){
+  clickMulti(key,value,disabled){
     let removed;
     this.data[value] = this.data[value]?this.data[value]:[];
     for(var i in this.data[value]){
@@ -121,7 +121,6 @@ export class SectionTwoComponent implements OnInit {
         this.data[value].splice(i,1);
         removed = true;
         $('#'+disabled+key).next().removeClass('disabled');
-       
         break;
       }
     }
@@ -144,21 +143,15 @@ export class SectionTwoComponent implements OnInit {
 
     }
   if(data.gc_basic_info.weekends){
-      params['weekends'] = data.gc_basic_info.weekends  .split(',')
+      params['weekends'] = data.gc_basic_info.weekends.split(',')
     }
 
     if(data.gc_basic_info.maintenance_day){
       params['closed'] = data.gc_basic_info.maintenance_day?[{day:data.gc_basic_info.maintenance_day,fullday:data.gc_basic_info.maintenance_type}]:null;
 
   }
-     for(var i in params['weekdays']){
-      this.data['weekdays'].push(params['weekdays'][i]);
-       this.data['weekdays1'].push(params['weekdays'][i]);
-    }
-    for(var i in params['weekends']){
-      this.data['weekends'].push(params['weekends'][i]);
-      this.data['weekends1'].push(params['weekends'][i]);
-    }
+
+
     var _self = this;
     setTimeout(function(){
       for(var i in params['weekdays']){
@@ -170,10 +163,6 @@ export class SectionTwoComponent implements OnInit {
       }
     },50);
 
-    setTimeout(function(){
-      _self.data['weekends'] = _self.data['weekends1'];
-      _self.data['weekdays'] = _self.data['weekdays1']
-    },1000)
 
     if(params['closed']){
       this.data.closedK = true;

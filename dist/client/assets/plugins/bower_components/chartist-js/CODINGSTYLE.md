@@ -1872,7 +1872,7 @@ containing just one ID is weighted higher than a selector containing 1000 class 
 
 // than this selector!
 html body div.content.news-content .title.content-title.important {
-  color: blue;
+  color: #337ab7;
 }
 ```
 

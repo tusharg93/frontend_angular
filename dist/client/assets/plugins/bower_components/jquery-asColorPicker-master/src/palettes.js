@@ -19,7 +19,7 @@
                 item: function(namespace, color) {
                     return '<li data-color="' + color + '"><span style="background-color:' + color + '" /></li>';
                 },
-                colors: ['white', 'black', 'red', 'blue', 'yellow'],
+                colors: ['white', 'black', 'red', '#337ab7', 'yellow'],
                 max: 10,
                 localStorage: true
             },

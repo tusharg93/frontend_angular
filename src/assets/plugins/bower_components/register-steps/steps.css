@@ -107,8 +107,8 @@ z-index:1; /*put it behind the numbers*/
 /*connector not needed before the first step*/
 content: none;
 }
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
+/*marking active/completed steps #03a9f3*/
+/*The number of the step and the connector before it = #03a9f3*/
 #eliteregister li.active:before, #eliteregister li.active:after {
 background: #01c0c8;
 color: #fff;

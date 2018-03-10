@@ -1,16 +1,29 @@
 <div class="container-fluid">
-
-    <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12">
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Dashboard 1</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <a href="https://themeforest.net/item/elite-admin-responsive-dashboard-web-app-kit-/16750820" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Buy Now</a>
+            <ol class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+                <li class="active">Dashboard 1</li>
+            </ol>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row" *ngIf="environment.random.userDetail">
+        <div class="col-md-12 col-lg-12 col-sm-12" >
             <div class="white-box">
                 <div class="row row-in">
                     <div class="col-lg-3 col-sm-6 row-in-br">
                         <div class="col-in row">
                             <div class="col-md-6 col-sm-6 col-xs-6"> <i data-icon="E" class="linea-icon linea-basic"></i>
-                                <h5 class="text-muted vb">MYNEW CLIENTS</h5>
+                                <h5 class="text-muted vb">PENDING REQUEST</h5>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <h3 class="counter text-right m-t-15 text-danger">23</h3>
+                                <h3 class="counter text-right m-t-15 text-danger">{{environment.random.userDetail.vendor_info.pending.length}}</h3>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="progress">
@@ -22,10 +35,10 @@
                     <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
                         <div class="col-in row">
                             <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe01b;"></i>
-                                <h5 class="text-muted vb">NEW PROJECTS</h5>
+                                <h5 class="text-muted vb">ACCEPTED</h5>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <h3 class="counter text-right m-t-15 text-megna">169</h3>
+                                <h3 class="counter text-right m-t-15 text-megna">{{environment.random.userDetail.vendor_info.accepted.length}}</h3>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="progress">
@@ -37,10 +50,10 @@
                     <div class="col-lg-3 col-sm-6 row-in-br">
                         <div class="col-in row">
                             <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe00b;"></i>
-                                <h5 class="text-muted vb">NEW INVOICES</h5>
+                                <h5 class="text-muted vb">DECLINED</h5>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
-                                <h3 class="counter text-right m-t-15 text-primary">157</h3>
+                                <h3 class="counter text-right m-t-15 text-primary">{{environment.random.userDetail.vendor_info.declined.length}}</h3>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="progress">
@@ -52,7 +65,7 @@
                     <div class="col-lg-3 col-sm-6  b-0">
                         <div class="col-in row">
                             <div class="col-md-6 col-sm-6 col-xs-6"> <i class="linea-icon linea-basic" data-icon="&#xe016;"></i>
-                                <h5 class="text-muted vb">All PROJECTS</h5>
+                                <h5 class="text-muted vb">NO OF SLOTS</h5>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6">
                                 <h3 class="counter text-right m-t-15 text-success">431</h3>

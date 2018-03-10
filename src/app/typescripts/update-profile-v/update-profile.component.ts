@@ -64,10 +64,10 @@ export class UpdateProfileComponent implements OnInit {
 
       }
 
-      params['weekday_hrs']['start_time'] = params['weekday_hrs']['start_time']>12?params['weekday_hrs']['start_time']-12+'pm':params['weekday_hrs']['start_time']+'am';
-      params['weekday_hrs']['end_time'] =params['weekday_hrs']['end_time']>12?params['weekday_hrs']['end_time']-12+'pm':params['weekday_hrs']['end_time']+'am';
-      params['weekend_hrs']['start_time'] =params['weekend_hrs']['start_time']>12?params['weekend_hrs']['start_time']-12+'pm':params['weekend_hrs']['start_time']+'am';
-      params['weekend_hrs']['end_time'] =params['weekend_hrs']['end_time']>12?params['weekend_hrs']['end_time']-12+'pm':params['weekend_hrs']['end_time']+'am';
+      // params['weekday_hrs']['start_time'] = params['weekday_hrs']['start_time']>12?params['weekday_hrs']['start_time']-12+'pm':params['weekday_hrs']['start_time']+'am';
+      // params['weekday_hrs']['end_time'] =params['weekday_hrs']['end_time']>12?params['weekday_hrs']['end_time']-12+'pm':params['weekday_hrs']['end_time']+'am';
+      // params['weekend_hrs']['start_time'] =params['weekend_hrs']['start_time']>12?params['weekend_hrs']['start_time']-12+'pm':params['weekend_hrs']['start_time']+'am';
+      // params['weekend_hrs']['end_time'] =params['weekend_hrs']['end_time']>12?params['weekend_hrs']['end_time']-12+'pm':params['weekend_hrs']['end_time']+'am';
       params['about'] = $('.note-editable').html();
       params['logo'] = this.image;
       if(!update){
@@ -99,7 +99,7 @@ export class UpdateProfileComponent implements OnInit {
       address_line_1:data.basic_info.address_line_1,
       address_line_2:data.basic_info.address_line_2,
       mobile:data.basic_info.mobile,
-      company_name:data.basic_info.company_name,
+      name:data.basic_info.name,
       facebook_url:data.basic_info.facebook_url, facilities:data.basic_info.facilities,
       twitter_url:data.basic_info.twiter_url, instagram_url:data.basic_info.instagram_url,weekday_hrs:
       {start_time:weekday_operating_hrs?weekday_operating_hrs[0]:null, end_time:weekday_operating_hrs?weekday_operating_hrs[1]:null},
@@ -109,7 +109,7 @@ export class UpdateProfileComponent implements OnInit {
     
 
     setTimeout(function(){
-      flatpickr('.cls', {noCalendar: true, enableTime: true, time_12hr: true});
+      flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
     },50)
 
 

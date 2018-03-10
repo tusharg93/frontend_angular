@@ -2,7 +2,9 @@
 <div id="wrapper">
     <tee-header></tee-header>
     <div id="page-wrapper" class="wht_back">
+        <div class="loader_ww" hidden="{{!environment.random.showLoader}}"></div>
         <router-outlet></router-outlet>
+
         <footer class="footer text-center"> 2018 &copy; The PUTT </footer>
     </div>
 

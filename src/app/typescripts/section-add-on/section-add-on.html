@@ -13,14 +13,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form class="floating-labels " #section="ngForm" name="section" id="section">
-                            <div style="height:310px">
-                                <div class="form-group m-b-5" style="    width: 45%;float: left;">
+                            <div style="height:330px">
+                                <div class="form-group m-b-5" style="width: 45%;float: left;">
                                     <h4 class="box-title">Price include</h4>
                                     <p class="text-muted  font-13"></p>
                                     <div class="switchery-demo m-b-30">
                                         <ng-container *ngFor="let list of commodities;let i=index">
                                             <ng-container *ngIf="i<5">
-                                                <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="ck{{i}}" id="ck{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                                <div>{{list}}</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="ck{{i}}" id="ck{{i}}" class="js-switch" data-color="#3d3b3b" />
 
                                             </ng-container>
                                         </ng-container>
@@ -34,7 +34,7 @@
                                     <div class="switchery-demo m-b-30">
                                         <ng-container *ngFor="let list of commodities;let i=index">
                                             <ng-container *ngIf="i>=5">
-                                                <div>{{list}}:</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="ck{{i}}" id="ck{{i}}" class="js-switch" data-color="#3d3b3b" />
+                                                <div>{{list}}</div> <input  type="checkbox" (change)="clickMulti(list)" [value]="list" name="ck{{i}}" id="ck{{i}}" class="js-switch" data-color="#3d3b3b" />
                                             </ng-container>
                                         </ng-container>
                                     </div>
@@ -47,13 +47,14 @@
 
 
 
-                                <div class="form-group m-b-40">
+
                                     <input type="text" [(ngModel)]="data.others" class="form-control" id="hole_9_price_other" required="" name="hole_9_price_other">
-                                    <span class="highlight"></span> <span class="bar">Seperate by comma </span>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
                                     <label for="hole_9_price">Others</label>
-                                </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
+
+
+                                <small class="form-text text-muted">Seperate by comma </small>
                             </div>
                             <div style="height:50px"></div>
                             <div class="form-group m-b-5">
@@ -137,10 +138,10 @@
                             </div>
                             <ng-container *ngFor="let list of data.newcommodities;let i=index">
                                 <div class="form-group m-b-5" >
-                                    <input type="text" class="form-control" style="float: left;width:45%;"  placeholder="Name" [(ngModel)]="data.newcommodities[i].name" name="newcommodities_name{{i}}" id="newcommodities_name{{i}}"><span class="highlight"></span> <span class="bar" style="width: 45%;"></span>
+                                    <input type="text" class="form-control" style="float: left;width:45%;"  placeholder="Name" [(ngModel)]="data.newcommodities[i].name" name="newcommodities_name{{i}}" id="newcommodities_name{{i}}">
                                 </div>
                                 <div class="form-group m-b-5" >
-                                    <input type="number" class="form-control" style="float: right;width:45%;"  placeholder="Price" [(ngModel)]="data.newcommodities[i].price" name="newcommodities_price{{i}}"  id="newcommodities_price{{i}}"><span class="highlight"></span> <span class="bar" style="width: 45%;float:right"></span>
+                                    <input type="number" class="form-control" style="float: right;width:45%;"  placeholder="Price" [(ngModel)]="data.newcommodities[i].price" name="newcommodities_price{{i}}"  id="newcommodities_price{{i}}">
                                 </div>
 
                                 <div style="height:60px"></div>
@@ -150,7 +151,7 @@
 
 
                             <div class="form-group bk">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-4">Back</a></button>
+                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a href="javascript:void(0)" onclick="$('#add-on-section').css('display','block');$('#rental-section').css('display','none');">Back</a></button>
                                 <button style="    float: right;" type="submit" (click)="saverental(section1,true)" class="btn btn-success waves-effect waves-light m-r-10" [hidden]="environment.random.userDetail&&environment.random.userDetail.extras_info&&environment.random.userDetail.extras_info.length==0">Update & Continue</button>
                                 <button style="    float: right;" type="submit" (click)="saverental(section1,false)" class="btn btn-success waves-effect waves-light m-r-10" [hidden]="environment.random.userDetail&&environment.random.userDetail.extras_info&&environment.random.userDetail.extras_info.length>0">Submit & Continue</button>
                             </div>

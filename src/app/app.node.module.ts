@@ -35,7 +35,8 @@ import { ServerRoutingModule } from './server-routing.module';
         UniversalModule,   
         FormsModule,
         ServerRoutingModule,
-        ServerCombineDirectiveModule
+        ServerCombineDirectiveModule,
+        
     ],
     declarations: [
         AppComponent, HomeComponent,HeaderComponent

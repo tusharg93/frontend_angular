@@ -1,4 +1,4 @@
-﻿/* jTable metro style theme - Blue
+﻿/* jTable metro style theme - #337ab7
  * Created by Halil İbrahim Kalkan
  * http://www.jtable.org
  */
@@ -489,7 +489,7 @@ div.jtable-busy-message {
   border: 1px solid #fff;
   padding: 5px 5px 5px 58px;
   color: #fff;
-  background: url('../../metro/blue/loading.gif') no-repeat;
+  background: url('../../metro/#337ab7/loading.gif') no-repeat;
   background-color: #0b67cd;
   background-position: 8px;
 }

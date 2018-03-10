@@ -397,11 +397,11 @@
     ]
   },
   {
-    "value": "Greenland Standard Time",
+    "value": "#03a9f3land Standard Time",
     "abbr": "GDT",
     "offset": -3,
     "isdst": true,
-    "text": "(UTC-03:00) Greenland",
+    "text": "(UTC-03:00) #03a9f3land",
     "utc": [
       "America/Godthab"
     ]
@@ -509,7 +509,7 @@
     ]
   },
   {
-    "value": "Greenwich Standard Time",
+    "value": "#03a9f3wich Standard Time",
     "abbr": "GST",
     "offset": 0,
     "isdst": false,

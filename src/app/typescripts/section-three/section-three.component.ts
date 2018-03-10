@@ -66,7 +66,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }
-      if(total==364){
+      if(total>=364){
         if(!update){
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
@@ -88,7 +88,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }else{
-        swal('Error', 'Please complete a year','error')
+        swal('Error', 'You have selected '+ total+' Please complete a year','error')
       }
 
     }
@@ -197,7 +197,7 @@ export class SectionThreeComponent implements OnInit {
     var date2 = new Date(_self.data.season_info[key].end_date);
     var timeDiff = Math.abs(date2.getTime() - date1.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    _self.data.season_info[key].diff = diffDays;
+    _self.data.season_info[key].diff = diffDays+1;
   }
 
   setValue(){

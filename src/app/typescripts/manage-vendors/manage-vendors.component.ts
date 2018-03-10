@@ -44,19 +44,27 @@ export class ManageVendorsComponent implements OnInit {
   setValue(){
     let data = this.environment.random.userDetail.vendor_info;
     let alldata = [];
-    for(var j in data.accepted){
-      data.all[j].accepted = true;
+    for(var j in data.all){
+      data.all[j].status = 'NO ACTION';
       alldata.push(data.all[j]);
+
+    }
+    for(var j in data.accepted){
+      data.accepted[j].accepted = true;
+      data.accepted[j].status = 'ACCEPTED';
+      alldata.push(data.accepted[j]);
 
     }
     for(var j in data.declined){
-      data.all[j].declined = true;
-      alldata.push(data.all[j]);
+      data.declined[j].declined = true;
+      data.declined[j].status = 'DECLINED';
+      alldata.push(data.declined[j]);
 
     }
     for(var j in data.pending){
-      data.all[j].pending = true;
-      alldata.push(data.all[j]);
+      data.pending[j].pending = true;
+      data.pending[j].status = 'PENDING';
+      alldata.push(data.pending[j]);
 
     }
     var _self = this;
@@ -100,6 +108,7 @@ export class ManageVendorsComponent implements OnInit {
 
   save(i){
     let params = {id:this.data.vendor_info[i].id,v_id:this.data.vendor_info[i].v_id}
+    
     let status = 'ACCEPTED';
 
     if(this.data.vendor_info[i].declined){
@@ -109,6 +118,7 @@ export class ManageVendorsComponent implements OnInit {
       status = 'PENDING';
     }
     params['status'] = status;
+    this.data.vendor_info[i].status = status;
     this.ApiService.postApiMc4k('/api/v1/vendors/request',params,false,true).then((value)=>{
       if(value&&value.msg=='success'){
         swal('Status changed','','success')

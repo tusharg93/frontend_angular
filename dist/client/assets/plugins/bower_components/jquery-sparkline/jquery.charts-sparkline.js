@@ -203,7 +203,7 @@ $(document).ready(function() {
             barWidth: '4',
             resize: true,
             barSpacing: '5',
-            barColor: '#ab8ce4'
+            barColor: '#337ab7'
         });
           $('#sparklinedash3').sparkline([ 0, 5, 6, 10, 9, 12, 4, 9], {
             type: 'bar',

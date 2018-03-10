@@ -229,11 +229,11 @@ Options allow you to customise the treeview's default appearance and behaviour. 
 ```javascript
 // Example: initializing the treeview
 // expanded to 5 levels
-// with a background color of green
+// with a background color of #03a9f3
 $('#tree').treeview({
   data: data,         // data is not optional
   levels: 5,
-  backColor: 'green'
+  backColor: '#03a9f3'
 });
 ```
 You can pass a new options object to the treeview at any time but this will have the effect of re-initializing the treeview.

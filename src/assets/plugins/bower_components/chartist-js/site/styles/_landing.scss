@@ -107,7 +107,7 @@
   text-align: center;
 
   .brwsrsup__support--supported {
-    color: $color-green;
+    color: $color-#03a9f3;
     @include icon($fa-var-check-circle, $icon-location: after, $icon-size: 1.5rem);
   }
 
@@ -168,7 +168,7 @@
     }
 
     .brwsrsup__support--supported {
-      background: $color-green;
+      background: $color-#03a9f3;
       color: white;
 
       &:before {

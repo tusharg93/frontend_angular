@@ -36,22 +36,33 @@
                                 <h4 class="box-title">HOLES</h4>
                                 <p class="text-muted  font-13"></p>
                                 <div class="switchery-demo m-b-30">
-                                    9 holes <input type="checkbox" (change)="data.tee=1" [(ngModel)]="data.hole_9" [value]="true"  id="hole_9" name="9_holes" class="js-switch" data-color="#3d3b3b" />
-                                    18 holes <input type="checkbox" (change)="data.tee=1" [(ngModel)]="data.hole_18" [value]="true"  id="hole_18" name="18_holes" class="js-switch" data-color="#3d3b3b" />
+                                    9 holes <input type="checkbox" (change)="setCheckBox(true)" [(ngModel)]="data.hole_9" [value]="true"  id="hole_9" name="9_holes" class="js-switch" data-color="#3d3b3b" />
+                                    18 holes <input type="checkbox" (change)="setCheckBox(true)" [(ngModel)]="data.hole_18" [value]="true"  id="hole_18" name="18_holes" class="js-switch" data-color="#3d3b3b" />
                                 </div>
                                 <span class="bar"></span>
                                 <small class="form-text text-muted">Type of holes you provide.</small>
                             </div>
-                            <div class="form-group m-b-40">
-                                <select class="form-control p-0" id="tee" [(ngModel)]="data.tee" required name="tee">
-                                    <ng-container *ngFor="let list of slotMonths">
-                                        <option value="{{list}}" *ngIf="!data.hole_18&&list<10">{{list}} Tee</option>
-                                        <option value="{{list}}" *ngIf="data.hole_18">{{list}} Tee</option>
-                                    </ng-container>
-                                </select><span class="bar"></span>
-                                <small class="form-text text-muted">Select starting tee slot.</small>
-                                <label for="tee">Start Tee</label>
+                            <div class="form-group m-b-40" style="height: 20px;" >
+                                <div class="multi_sel">
+                                    <div class="selectBox" onclick="$('#checkboxes1').toggle()" >
+                                        <select>
+                                            <option>Select Tee</option>
+                                        </select>
+                                        <div class="overSelect"></div>
+                                    </div>
+                                    <div id="checkboxes1" class="tee_slot" style="display: none" (ngInit)="setCheckBox()">
+                                        <ng-container *ngFor="let list of slotMonths" >
+                                            <label for="slots_{{list}}" >
+                                                <input type="checkbox" (click)="clickMulti(list)"  id="slots_{{list}}" />{{list}}
+                                            </label>
+                                            <br/>
+
+
+                                        </ng-container>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="form-group m-b-40">
                                 <h4 class="box-title">PLAYER TYPES</h4>
                                 <p class="text-muted  font-13"></p>

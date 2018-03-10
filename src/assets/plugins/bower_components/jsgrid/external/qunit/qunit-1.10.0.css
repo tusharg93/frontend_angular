@@ -205,7 +205,7 @@
 #qunit-tests .fail .module-name             { color: #000000; }
 
 #qunit-tests .fail .test-actual             { color: #EE5757; }
-#qunit-tests .fail .test-expected           { color: green;   }
+#qunit-tests .fail .test-expected           { color: #03a9f3;   }
 
 #qunit-banner.qunit-fail                    { background-color: #EE5757; }
 

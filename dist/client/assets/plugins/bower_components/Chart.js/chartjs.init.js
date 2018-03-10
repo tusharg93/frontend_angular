@@ -92,7 +92,7 @@ $( document ).ready(function() {
             value: 300,
             color:"#25a6f7",
             highlight: "#25a6f7",
-            label: "Blue"
+            label: "#337ab7"
         },
         {
             value: 50,
@@ -145,7 +145,7 @@ $( document ).ready(function() {
             value: 50,
             color: "#25a6f7",
             highlight: "#25a6f7",
-            label: "Blue"
+            label: "#337ab7"
         },
         {
             value: 100,
@@ -180,7 +180,7 @@ $( document ).ready(function() {
             value: 50,
             color: "#25a6f7",
             highlight: "#25a6f7",
-            label: "Blue"
+            label: "#337ab7"
         },
         {
             value: 100,

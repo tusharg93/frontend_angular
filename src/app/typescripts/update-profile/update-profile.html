@@ -121,14 +121,14 @@
                             </div>
                             <h3 class="box-title">Week days Working Hours</h3>
                             <div class="form-group m-b-40">
-                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekday_hrs.start_time" class="form-control cls_set cls_date" id="weekday_hrs_start_time" name="weekday_hrs_start_time">
+                                <input type="text" placeholder="Start Time" style="float:left;width:45%"  [(ngModel)]="data.weekday_hrs.start_time" class="form-control cls_set cls_date" id="weekday_hrs_start_time" name="weekday_hrs_start_time">
 
-                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekday_hrs.end_time" class="form-control cls_set cls_date" id="weekday_hrs_end_time" name="weekday_hrs_end_time">
+                                <input type="text" placeholder="End Time" style="right:right;width:45%"  [(ngModel)]="data.weekday_hrs.end_time" class="form-control cls_set cls_date" id="weekday_hrs_end_time" name="weekday_hrs_end_time">
                             </div>
                             <h3 class="box-title">Weekend Working Hours</h3>
                             <div class="form-group m-b-40">
-                                <input type="text" placeholder="Start Time" style="float:left;width:45%" required [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set cls_date" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
-                                <input type="text" placeholder="End Time" style="right:right;width:45%" required [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set cls_date" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
+                                <input type="text" placeholder="Start Time" style="float:left;width:45%"  [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set cls_date" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
+                                <input type="text" placeholder="End Time" style="right:right;width:45%"  [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set cls_date" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
                             </div>
                             <div class="form-group m-b-40">
                                 <input type="file" name="logo" placeholder="Logo"   [(ngModel)]="image"  (change)="changeImg($event)">

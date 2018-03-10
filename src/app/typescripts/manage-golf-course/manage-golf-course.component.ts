@@ -55,18 +55,27 @@ export class ManageGolfCourseComponent implements OnInit {
   setValue(){
     let data = this.environment.random.userDetail.manage_course;
     let alldata = []
+    
+    for(var j in data.all){
+      data.all[j].status = 'NO ACTION';
+      alldata.push(data.all[j]);
+
+    }
     for(var j in data.accepted){
       data.accepted[j].accepted = true;
+      data.accepted[j].status = 'ACCEPTED';
       alldata.push(data.accepted[j]);
 
     }
     for(var j in data.declined){
       data.declined[j].declined = true;
+      data.declined[j].status = 'DECLINED';
       alldata.push(data.declined[j]);
 
     }
     for(var j in data.pending){
       data.pending[j].pending = true;
+      data.pending[j].status = 'PENDING';
       alldata.push(data.pending[j]);
 
     }
@@ -119,9 +128,10 @@ export class ManageGolfCourseComponent implements OnInit {
       status = 'PENDING';
     }
     params['status'] = status;
+    this.data.vendor_info[i].status = status;
     this.ApiService.postApiMc4k('/api/v1/vendors/request',params,false,true).then((value)=>{
       if(value&&value.msg=='success'){
-        // swal('Status changed','','success')
+         swal('Status changed','','success')
       }
 
     });

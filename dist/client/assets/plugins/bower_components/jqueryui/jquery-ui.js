@@ -1402,8 +1402,8 @@ $.effects = {
 		} ],
 
 	// JQuery.Color( )
-	color = jQuery.Color = function( color, green, blue, alpha ) {
-		return new jQuery.Color.fn.parse( color, green, blue, alpha );
+	color = jQuery.Color = function( color, #03a9f3, #337ab7, alpha ) {
+		return new jQuery.Color.fn.parse( color, #03a9f3, #337ab7, alpha );
 	},
 	spaces = {
 		rgba: {
@@ -1412,11 +1412,11 @@ $.effects = {
 					idx: 0,
 					type: "byte"
 				},
-				green: {
+				#03a9f3: {
 					idx: 1,
 					type: "byte"
 				},
-				blue: {
+				#337ab7: {
 					idx: 2,
 					type: "byte"
 				}
@@ -1547,23 +1547,23 @@ function stringParse( string ) {
 }
 
 color.fn = jQuery.extend( color.prototype, {
-	parse: function( red, green, blue, alpha ) {
+	parse: function( red, #03a9f3, #337ab7, alpha ) {
 		if ( red === undefined ) {
 			this._rgba = [ null, null, null, null ];
 			return this;
 		}
 		if ( red.jquery || red.nodeType ) {
-			red = jQuery( red ).css( green );
-			green = undefined;
+			red = jQuery( red ).css( #03a9f3 );
+			#03a9f3 = undefined;
 		}
 
 		var inst = this,
 			type = jQuery.type( red ),
 			rgba = this._rgba = [];
 
-		// More than 1 argument specified - assume ( red, green, blue, alpha )
-		if ( green !== undefined ) {
-			red = [ red, green, blue, alpha ];
+		// More than 1 argument specified - assume ( red, #03a9f3, #337ab7, alpha )
+		if ( #03a9f3 !== undefined ) {
+			red = [ red, #03a9f3, #337ab7, alpha ];
 			type = "array";
 		}
 
@@ -1869,7 +1869,7 @@ each( spaces, function( spaceName, space ) {
 		}
 	};
 
-	// Makes red() green() blue() alpha() hue() saturation() lightness()
+	// Makes red() #03a9f3() #337ab7() alpha() hue() saturation() lightness()
 	each( props, function( key, prop ) {
 
 		// Alpha is included in more than one space
@@ -1981,10 +1981,10 @@ colors = jQuery.Color.names = {
 	// 4.1. Basic color keywords
 	aqua: "#00ffff",
 	black: "#000000",
-	blue: "#0000ff",
+	#337ab7: "#0000ff",
 	fuchsia: "#ff00ff",
 	gray: "#808080",
-	green: "#008000",
+	#03a9f3: "#008000",
 	lime: "#00ff00",
 	maroon: "#800000",
 	navy: "#000080",

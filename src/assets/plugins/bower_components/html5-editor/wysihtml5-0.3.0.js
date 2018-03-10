@@ -4732,7 +4732,7 @@ wysihtml5.dom.observe = function(element, eventNames, handler) {
  *    wysihtml5.dom.parse(userHTML, {
  *      classes: {
  *        red:    1,
- *        green:  1
+ *        #03a9f3:  1
  *      },
  *      tags: {
  *        div: {

@@ -23,8 +23,11 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <link href="../assets/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/select.css" rel="stylesheet" type="text/css">
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+
+
+    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
       <script src="../assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../assets/plugins/bower_components/switchery/dist/switchery.min.js"></script>
 
@@ -47,7 +50,7 @@
     <script src="../assets/js/flatpicker.js"></script>
     <link href="../assets/css/flatpicker.css" rel="stylesheet">
     <link href="../assets/plugins/bower_components/summernote/dist/summernote.css" rel="stylesheet" />
-
+    <script src="../assets/js/select.js"></script>
     <!--Wave Effects -->
   <!--<script src="../assets/js/waves.js"></script>-->
   <!--&lt;!&ndash;Counter js &ndash;&gt;-->
@@ -130,6 +133,7 @@
     function flipCom(from,to){
         $("#"+to).slideUp();
         $("#"+from).fadeIn();
+        $("#"+from).css('display','block');
     }
    function switchMaker(id){
         var val = id?'.'+id:'.js-switch';
@@ -177,8 +181,15 @@
         $('[rel=tooltip]').tooltip('destroy');
         $('.note-editable').html(val)
     }
-
+   function showCheckboxes(id) {
+        var checkboxes = document.getElementById(id);
+        if (checkboxes.style.display=='block') {
+            checkboxes.style.display = "none";
+        } else {
+            checkboxes.style.display = "block";
+        }
+    }
 
 </script>
-<script type="text/javascript" src="inline.1520360959826.bundle.js" defer></script><script type="text/javascript" src="styles.d41d8cd98f00b204e980.bundle.map" defer></script><script type="text/javascript" src="vendor.1520360959826.bundle.js" defer></script><script type="text/javascript" src="client.1520360959826.bundle.js" defer></script></body>
+<script type="text/javascript" src="inline.1520713644250.bundle.js" defer></script><script type="text/javascript" src="styles.d41d8cd98f00b204e980.bundle.map" defer></script><script type="text/javascript" src="vendor.1520713644250.bundle.js" defer></script><script type="text/javascript" src="client.1520713644250.bundle.js" defer></script></body>
 </html>

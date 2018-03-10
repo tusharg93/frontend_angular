@@ -21,7 +21,7 @@
   position: absolute;
   display: none;
   z-index: 100;
-  color: lightskyblue;
+  color: lightsky#337ab7;
   background-color: white;
   opacity: 0.95;
   pointer-event: none;
@@ -275,7 +275,7 @@
 }
 .note-popover .popover .popover-content .dropdown-menu.note-check li a i,
 .panel-heading.note-toolbar .dropdown-menu.note-check li a i {
-  color: deepskyblue;
+  color: deepsky#337ab7;
   visibility: hidden;
 }
 .note-popover .popover .popover-content .dropdown-menu.note-check li a.checked i,

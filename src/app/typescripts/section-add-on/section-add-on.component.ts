@@ -60,7 +60,7 @@ export class SectionAddOnComponent implements OnInit {
     for(var i in this.commodities){
       if(key == this.data.price_includes[i]){
         this.data.price_includes.splice(i,1);
-        this.others = key=='Other'?false:true;
+        this.others = key=='Other'?false:this.others;
         removed = true;
         break;
       }
@@ -162,24 +162,21 @@ export class SectionAddOnComponent implements OnInit {
 
     this.data.tnc = data.gc_basic_info.tnc;
     this.data.cancel_policy = data.gc_basic_info.cancel_policy;
-    this.data.price_includes = data.gc_basic_info.price_includes?data.gc_basic_info.price_includes:[];
-    this.data.price_includes1 = data.gc_basic_info.price_includes?data.gc_basic_info.price_includes:[];
+    let price_includes = data.gc_basic_info.price_includes?data.gc_basic_info.price_includes:[];
 
     var _self =this;
-    setTimeout(function(){
 
-
-
-      for(var i in _self.data.price_includes){
+    
+    for(var i in price_includes){
       for(var j in _self.commodities) {
-        _self.others = _self.others ? _self.others : _self.data.price_includes[i] == 'Other';
-        if (_self.data.price_includes[i] == _self.commodities[j]) {
+        _self.others = _self.others ? _self.others : price_includes[i] == 'Other';
+        if (price_includes[i] == _self.commodities[j]) {
           $('#ck' + j).click();
         }
       }
-      }
-
-    },50)
+    }
+    
+  
 
     if(this.others){
       this.data.others = this.data.price_includes.pop();
@@ -192,9 +189,6 @@ export class SectionAddOnComponent implements OnInit {
     this.data.newcommodities = defaultArr;
 
 
-    setTimeout(function(){
-      _self.data.price_includes = _self.data.price_includes1;
-    },400)
   }
 
 

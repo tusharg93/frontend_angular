@@ -398,7 +398,7 @@ the specific language governing permissions and limitations under the Apache Lic
      *      The expected format is an object containing the following keys:
      *      results array of objects that will be used as choices
      *      more (optional) boolean indicating whether there are more results available
-     *      Example: {results:[{id:1, text:'Red'},{id:2, text:'Blue'}], more:true}
+     *      Example: {results:[{id:1, text:'Red'},{id:2, text:'#337ab7'}], more:true}
      */
     function ajax(options) {
         var timeout, // current scheduled but not yet executed request

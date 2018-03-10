@@ -81,8 +81,12 @@ export class SectionFourComponent implements OnInit {
 
        }else{
          this.next = i +1;
+         let next = this.next;
          setTimeout(function(){
-           flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
+           flatpickr('#start_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+           flatpickr('#end_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+           flatpickr('#start_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+           flatpickr('#end_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
          },50)
        }
 
@@ -129,9 +133,8 @@ export class SectionFourComponent implements OnInit {
     }
     this.data = params;
 
-    
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
-    this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&!this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
+    this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
     setTimeout(function(){
       flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
     },50)

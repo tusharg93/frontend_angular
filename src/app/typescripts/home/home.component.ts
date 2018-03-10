@@ -8,7 +8,8 @@ import { isBrowser } from 'angular2-universal';
 
 declare var $:any;
 declare var swal:any;
-
+declare var flipCom:any;
+var BATTUTA_KEY="00000000000000000000000000000000";
 
 @Component({
   encapsulation:ViewEncapsulation.None,
@@ -21,12 +22,13 @@ declare var swal:any;
 export class HomeComponent implements OnInit {
   @ViewChild(MetaComponent) private metaComp: MetaComponent;
     
-  environment:any;
-  data:any;
+  environment:any;all:any;
+  data:any;cities:any;regions:any;
   constructor(private _storage:StorageService,private activeRoute:ActivatedRoute,private _router: Router, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
     this.data = new Array();
+    this.all = new Array();
   }
 
   ngOnInit() {
@@ -65,72 +67,59 @@ export class HomeComponent implements OnInit {
 
   loginMeIn(form){
     if(form.valid){
-      this.environment.random.source = this.data.vendor?'vendor':'golf_course';
-      var _self = this;
-      swal({
-            title: "Register Type",
-            text: "Check user type",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: "btn-danger",
-            confirmButtonText: "Golf Course",
-            cancelButtonText: "Vendor",
-            closeOnConfirm: true,
-            closeOnCancel: true
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              _self.environment.random.source ='golf_course';
-              _self.login()
-            } else {
-              _self.environment.random.source ='vendor';
-              _self.login()
-            }
-          });
+
+      this.ApiService.postApiMc4k('api/v1/auth/login',"login_id="+this.data.email+"&password="+this.data.password+'&source='+this.environment.random.source,true).then((value)=>{
+
+        if(value&&value.data&&this.environment.random.source==value.data['source']){
+          this.environment.random.userInfo = {activated:value.data.activated,id:value.data['id'],token:value.data['token'],source:this.environment.random.source};
+          let d = new Date();
+          if(this.data.remember){
+            d.setTime(d.getTime() + (12*30*24*60*60*1000));
+            this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
+            this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
+            this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
+          }else {
+            d.setTime(d.getTime() + (1*60*60*1000));
+            this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
+            this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
+            this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
+          }
+
+
+
+        }else if(value&&value.data&&this.environment.random.userInfo.source!=value.data['source']){
+          swal("Error", 'You are not a '+this.environment.random.source, "error")
+        }else{
+          swal("Error", value.error, "error")
+        }
+      });
+
     }
 
   }
-
-  login(){
-    this.ApiService.postApiMc4k('api/v1/auth/login',"login_id="+this.data.email+"&password="+this.data.password+'&source='+this.environment.random.source,true).then((value)=>{
-
-      if(value&&value.data&&this.environment.random.source==value.data['source']){
-        this.environment.random.userInfo = {activated:value.data.activated,id:value.data['id'],token:value.data['token'],source:this.environment.random.source};
-        let d = new Date();
-        if(this.data.remember){
-          d.setTime(d.getTime() + (12*30*24*60*60*1000));
-          this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
-          this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
-          this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
-        }else {
-          d.setTime(d.getTime() + (1*60*60*1000));
-          this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
-          this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
-          this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
-        }
-        
-        
-
-      }else if(value&&value.data&&this.environment.random.userInfo.source!=value.data['source']){
-        swal("Error", 'You are not a '+this.environment.random.source, "error")
-      }else{
-        swal("Error", value.error, "error")
-      }
-    });
-
-  }
+  
 
   registerMeIn(form){
     if(form.valid){
       this.environment.random.source ='golf_course';
-      let params = {name:this.data.name,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:this.data.country_code, email:this.data.email1, password:this.data.password1}
+      let code = this.data.country_code?this.data.country_code:this.data.country_code2;
+      let countryCode;
+      for(var i in this.all['code']){
+        if(this.all['code'][i].code==code){
+          countryCode = this.all['code'][i].callingCode;
+          break;
+        }
+      }
+      let params = {name:this.data.name,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:countryCode, email:this.data.email1, password:this.data.password1}
       this.ApiService.postApiMc4k('api/v1/forms/register',params).then((value)=>{
         if(value&&value.msg=='success'){
+          flipCom('loginform','registerform')
           swal("Success", value.msg, "success")
         }else{
           swal("Error", value.error, "error")
         }
       });
+      
     }
 
   }
@@ -138,14 +127,24 @@ export class HomeComponent implements OnInit {
   registerVendor(form){
     if(form.valid) {
       this.environment.random.source ='vendor';
-      let params = {name:this.data.name2,country:this.data.country2, city:this.data.city2, mobile:this.data.mobile2, country_code:this.data.country_code2, email:this.data.email2, password:this.data.password2, website_url:this.data.website_url2}
+      let code = this.data.country_code?this.data.country_code:this.data.country_code2;
+      let countryCode;
+      for(var i in this.all['code']){
+        if(this.all['code'][i].code==code){
+          countryCode = this.all['code'][i].callingCode;
+          break;
+        }
+      }
+      let params = {name:this.data.name2,country:this.data.country2, city:this.data.city2, mobile:this.data.mobile2, country_code:countryCode, email:this.data.email2, password:this.data.password2, website_url:this.data.website_url2}
       this.ApiService.postApiMc4k('api/v1/vendors/register', params).then((value)=> {
         if(value&&value.msg=='success'){
+          flipCom('loginform','registerVform')
           swal("Success", value.msg, "success")
         }else{
           swal("Error", value.error, "error")
         }
       });
+
     }
   }
 
@@ -160,14 +159,43 @@ export class HomeComponent implements OnInit {
         swal("Error", value.error, "error")
       }
     });
+
   }
 
   _getCountry(){
-    this.ApiService._getCountry();
+    var url="https://battuta.medunes.net/api/country/all/?key="+BATTUTA_KEY+"&callback=?";
+    var _self = this;
+    $.getJSON(url,function(countries) {
+      _self.environment.random.countries = countries;
+      _self.all['countries'] = countries;
+    });
+    if(!this.environment.random.countries){
+      this.ApiService.getApiMc4k('https://restcountries.eu/rest/v2/all',1).then((value)=>{
+        let arr = [];
+        for(var i in value){
+          arr.push({code:value[i].alpha2Code.toLocaleLowerCase(),callingCode:value[i].callingCodes[0]})
+        }
+        this.all['code'] = arr;
+      });
+    }
   }
 
-  _getCity(country){
-    this.ApiService._getCity(country);
+  _getRegion(countryCode){
+    let url="https://battuta.medunes.net/api/region/" +countryCode +"/all/?key="+BATTUTA_KEY+"&callback=?";
+    var _self = this;_self.regions = [];_self.all.search = null;
+    $.getJSON(url,function(regions) {
+      _self.regions = regions;
+      _self.all['regions'] = regions;
+    });
+  }
+
+  _getCity(countryCode,region){
+    let url="https://battuta.medunes.net/api/city/" +countryCode +"/search/?region=" +region +"&key=" +BATTUTA_KEY +"&callback=?";
+    var _self = this;_self.cities = [];_self.all.search1 = null;
+    $.getJSON(url,function(cities) {
+      _self.cities = cities;
+      _self.all['cities'] = cities;
+    });
   }
 
   terms(id){
@@ -184,6 +212,7 @@ export class HomeComponent implements OnInit {
           $('#'+id).prop('checked',true)
         });
   }
+  
 
 
 }

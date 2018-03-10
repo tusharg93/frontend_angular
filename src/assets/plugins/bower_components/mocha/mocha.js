@@ -1911,7 +1911,7 @@ exports.colors = {
   , 'fast': 90
   , 'medium': 33
   , 'slow': 31
-  , 'green': 32
+  , '#03a9f3': 32
   , 'light': 90
   , 'diff gutter': 90
   , 'diff added': 42
@@ -2137,7 +2137,7 @@ Base.prototype.epilogue = function(){
 
   // passes
   fmt = color('bright pass', ' ')
-    + color('green', ' %d passing')
+    + color('#03a9f3', ' %d passing')
     + color('light', ' (%s)');
 
   console.log(fmt,
@@ -3542,7 +3542,7 @@ NyanCat.prototype.drawScoreboard = function(){
     write('\n');
   }
 
-  draw(colors.green, stats.passes);
+  draw(colors.#03a9f3, stats.passes);
   draw(colors.fail, stats.failures);
   draw(colors.pending, stats.pending);
   write('\n');

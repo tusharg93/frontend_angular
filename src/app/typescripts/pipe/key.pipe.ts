@@ -36,9 +36,18 @@ export class ForKeyPipe implements PipeTransform {
 @Pipe({name: 'FilterPipe'})
 export class FilterPipe implements PipeTransform {
     transform(items: any[], field: string, value: string): any[] {
+        var allList = [];
        if(value && value.trim() && value.length >0){
-          if (!items) return [];
-          return items.filter(it => it[field].toLocaleLowerCase().indexOf(value) > -1);
+          value = value.toLocaleLowerCase();
+           value = value.trim();
+          if (!items) return allList;
+          for(var i in items){
+              let it = items[i];
+              if(it[field].toLocaleLowerCase().indexOf(value) > -1 ){
+                  allList.push(it);
+              }
+          }
+          return allList;
        }else{
           return items;
        }

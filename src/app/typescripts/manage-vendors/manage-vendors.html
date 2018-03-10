@@ -19,7 +19,8 @@
                                 <th>Name</th>
                                 <th>Accepted</th>
                                 <th>Declined</th>
-                                <th>Pending</th>
+                                <th>Status</th>
+                                <th>Request Status</th>
 
                             </tr>
                             </thead>
@@ -35,15 +36,12 @@
                                         <input type="checkbox"  [(ngModel)]="data.vendor_info[i].declined" (change)="changeAll(i,'declined','pending','accepted')" [value]="true" name="declined"  id="declined{{i}}" class="js-switch" data-color="#3d3b3b" />
 
                                     </td>
-                                    <td>
-                                        <input type="checkbox"  [(ngModel)]="data.vendor_info[i].pending" (change)="changeAll(i,'pending','accepted','declined')" [value]="true" name="pending"  id="pending{{i}}" class="js-switch" data-color="#3d3b3b" />
-                                    </td>
-
-
-
-
-
-
+                                <td>
+                                    {{list.status}}
+                                </td>
+                                <td>
+                                    {{list.requestor_status}}
+                                </td>
                             </tr>
 
                             </tbody>

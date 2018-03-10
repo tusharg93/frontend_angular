@@ -80,7 +80,7 @@ export class PublicHolidayComponent implements OnInit {
     setTimeout(function(){
       flatpickr('.cls', {enableTime: false,minDate:new Date()});
       _self.clickTheCheck()
-    },100)
+    },50)
 
   }
 

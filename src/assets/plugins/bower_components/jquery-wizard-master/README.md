@@ -372,6 +372,6 @@ Licensed under [the LGPL license](LICENSE).
 [npm-image]: https://badge.fury.io/js/jquery-wizard.svg?style=flat
 [npm-url]: https://npmjs.org/package/jquery-wizard
 [license]: https://img.shields.io/npm/l/jquery-wizard.svg?style=flat
-[prs-welcome]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg
+[prs-welcome]: https://img.shields.io/badge/PRs-welcome-bright#03a9f3.svg
 [daviddm-image]: https://david-dm.org/amazingSurge/jquery-wizard.svg?style=flat
 [daviddm-url]: https://david-dm.org/amazingSurge/jquery-wizard

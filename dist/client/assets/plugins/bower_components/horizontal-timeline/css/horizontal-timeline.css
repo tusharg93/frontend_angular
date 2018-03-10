@@ -85,7 +85,7 @@ Main Components
   transition: transform 0.4s;
 }
 .cd-horizontal-timeline .filling-line {
-  /* this is used to create the green line filling the timeline */
+  /* this is used to create the #03a9f3 line filling the timeline */
   position: absolute;
   z-index: 1;
   left: 0;

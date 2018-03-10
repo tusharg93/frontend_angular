@@ -22,13 +22,13 @@
   transition: height 0.2s ease;
 }
 .current {
-  color: blue !important;
+  color: #337ab7 !important;
 }
 .error {
   color: red !important;
 }
 .done {
-  color: green !important;
+  color: #03a9f3 !important;
 }
 .disabled {
   cursor: not-allowed !important;

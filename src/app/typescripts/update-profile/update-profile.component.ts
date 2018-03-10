@@ -67,10 +67,10 @@ export class UpdateProfileComponent implements OnInit {
         }
 
       }
-      params['weekday_hrs']['start_time'] = params['weekday_hrs']['start_time']>12?params['weekday_hrs']['start_time']-12+'pm':params['weekday_hrs']['start_time']+'am';
-      params['weekday_hrs']['end_time'] =params['weekday_hrs']['end_time']>12?params['weekday_hrs']['end_time']-12+'pm':params['weekday_hrs']['end_time']+'am';
-      params['weekend_hrs']['start_time'] =params['weekend_hrs']['start_time']>12?params['weekend_hrs']['start_time']-12+'pm':params['weekend_hrs']['start_time']+'am';
-      params['weekend_hrs']['end_time'] =params['weekend_hrs']['end_time']>12?params['weekend_hrs']['end_time']-12+'pm':params['weekend_hrs']['end_time']+'am';
+      // params['weekday_hrs']['start_time'] = params['weekday_hrs']['start_time']>12?params['weekday_hrs']['start_time']-12+'pm':params['weekday_hrs']['start_time']+'am';
+      // params['weekday_hrs']['end_time'] =params['weekday_hrs']['end_time']>12?params['weekday_hrs']['end_time']-12+'pm':params['weekday_hrs']['end_time']+'am';
+      // params['weekend_hrs']['start_time'] =params['weekend_hrs']['start_time']>12?params['weekend_hrs']['start_time']-12+'pm':params['weekend_hrs']['start_time']+'am';
+      // params['weekend_hrs']['end_time'] =params['weekend_hrs']['end_time']>12?params['weekend_hrs']['end_time']-12+'pm':params['weekend_hrs']['end_time']+'am';
 
       params['about'] = $('.note-editable').html();
       params['course'] = this.course;
@@ -141,7 +141,7 @@ export class UpdateProfileComponent implements OnInit {
     }
     
     
-    flatpickr('.cls_date', {noCalendar: true, enableTime: true, time_12hr: true});
+    flatpickr('.cls_date', {noCalendar: true, enableTime: true, time_24hr: true});
     switchMaker();
     summernode(this.data.about);
     

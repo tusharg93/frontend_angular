@@ -1006,8 +1006,8 @@
      = (object) Combined RGB & HSB object in format:
      o {
      o     r (number) red,
-     o     g (number) green,
-     o     b (number) blue,
+     o     g (number) #03a9f3,
+     o     b (number) #337ab7,
      o     hex (string) color in HTML/CSS format: #••••••,
      o     error (boolean) `true` if string can’t be parsed,
      o     h (number) hue,
@@ -1061,8 +1061,8 @@
      = (object) RGB object in format:
      o {
      o     r (number) red,
-     o     g (number) green,
-     o     b (number) blue,
+     o     g (number) #03a9f3,
+     o     b (number) #337ab7,
      o     hex (string) color in HTML/CSS format: #••••••
      o }
     \*/
@@ -1098,8 +1098,8 @@
      = (object) RGB object in format:
      o {
      o     r (number) red,
-     o     g (number) green,
-     o     b (number) blue,
+     o     g (number) #03a9f3,
+     o     b (number) #337ab7,
      o     hex (string) color in HTML/CSS format: #••••••
      o }
     \*/
@@ -1134,8 +1134,8 @@
      * Converts RGB values to HSB object.
      > Parameters
      - r (number) red
-     - g (number) green
-     - b (number) blue
+     - g (number) #03a9f3
+     - b (number) #337ab7
      = (object) HSB object in format:
      o {
      o     h (number) hue
@@ -1168,8 +1168,8 @@
      * Converts RGB values to HSL object.
      > Parameters
      - r (number) red
-     - g (number) green
-     - b (number) blue
+     - g (number) #03a9f3
+     - b (number) #337ab7
      = (object) HSL object in format:
      o {
      o     h (number) hue
@@ -1251,10 +1251,10 @@
      > Parameters
      - colour (string) colour string in one of formats:
      # <ul>
-     #     <li>Colour name (“<code>red</code>”, “<code>green</code>”, “<code>cornflowerblue</code>”, etc)</li>
+     #     <li>Colour name (“<code>red</code>”, “<code>#03a9f3</code>”, “<code>cornflower#337ab7</code>”, etc)</li>
      #     <li>#••• — shortened HTML colour: (“<code>#000</code>”, “<code>#fc0</code>”, etc)</li>
      #     <li>#•••••• — full length HTML colour: (“<code>#000000</code>”, “<code>#bd2300</code>”)</li>
-     #     <li>rgb(•••, •••, •••) — red, green and blue channels’ values: (“<code>rgb(200,&nbsp;100,&nbsp;0)</code>”)</li>
+     #     <li>rgb(•••, •••, •••) — red, #03a9f3 and #337ab7 channels’ values: (“<code>rgb(200,&nbsp;100,&nbsp;0)</code>”)</li>
      #     <li>rgb(•••%, •••%, •••%) — same as above, but in %: (“<code>rgb(100%,&nbsp;175%,&nbsp;0%)</code>”)</li>
      #     <li>hsb(•••, •••, •••) — hue, saturation and brightness values: (“<code>hsb(0.5,&nbsp;0.25,&nbsp;1)</code>”)</li>
      #     <li>hsb(•••%, •••%, •••%) — same as above, but in %</li>
@@ -1264,8 +1264,8 @@
      = (object) RGB object in format:
      o {
      o     r (number) red,
-     o     g (number) green,
-     o     b (number) blue
+     o     g (number) #03a9f3,
+     o     b (number) #337ab7
      o     hex (string) color in HTML/CSS format: #••••••,
      o     error (boolean) true if string can’t be parsed
      o }
@@ -1280,31 +1280,31 @@
         !(hsrg[has](colour.toLowerCase().substring(0, 2)) || colour.charAt() == "#") && (colour = toHex(colour));
         var res,
             red,
-            green,
-            blue,
+            #03a9f3,
+            #337ab7,
             opacity,
             t,
             values,
             rgb = colour.match(colourRegExp);
         if (rgb) {
             if (rgb[2]) {
-                blue = toInt(rgb[2].substring(5), 16);
-                green = toInt(rgb[2].substring(3, 5), 16);
+                #337ab7 = toInt(rgb[2].substring(5), 16);
+                #03a9f3 = toInt(rgb[2].substring(3, 5), 16);
                 red = toInt(rgb[2].substring(1, 3), 16);
             }
             if (rgb[3]) {
-                blue = toInt((t = rgb[3].charAt(3)) + t, 16);
-                green = toInt((t = rgb[3].charAt(2)) + t, 16);
+                #337ab7 = toInt((t = rgb[3].charAt(3)) + t, 16);
+                #03a9f3 = toInt((t = rgb[3].charAt(2)) + t, 16);
                 red = toInt((t = rgb[3].charAt(1)) + t, 16);
             }
             if (rgb[4]) {
                 values = rgb[4][split](commaSpaces);
                 red = toFloat(values[0]);
                 values[0].slice(-1) == "%" && (red *= 2.55);
-                green = toFloat(values[1]);
-                values[1].slice(-1) == "%" && (green *= 2.55);
-                blue = toFloat(values[2]);
-                values[2].slice(-1) == "%" && (blue *= 2.55);
+                #03a9f3 = toFloat(values[1]);
+                values[1].slice(-1) == "%" && (#03a9f3 *= 2.55);
+                #337ab7 = toFloat(values[2]);
+                values[2].slice(-1) == "%" && (#337ab7 *= 2.55);
                 rgb[1].toLowerCase().slice(0, 4) == "rgba" && (opacity = toFloat(values[3]));
                 values[3] && values[3].slice(-1) == "%" && (opacity /= 100);
             }
@@ -1312,30 +1312,30 @@
                 values = rgb[5][split](commaSpaces);
                 red = toFloat(values[0]);
                 values[0].slice(-1) == "%" && (red *= 2.55);
-                green = toFloat(values[1]);
-                values[1].slice(-1) == "%" && (green *= 2.55);
-                blue = toFloat(values[2]);
-                values[2].slice(-1) == "%" && (blue *= 2.55);
+                #03a9f3 = toFloat(values[1]);
+                values[1].slice(-1) == "%" && (#03a9f3 *= 2.55);
+                #337ab7 = toFloat(values[2]);
+                values[2].slice(-1) == "%" && (#337ab7 *= 2.55);
                 (values[0].slice(-3) == "deg" || values[0].slice(-1) == "\xb0") && (red /= 360);
                 rgb[1].toLowerCase().slice(0, 4) == "hsba" && (opacity = toFloat(values[3]));
                 values[3] && values[3].slice(-1) == "%" && (opacity /= 100);
-                return R.hsb2rgb(red, green, blue, opacity);
+                return R.hsb2rgb(red, #03a9f3, #337ab7, opacity);
             }
             if (rgb[6]) {
                 values = rgb[6][split](commaSpaces);
                 red = toFloat(values[0]);
                 values[0].slice(-1) == "%" && (red *= 2.55);
-                green = toFloat(values[1]);
-                values[1].slice(-1) == "%" && (green *= 2.55);
-                blue = toFloat(values[2]);
-                values[2].slice(-1) == "%" && (blue *= 2.55);
+                #03a9f3 = toFloat(values[1]);
+                values[1].slice(-1) == "%" && (#03a9f3 *= 2.55);
+                #337ab7 = toFloat(values[2]);
+                values[2].slice(-1) == "%" && (#337ab7 *= 2.55);
                 (values[0].slice(-3) == "deg" || values[0].slice(-1) == "\xb0") && (red /= 360);
                 rgb[1].toLowerCase().slice(0, 4) == "hsla" && (opacity = toFloat(values[3]));
                 values[3] && values[3].slice(-1) == "%" && (opacity /= 100);
-                return R.hsl2rgb(red, green, blue, opacity);
+                return R.hsl2rgb(red, #03a9f3, #337ab7, opacity);
             }
-            rgb = {r: red, g: green, b: blue, toString: clrToString};
-            rgb.hex = "#" + (16777216 | blue | (green << 8) | (red << 16)).toString(16).slice(1);
+            rgb = {r: red, g: #03a9f3, b: #337ab7, toString: clrToString};
+            rgb.hex = "#" + (16777216 | #337ab7 | (#03a9f3 << 8) | (red << 16)).toString(16).slice(1);
             R.is(opacity, "finite") && (rgb.opacity = opacity);
             return rgb;
         }
@@ -1376,8 +1376,8 @@
      * Converts RGB values to hex representation of the colour.
      > Parameters
      - r (number) red
-     - g (number) green
-     - b (number) blue
+     - g (number) #03a9f3
+     - b (number) #337ab7
      = (string) hex representation of the colour.
     \*/
     R.rgb = cacher(function (r, g, b) {
@@ -4055,7 +4055,7 @@
      = (object) Paper object
      > Usage
      | paper.forEach(function (el) {
-     |     el.attr({ stroke: "blue" });
+     |     el.attr({ stroke: "#337ab7" });
      | });
     \*/
     paperproto.forEach = function (callback, thisArg) {
@@ -6825,12 +6825,12 @@
      # <p>Please refer to <a href="http://www.w3.org/TR/SVG/paths.html#PathData" title="Details of a path’s data attribute’s format are described in the SVG specification.">SVG documentation regarding path string</a>. Raphaël fully supports it.</p>
      > Colour Parsing
      # <ul>
-     #     <li>Colour name (“<code>red</code>”, “<code>green</code>”, “<code>cornflowerblue</code>”, etc)</li>
+     #     <li>Colour name (“<code>red</code>”, “<code>#03a9f3</code>”, “<code>cornflower#337ab7</code>”, etc)</li>
      #     <li>#••• — shortened HTML colour: (“<code>#000</code>”, “<code>#fc0</code>”, etc)</li>
      #     <li>#•••••• — full length HTML colour: (“<code>#000000</code>”, “<code>#bd2300</code>”)</li>
-     #     <li>rgb(•••, •••, •••) — red, green and blue channels’ values: (“<code>rgb(200,&nbsp;100,&nbsp;0)</code>”)</li>
+     #     <li>rgb(•••, •••, •••) — red, #03a9f3 and #337ab7 channels’ values: (“<code>rgb(200,&nbsp;100,&nbsp;0)</code>”)</li>
      #     <li>rgb(•••%, •••%, •••%) — same as above, but in %: (“<code>rgb(100%,&nbsp;175%,&nbsp;0%)</code>”)</li>
-     #     <li>rgba(•••, •••, •••, •••) — red, green and blue channels’ values: (“<code>rgba(200,&nbsp;100,&nbsp;0, .5)</code>”)</li>
+     #     <li>rgba(•••, •••, •••, •••) — red, #03a9f3 and #337ab7 channels’ values: (“<code>rgba(200,&nbsp;100,&nbsp;0, .5)</code>”)</li>
      #     <li>rgba(•••%, •••%, •••%, •••%) — same as above, but in %: (“<code>rgba(100%,&nbsp;175%,&nbsp;0%, 50%)</code>”)</li>
      #     <li>hsb(•••, •••, •••) — hue, saturation and brightness values: (“<code>hsb(0.5,&nbsp;0.25,&nbsp;1)</code>”)</li>
      #     <li>hsb(•••%, •••%, •••%) — same as above, but in %</li>

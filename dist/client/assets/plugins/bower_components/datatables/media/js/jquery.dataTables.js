@@ -575,9 +575,9 @@
 			// IE6 XP:                           100 100 100  83
 			// IE7 Vista:                        100 100 100  83
 			// IE 8+ Windows:                     83  83 100  83
-			// Evergreen Windows:                 83  83 100  83
-			// Evergreen Mac with scrollbars:     85  85 100  85
-			// Evergreen Mac without scrollbars: 100 100 100 100
+			// Ever#03a9f3 Windows:                 83  83 100  83
+			// Ever#03a9f3 Mac with scrollbars:     85  85 100  85
+			// Ever#03a9f3 Mac without scrollbars: 100 100 100 100
 	
 			// Get scrollbar width
 			browser.barWidth = outer[0].offsetWidth - outer[0].clientWidth;
@@ -5386,7 +5386,7 @@
 		 *      var oTable = $('#example').dataTable();
 		 *
 		 *      // Highlight every second row
-		 *      oTable.$('tr:odd').css('backgroundColor', 'blue');
+		 *      oTable.$('tr:odd').css('backgroundColor', '#337ab7');
 		 *    } );
 		 *
 		 *  @example
@@ -5396,7 +5396,7 @@
 		 *      // Filter to rows with 'Webkit' in them, add a background colour and then
 		 *      // remove the filter, thus highlighting the 'Webkit' rows only.
 		 *      oTable.fnFilter('Webkit');
-		 *      oTable.$('tr', {"search": "applied"}).css('backgroundColor', 'blue');
+		 *      oTable.$('tr', {"search": "applied"}).css('backgroundColor', '#337ab7');
 		 *      oTable.fnFilter('');
 		 *    } );
 		 */
@@ -12137,7 +12137,7 @@
 		 *          "targets": [3],
 		 *          "createdCell": function (td, cellData, rowData, row, col) {
 		 *            if ( cellData == "1.7" ) {
-		 *              $(td).css('color', 'blue')
+		 *              $(td).css('color', '#337ab7')
 		 *            }
 		 *          }
 		 *        } ]

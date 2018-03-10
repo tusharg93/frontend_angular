@@ -146,27 +146,9 @@ export class ApiService {
     });
   }
 
-  _getCountry(){
-    if(!this.environment.random.countries){
-      this.getApiMc4k('https://restcountries.eu/rest/v2/all',1).then((value)=>{
-        this.environment.random.countries = value;
-        setTimeout(()=>{
-          // setSelect();
-        },100)
-      });
-    }
-  }
+ 
 
-  _getCity(country){
-    if(!this.environment.random.city){
-      // this.getApiMc4k('http://battuta.medunes.net/api/country/search/?country='+country+'&region=&city=&key='+this.environment.random.Battuta,1).then((value)=>{
-      //   this.environment.random.city = value;
-      //   setTimeout(()=>{
-      //     // $('.selectpicker').selectpicker();
-      //   },100)
-      // });
-    }
-  }
+
   
   userDetail(link){
     this.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
@@ -182,8 +164,10 @@ export class ApiService {
           this.router.navigateByUrl('golf-course/section-3');
         }else if(this.environment.random.userDetail&&this.environment.random.userDetail.rates_info&&this.environment.random.userDetail.rates_info.length == 0){
           this.router.navigateByUrl('golf-course/section-4');
-        }else{
+        }else if(this.router.url == '/'){
           this.router.navigateByUrl('golf-course/dashboard');
+        }else{
+          this.router.navigateByUrl(this.router.url);
         }
       }
     })

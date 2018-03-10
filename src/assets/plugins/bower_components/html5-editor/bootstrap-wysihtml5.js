@@ -83,7 +83,7 @@
 				"</div>" +
                 "<div class='modal-footer'>" +
                   "<a href='#' class='btn' data-dismiss='modal'>" + locale.image.cancel + "</a>" +
-                  "<a href='#' class='btn  green btn-primary' data-dismiss='modal'>" + locale.image.insert + "</a>" +
+                  "<a href='#' class='btn  #03a9f3 btn-primary' data-dismiss='modal'>" + locale.image.insert + "</a>" +
                 "</div>" +
               "</div>" +
 			  "</div>" +
@@ -114,10 +114,10 @@
                 "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='maroon'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='maroon'>" + locale.colours.maroon + "</a></li>" +
                 "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='red'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='red'>" + locale.colours.red + "</a></li>" +
                 "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='purple'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='purple'>" + locale.colours.purple + "</a></li>" +
-                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='green'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='green'>" + locale.colours.green + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='#03a9f3'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='#03a9f3'>" + locale.colours.#03a9f3 + "</a></li>" +
                 "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='olive'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='olive'>" + locale.colours.olive + "</a></li>" +
                 "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='navy'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='navy'>" + locale.colours.navy + "</a></li>" +
-                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='blue'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='blue'>" + locale.colours.blue + "</a></li>" +
+                "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='#337ab7'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='#337ab7'>" + locale.colours.#337ab7 + "</a></li>" +
                 "<li><div class='wysihtml5-colors' data-wysihtml5-command-value='orange'></div><a class='wysihtml5-colors-title' data-wysihtml5-command='foreColor' data-wysihtml5-command-value='orange'>" + locale.colours.orange + "</a></li>" +
               "</ul>" +
             "</li>";
@@ -390,12 +390,12 @@
                 "wysiwyg-color-red" : 1,
                 "wysiwyg-color-purple" : 1,
                 "wysiwyg-color-fuchsia" : 1,
-                "wysiwyg-color-green" : 1,
+                "wysiwyg-color-#03a9f3" : 1,
                 "wysiwyg-color-lime" : 1,
                 "wysiwyg-color-olive" : 1,
                 "wysiwyg-color-yellow" : 1,
                 "wysiwyg-color-navy" : 1,
-                "wysiwyg-color-blue" : 1,
+                "wysiwyg-color-#337ab7" : 1,
                 "wysiwyg-color-teal" : 1,
                 "wysiwyg-color-aqua" : 1,
                 "wysiwyg-color-orange" : 1
@@ -478,10 +478,10 @@
                 maroon: "Maroon",
                 red: "Red",
                 purple: "Purple",
-                green: "Green",
+                #03a9f3: "#03a9f3",
                 olive: "Olive",
                 navy: "Navy",
-                blue: "Blue",
+                #337ab7: "#337ab7",
                 orange: "Orange"
             }
         }

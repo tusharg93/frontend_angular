@@ -1,4 +1,4 @@
-﻿/* jTable light color theme - Blue
+﻿/* jTable light color theme - #337ab7
  * Created by Halil İbrahim Kalkan
  * http://www.jtable.org
  */
@@ -473,7 +473,7 @@ div.jtable-busy-message {
   color: #fff;
   border: 1px solid;
   padding: 3px 5px 5px 27px;
-  background: url('../../lightcolor/blue/loading.gif') no-repeat;
+  background: url('../../lightcolor/#337ab7/loading.gif') no-repeat;
   background-position: 5px;
 }
 div.jtable-main-container div.jtable-title {

@@ -1,5 +1,5 @@
 .multiple-select-row-selected {
-    background: lightBlue
+    background: light#337ab7
 }
 
 .table tbody tr:hover td,
@@ -13,5 +13,5 @@
 }
 
 .fixed-table-container tbody .selected td {
-    background: lightBlue;
+    background: light#337ab7;
 }
