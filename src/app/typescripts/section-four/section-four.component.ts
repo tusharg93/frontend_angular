@@ -136,7 +136,11 @@ export class SectionFourComponent implements OnInit {
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
     this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
     setTimeout(function(){
-      flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
+      let next = 0;
+      flatpickr('#start_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      flatpickr('#end_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      flatpickr('#start_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      flatpickr('#end_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
     },50)
 
   }

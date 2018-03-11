@@ -105,12 +105,15 @@ export class SectionOneComponent implements OnInit {
       }
 
     }
-    params.tee = params.tee?params.tee.split(','):[];
 
-    for(var i in params.tee){
-      params.tee[i] = params.tee[i].replace('{','');
-      params.tee[i] = params.tee[i].replace('}','');
+    if(typeof params.tee == 'string'){
+      params.tee = params.tee?params.tee.split(','):[];
+      for(var i in params.tee){
+        params.tee[i] = params.tee[i].replace('{','');
+        params.tee[i] = params.tee[i].replace('}','');
+      }
     }
+
     this.data['tee'] = params.tee
   }
 

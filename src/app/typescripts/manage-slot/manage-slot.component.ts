@@ -26,6 +26,7 @@ export class ManageSlotComponent implements OnInit {
   current:any;
   days:any;
   slots:any;
+  is_hole_18:boolean;
   constructor(private _storage:StorageService,private router:Router,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
@@ -83,6 +84,7 @@ export class ManageSlotComponent implements OnInit {
       this.days = [{id:this.environment.random.keys['others']['weekend'],name:"Weekend"},{id:this.environment.random.keys['others']['weekday'],name:"Weekday"}]
       this.getdata();
     }
+    this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
 
 
     flatpickr('.cls',{enableTime:false});
@@ -90,14 +92,14 @@ export class ManageSlotComponent implements OnInit {
   }
   
   setCheck(val){
-    console.log('kjhkj',val)
+
     var _self = this;
     setTimeout(function(){
       for(var i in val){
         $('#'+val[i]).attr('checked',true);
       }
       _self.current.days = JSON.parse(JSON.stringify(val));
-      console.log(_self.current)
+
     },100);
 
 
@@ -106,48 +108,18 @@ export class ManageSlotComponent implements OnInit {
   save(i){
 
     let params = {};
-    let holes_9 = true;
-    let holes_18 = true;
-
-
-    if(this.slots[i].holes == "9" && this.slots[i].slot_status == "CLOSED"){
-      holes_18 = !this.slots[i].hole_18_price||this.slots[i].hole_18_price==0||this.slots[i].slot_status1=='CLOSED'?false:true;
-      holes_9 = false;
-
-    }
-    if(this.slots[i].holes == "9" && this.slots[i].slot_status=="OPEN"){
-      holes_18 = !this.slots[i].hole_18_price||this.slots[i].hole_18_price==0||this.slots[i].slot_status1=='CLOSED'?false:true;
-      holes_9 = true
-
-    }
-
-    if(this.slots[i].holes == "18" && this.slots[i].slot_status1=="OPEN"){
-      holes_18 = true;
-      holes_9 = !this.slots[i].hole_9_price||this.slots[i].hole_9_price==0||this.slots[i].slot_status=='CLOSED'?false:true;
-
-    }
-
-    if(this.slots[i].holes == "18"&& this.slots[i].slot_status1=="CLOSED"){
-      holes_18 = !this.slots[i].hole_9_price||this.slots[i].hole_9_price==0||this.slots[i].slot_status=='CLOSED'?false:true;
-      holes_9 = true;
-    }
-
-
+    let holes_9 = this.slots[i].holes == '9'&&this.slots[i].slot_status=='OPEN';
+    let holes_18 = this.slots[i].holes == '18'&&this.slots[i].slot_status1=='OPEN';
 
     params['type'] = this.data.type;
-    let statusVal = !holes_9&&!holes_18?'CLOSED':null;
-    statusVal = holes_9&&holes_18?'OPEN':null;
     if(params['type']=='seasons'){
       params['day_type'] = this.current.date
       params['season_id'] = this.current.name;
       params['days'] = this.current.days;
-      params['slots'] = [{tee_time:this.slots[i].tee_time,hole_9_price:parseInt(this.slots[i].hole_9_price),hole_18_price:parseInt(this.slots[i].hole_18_price),hole_18_flag:holes_18,hole_9_flag:holes_9}];
+      params['slots'] = [{hole_9_status:this.slots[i].slot_status,hole_18_status:this.slots[i].slot_status1,tee_time:this.slots[i].tee_time,hole_9_price:parseInt(this.slots[i].hole_9_price),hole_18_price:parseInt(this.slots[i].hole_18_price)}];
     }else{
-      params['slots'] = [{id:this.slots[i].id,hole_9_price:parseInt(this.slots[i].hole_9_price),hole_18_price:parseInt(this.slots[i].hole_18_price),hole_18_flag:holes_18,hole_9_flag:holes_9}]
+      params['slots'] = [{hole_9_status:this.slots[i].slot_status,hole_18_status:this.slots[i].slot_status1,id:this.slots[i].id,hole_9_price:parseInt(this.slots[i].hole_9_price),hole_18_price:parseInt(this.slots[i].hole_18_price)}]
 
-    }
-    if(statusVal){
-      params['slots'][0]['slot_status'] = statusVal;
     }
 
     if((holes_9&&!this.slots[i].hole_9_price)||(holes_18&&!this.slots[i].hole_18_price)){
@@ -187,14 +159,8 @@ export class ManageSlotComponent implements OnInit {
           let data = value.data;
           for(var i in data){
             data[i].holes = '9';
-            if(_self.data.type == 'date'){
-              data[i].slot_status = !data[i].slot_status_9?'CLOSED':'OPEN';
-              data[i].slot_status1 = !data[i].slot_status_18?'CLOSED':'OPEN';
-            }else{
-              data[i].slot_status = data[i].hole_9_price==0||!data[i].hole_9_price?'CLOSED':'OPEN';
-              data[i].slot_status1 = data[i].hole_18_price==0||!data[i].hole_18_price?'CLOSED':'OPEN';
-            }
-
+            data[i].slot_status = data[i].slot_status_9;
+            data[i].slot_status1 = data[i].slot_status_18;
           }
           _self.slots = data;
           _self.environment.random.showLoader = false;

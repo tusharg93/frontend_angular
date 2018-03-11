@@ -29,21 +29,6 @@ export class HeaderComponent implements OnInit {
 
   dashboard(){
     // $('#page-wrapper').addClass('loggedIn');
-    this.ApiService.getApiMc4k('api/v1/forms/defaults',0,true).then((value)=>{
-      if(value&&value.data){
-        this.environment.random.keys = value.data;
-        this.environment.random.keys['others'] = new Array();
-        let param = [];
-        for(var i in this.environment.random.keys){
-          for(var j in this.environment.random.keys[i]){
-            param[this.environment.random.keys[i][j].name] = this.environment.random.keys[i][j].id;
-            param[this.environment.random.keys[i][j].id] = this.environment.random.keys[i][j].name;
-          }
-
-        }
-        this.environment.random.keys['others']  = param;
-      }
-    });
     if(this.environment.random.userInfo.activated){
       this.ApiService.userDetail('golf-course/dashboard');
     }else{

@@ -58,10 +58,11 @@
                                     <span class="bar"></span>
                                     <small class="form-text text-muted"></small>
                                 </div>
-                                <p class="text-muted m-b-30 font-13" [hidden]="!closed">Maintenance Days</p>
+                                <p class="text-muted m-b-30 font-13" [hidden]="list.full_day">Maintenance Days</p>
                                 <div class="form-group m-b-40" [hidden]="!closed">
                                     <p class="text-muted  font-13"></p>
                                     <div class="switchery-demo m-b-30">
+                                        {{data[i].maintenance.start_time}}
                                         First Tee Time: <input type="text"  [(ngModel)]="data[i].maintenance.start_time"  class="flatpickr cls_set cls"  placeholder="Select Time" id="start_time_m{{i}}" name="start_time_main{{i}}"/>
 
                                         Last Tee Time: <input type="text" [(ngModel)]="data[i].maintenance.end_time" class="flatpickr cls_set cls"  placeholder="Select Time" id="end_time_m{{i}}" name="end_time_main{{i}}"  />

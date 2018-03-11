@@ -154,6 +154,7 @@ export class ApiService {
     this.getApiMc4k('api/v1/forms/dashboard',0,true).then((value)=>{
       if(value&&value.data){
         this.environment.random.userDetail = value.data;
+        this.default(value.data.defaults);
         if(link){
           this.router.navigateByUrl(link);
         } else if(this.environment.random.userDetail&&this.environment.random.userDetail.gc_basic_info&&!this.environment.random.userDetail.gc_basic_info.time_zone){
@@ -180,8 +181,23 @@ export class ApiService {
         if(link){
           this.router.navigateByUrl(link);
         }
+        this.default(value.data.defaults);
       }
     })
+  }
+
+  default(value){
+    this.environment.random.keys = value;
+    this.environment.random.keys['others'] = new Array();
+    let param = [];
+    for(var i in this.environment.random.keys){
+      for(var j in this.environment.random.keys[i]){
+        param[this.environment.random.keys[i][j].name] = this.environment.random.keys[i][j].id;
+        param[this.environment.random.keys[i][j].id] = this.environment.random.keys[i][j].name;
+      }
+
+    }
+    this.environment.random.keys['others']  = param;
   }
   
    
