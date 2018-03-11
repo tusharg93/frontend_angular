@@ -22,7 +22,7 @@
                                 <ng-container *ngFor="let rates of list.rates;let j=index" >
                                     <p class="text-muted m-b-30 font-13">{{rates.type | uppercase}} Rack Rate <code>Visitor/Online</code></p>
 
-                                    <div class="form-group m-b-40">
+                                    <div class="form-group m-b-40" *ngIf="is_hole_9">
                                         <input type="number" [(ngModel)]="data[i].rates[j].hole_9_price" class="form-control" id="hole_9{{j}}_price" required="" name="hole_9_price">
                                         <span class="highlight"></span> <span class="bar"></span>
                                         <label for="hole_9{{j}}_price">9 Hole Price in {{environment.random.userDetail.gc_basic_info.currency}}</label>

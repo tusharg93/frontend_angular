@@ -158,14 +158,14 @@ export class ApiService {
         if(link){
           this.router.navigateByUrl(link);
         } else if(this.environment.random.userDetail&&this.environment.random.userDetail.gc_basic_info&&!this.environment.random.userDetail.gc_basic_info.time_zone){
-          this.router.navigateByUrl('golf-course/section-1');
+          this.router.navigateByUrl('golf-course/section-one');
         }else if(this.environment.random.userDetail&&!(this.environment.random.userDetail.weekends || this.environment.random.userDetail.gc_basic_info.weekdays)){
-          this.router.navigateByUrl('golf-course/section-2');
+          this.router.navigateByUrl('golf-course/section-two');
         }else if(this.environment.random.userDetail&&this.environment.random.userDetail.seasons_info&&this.environment.random.userDetail.seasons_info.length == 0){
-          this.router.navigateByUrl('golf-course/section-3');
+          this.router.navigateByUrl('golf-course/section-three');
         }else if(this.environment.random.userDetail&&this.environment.random.userDetail.rates_info&&this.environment.random.userDetail.rates_info.length == 0){
-          this.router.navigateByUrl('golf-course/section-4');
-        }else if(this.router.url == '/'){
+          this.router.navigateByUrl('golf-course/section-four');
+        }else if(this.router.url == '/' || this.router.url.indexOf('login') >- 1 || this.router.url.indexOf('register') >- 1){
           this.router.navigateByUrl('golf-course/dashboard');
         }else{
           this.router.navigateByUrl(this.router.url);

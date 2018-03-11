@@ -1,0 +1,362 @@
+
+<section id="wrapper" class="login-register">
+    <div class="login-box">
+        <!--<div class="white-box loggin_page" style="display: block;" id="centerForm">-->
+            <!--<div class="reg_parent" >-->
+                <!--<div class="reg_left">-->
+                    <!--<h2>Golf Course</h2>-->
+                    <!--<div class="log_box">-->
+                        <!--<a href="javascript:void(0)" (click)="environment.random.source ='golf_course'" onclick="flipCom('loginform','centerForm')" >LOGIN</a>-->
+                    <!--</div>-->
+                    <!--<div class="regis_box">-->
+                        <!--<a href="javascript:void(0)"  (click)="_getCountry();" onclick="flipCom('registerform','centerForm')">REGISTER</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="reg_right">-->
+                    <!--<h2>Tee Times Seller</h2>-->
+                    <!--<div class="log_box">-->
+                        <!--<a href="javascript:void(0)" (click)="environment.random.source ='vendor'" onclick="flipCom('loginform','centerForm')">LOGIN</a>-->
+                    <!--</div>-->
+                    <!--<div class="regis_box">-->
+                        <!--<a href="javascript:void(0)" (click)="_getCountry();" onclick="flipCom('registerVForm','centerForm')">REGISTER</a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="white-box" style="display: none" id="loginform">
+
+            <form class="form-horizontal form-material"  #loginForm="ngForm" name="loginForm">
+                <h3 class="box-title m-b-20">Sign In</h3>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="email" name="email" required #emailId="ngModel" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$" [(ngModel)]="data.email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" name="password" required #userPass="ngModel" minlength="6" [(ngModel)]="data.password" placeholder="Password">
+                    </div>
+                    <div class="input-error" [hidden]="userPass.valid || userPass.untouched" *ngIf="environment.random.isBrowser">
+                        <div  *ngIf="userPass.errors && userPass.errors.required">
+                            Password is required
+                        </div>
+                        <div  *ngIf="userPass.errors && userPass.errors.minlength">
+                            Password need to be minimum 6 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary pull-left p-t-0">
+                            <input id="checkbox-login" type="checkbox" [(ngModel)]="data.remember" name="remember">
+                            <label for="checkbox-login"> Remember me </label>
+                        </div>
+                        <a href="javascript:void(0)" onclick="flipCom('recoverform','loginform')" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="loginMeIn(loginForm)" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Log In</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center" *ngIf="environment.random.source !='vendor'">
+                        <p>Don't have an account? <a href="javascript:void(0)" class="text-primary m-l-5" onclick="flipCom('registerform','loginform')" (click)="_getCountry();"><b>SIGN UP </b></a> </p>
+                    </div>
+                    <div class="col-sm-12 text-center" *ngIf="environment.random.source =='vendor'">
+                        <p>Don't have an account? <a href="javascript:void(0)" class="text-primary m-l-5" onclick="flipCom('registerVForm','loginform')" (click)="_getCountry();"><b>SIGN UP</b></a></p>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="white-box" id="recoverform" style="display: none">
+            <form class="form-horizontal"  #recoverform="ngForm" name="recoverform">
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <h3>Recover Password</h3>
+                        <p class="text-muted">Enter your Email and instructions will be sent to you! </p>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required="" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Don't have an account? <a href="javascript:void(0)" class="text-primary m-l-5" onclick="flipCom('registerform','recoverform')"><b>Sign Up</b></a></p>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="white-box" style="display: none" id="registerform">
+            <form autocomplete="off" class="form-horizontal form-material"  #registerForm="ngForm" name="registerForm" >
+                <h3 class="box-title m-b-20">Sign In</h3>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.name" placeholder="Golf Course Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12" *ngIf="!data.country">
+                        <input class="form-control" type="text"  [(ngModel)]="all.search" placeholder="Search Country" name="countrysearch"   />
+                        <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;"  *ngIf="all.search&&all.search!=''">
+                            <ul class="select2-results">
+                                <ng-container *ngFor="let list of environment.random.countries | FilterPipe:'name':all.search">
+                                <li (click)="_getRegion(list.code,list.name);data.country=list.name;data.country_code=list.code;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
+                                    <div class="select2-result-label"  role="option">
+                                        <span class="select2-match"></span>{{list.name}}
+                                    </div>
+                                </li>
+                                </ng-container>
+                            </ul>
+
+                        </div>
+                     </div>
+
+                    <div class="col-xs-12" *ngIf="data.country" (click)="data.country=null;data.region=null;data.city=null;">
+                        <input disabled  class="form-control" type="text"  [(ngModel)]="data.country" placeholder="Select Country" name="country"   />
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="data.country">
+                    <div class="col-xs-12" *ngIf="!data.region">
+                        <input autocomplete="false" class="form-control" type="text"  [(ngModel)]="all.search1" placeholder="Search Region" name="regioncountry"   />
+                        <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;" id="select2-drop" *ngIf="all.search1&&all.search1!=''">
+                            <ul class="select2-results">
+                                <ng-container *ngFor="let list of regions | FilterPipe:'region':all.search1">
+                                    <li (click)="_getCity(data.country_code,list.region);data.region=list.region;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
+                                        <div class="select2-result-label"  role="option">
+                                            <span class="select2-match"></span>{{list.region}}
+                                        </div>
+                                    </li>
+                                </ng-container>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12" *ngIf="data.region" (click)="data.region=null;data.city=null;">
+                        <input disabled  class="form-control" type="text"  [(ngModel)]="data.region" placeholder="Select Region" name="region"   />
+                    </div>
+
+                </div>
+                <div class="form-group" *ngIf="data.region">
+
+                    <div class="col-xs-12" *ngIf="!data.city">
+                        <input autocomplete="false" class="form-control" type="text"  [(ngModel)]="all.search2" placeholder="Search City" name="cityserch"   />
+                        <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;" id="select2-drop" *ngIf="all.search2&&all.search2!=''">
+                            <ul class="select2-results">
+                                <ng-container *ngFor="let list of cities | FilterPipe:'city':all.search2">
+                                    <li (click)="data.city=list.city;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
+                                        <div class="select2-result-label"  role="option">
+                                            <span class="select2-match"></span>{{list.city}}
+                                        </div>
+                                    </li>
+                                </ng-container>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12" *ngIf="data.city" (click)="data.city=null;">
+                        <input disabled  class="form-control" type="text"  [(ngModel)]="data.city" placeholder="Select City" name="city"   />
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <select data-search="true" class="custom-select sources" style="width:20%;float:left" data-style="btn-primary btn-outline" required name="call" [(ngModel)]="data.country_code">
+                            <ng-container *ngFor="let list of all.code">
+                                <option [value]="list.code">+{{list.callingCode}}</option>
+                            </ng-container>
+                        </select>
+                        <input class="form-control" style="width:75%;float:right" type="number" required name="mobile" [(ngModel)]="data.mobile" placeholder="Mobile">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email1" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" #repassword type="password" required name="password" [(ngModel)]="data.password1" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" #newpassword type="password" required name="newpassword" [(ngModel)]="data.newpassword" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="input-error" [hidden]="newpassword.valid || newpassword.untouched">
+                    <div  *ngIf="(data.newpassword&&data.password1)&&data.newpassword != data.password1">
+                        Password does not match
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input id="checkbox-register1" type="checkbox" required>
+                            <label for="checkbox-register1"> I agree to all <a href="javascript:void(0)" (click)="terms('checkbox-register1')">Terms</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="registerMeIn(registerForm)" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Already have an account? <a href="javascript:void(0)" onclick="flipCom('loginform','registerform')" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="white-box" style="display:none" id="registerVForm">
+            <form class="form-horizontal form-material"  #registerVForm="ngForm" name="registerVForm" >
+                <h3 class="box-title m-b-20">Sign In</h3>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required  name="name" [(ngModel)]="data.name2" placeholder="Company Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text"   pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)" name="website_url2" [(ngModel)]="data.website_url2" placeholder="Website URL">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12" *ngIf="!data.country2">
+                        <input class="form-control" type="text"  [(ngModel)]="all.search3" placeholder="Search Country" name="countrysearch3"   />
+                        <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;"  *ngIf="all.search3&&all.search3!=''">
+                            <ul class="select2-results">
+                                <ng-container *ngFor="let list of environment.random.countries | FilterPipe:'name':all.search3">
+                                    <li (click)="_getRegion(list.code,list.name);data.country2=list.name;data.country_code2=list.code;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
+                                        <div class="select2-result-label" role="option">
+                                            <span class="select2-match"></span>{{list.name}}
+                                        </div>
+                                    </li>
+                                </ng-container>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12" *ngIf="data.country2" (click)="data.country2=null;data.region2=null;data.city2=null;">
+                        <input disabled  class="form-control" type="text"  [(ngModel)]="data.country2" placeholder="Select Country" name="country"   />
+                    </div>
+                </div>
+                <div class="form-group"  *ngIf="data.country2">
+                    <div class="col-xs-12">
+                        <div  *ngIf="!data.region2" style="width:50%;float: left;">
+                            <input autocomplete="false" class="form-control" type="text"  [(ngModel)]="all.search4" placeholder="Search Region" name="regioncountry2"   />
+                            <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;"  *ngIf="all.search4&&all.search4!=''">
+                                <ul class="select2-results">
+                                    <ng-container *ngFor="let list of regions | FilterPipe:'region':all.search4">
+                                        <li (click)="_getCity(data.country_code2,list.region);data.region2=list.region;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
+                                            <div class="select2-result-label"  role="option">
+                                                <span class="select2-match"></span>{{list.region}}
+                                            </div>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div  style="width:50%;float: right;" *ngIf="data.region2" (click)="data.region2=null;data.city2=null;">
+                            <input disabled  class="form-control" type="text"  [(ngModel)]="data.region2" placeholder="Select Region" name="region"   />
+                        </div>
+
+                        <div  *ngIf="data.region2&&!data.city2" style="width:48%">
+                            <input autocomplete="false" class="form-control" type="text"  [(ngModel)]="all.search5" placeholder="Search City" name="citysearch"   />
+                            <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;"  *ngIf="all.search5&&all.search5!=''">
+                                <ul class="select2-results">
+                                    <ng-container *ngFor="let list of cities | FilterPipe:'city':all.search5">
+                                        <li (click)="data.city2=list.city;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
+                                            <div class="select2-result-label"  role="option">
+                                                <span class="select2-match"></span>{{list.city}}
+                                            </div>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div  *ngIf="data.city2" style="width:48%" (click)="data.city2=null;">
+                            <input disabled  class="form-control" type="text"  [(ngModel)]="data.city2" placeholder="Select City" name="city"   />
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <select data-search="true" class="custom-select sources" style="width:20%;float:left"  data-style="btn-primary btn-outline" required name="country_code2" [(ngModel)]="data.country_code2" >
+                            <ng-container *ngFor="let list of all.code">
+                                <option [value]="list.code">+{{list.callingCode}}</option>
+                            </ng-container>
+                        </select>
+                        <input class="form-control" style="width:75%;float:right" type="number" required name="mobile" [(ngModel)]="data.mobile2" placeholder="Mobile">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" name="email" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+[.]([A-Za-z]{2,5}|[A-Za-z){2}[.][A-Za-z]{2})$"[(ngModel)]="data.email2" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control" #repassword1 type="password" required name="password" [(ngModel)]="data.password2" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" #newpassword1 type="password" required name="password" [(ngModel)]="data.newpassword1" placeholder="Confirm Password">
+                    </div>
+                </div>
+                <div class="input-error" [hidden]="newpassword1.valid || newpassword1.untouched">
+                    <div  *ngIf="data.newpassword1&&data.password2&&data.newpassword1 != data.password2">
+                        Password does not match
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input id="checkbox-register" type="checkbox" required>
+                            <label for="checkbox-register"> I agree to all <a href="javascript:void(0)" (click)="terms('checkbox-register')">Terms</a></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button (click)="registerVendor(registerVForm)" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Already have an account? <a href="javascript:void(0)" onclick="flipCom('loginform','registerVForm')" class="text-primary m-l-5"><b>Sign In</b></a></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+

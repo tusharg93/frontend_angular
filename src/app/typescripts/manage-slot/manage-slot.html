@@ -137,25 +137,27 @@
                         <tr *ngFor="let list of slots;let i=index">
                             <ng-container >
                                 <td>{{list.tee_time}}</td>
-                                <td *ngIf="is_hole_18">
+                                <td *ngIf="is_hole_18&&is_hole_9">
                                     <select class="form-control p-0"  [(ngModel)]="slots[i].holes" name="holes{{i}}" required>
                                         <option value="9" >9</option>
                                         <option value="18" >18</option>
+                                        <option value="BOTH" >Both</option>
                                     </select>
                                 </td>
-                                <td *ngIf="!is_hole_18">
+                                <td *ngIf="((is_hole_18&&!is_hole_9)||(!is_hole_18&&is_hole_9))">
                                     {{slots[i].holes}}
                                 </td>
 
-                                <td><input type="number"  class="mnge_input" required="{{slots[i].slot_status=='OPEN'?true:false}}" [(ngModel)]="slots[i].hole_9_price"  placeholder="Add a Price" name="price_9{{i}}" /></td>
 
-                                <td *ngIf="is_hole_18"><input type="number"  class="mnge_input" required="{{slots[i].slot_status1=='OPEN'?true:false}}" [(ngModel)]="slots[i].hole_18_price"  placeholder="Add a Price" name="price_18{{i}}" /></td>
+                                <td *ngIf="is_hole_9"><input type="number" disabled="{{(slots[i].holes=='18')}}" class="mnge_input" required="{{slots[i].slot_status=='OPEN'?true:false}}" [(ngModel)]="slots[i].hole_9_price"  placeholder="Add a Price" name="price_9{{i}}" /></td>
+
+                                <td *ngIf="is_hole_18"><input type="number" disabled="{{(slots[i].holes=='9')}}" class="mnge_input" required="{{slots[i].slot_status1=='OPEN'?true:false}}" [(ngModel)]="slots[i].hole_18_price"  placeholder="Add a Price" name="price_18{{i}}" /></td>
 
 
                                 <td [hidden]="slots[i].holes=='18'" *ngIf="slots[i].slot_status=='WEEKLY_OFF'">{{slots[i].slot_status}}</td>
                                 <td [hidden]="slots[i].holes=='9'" *ngIf="slots[i].slot_status1=='WEEKLY_OFF'">{{slots[i].slot_status1}}</td>
 
-                                <td [hidden]="slots[i].holes=='18'" *ngIf="slots[i].slot_status!='WEEKLY_OFF'">
+                                <td [hidden]="!(slots[i].holes=='9')" *ngIf="slots[i].slot_status!='WEEKLY_OFF'">
                                     <select class="form-control p-0"  [(ngModel)]="slots[i].slot_status" name="status{{i}}" required>
                                         <option value="OPEN" >OPEN</option>
                                         <option value="CLOSED" >CLOSED</option>
@@ -164,8 +166,17 @@
                                         <!--<option value="WEEKLY_OFF">WEEKLY_OFF</option>-->
                                     </select>
                                 </td>
-                                <td [hidden]="slots[i].holes=='9'" *ngIf="slots[i].slot_status1!='WEEKLY_OFF'">
+                                <td [hidden]="!(slots[i].holes=='18')" *ngIf="slots[i].slot_status1!='WEEKLY_OFF'">
                                     <select  class="form-control p-0"  [(ngModel)]="slots[i].slot_status1" name="status_price{{i}}" required >
+                                        <option value="OPEN" >OPEN</option>
+                                        <option value="CLOSED" >CLOSED</option>
+                                        <option value="RESERVED" >RESERVED</option>
+                                        <option value="BOOKED" >BOOKED</option>
+                                        <!--<option value="WEEKLY_OFF">WEEKLY_OFF</option>-->
+                                    </select>
+                                </td>
+                                <td [hidden]="!(slots[i].holes=='BOTH')" *ngIf="slots[i].slot_status2!='WEEKLY_OFF'">
+                                    <select  class="form-control p-0"  [(ngModel)]="slots[i].slot_status2" name="status_price_both{{i}}" required >
                                         <option value="OPEN" >OPEN</option>
                                         <option value="CLOSED" >CLOSED</option>
                                         <option value="RESERVED" >RESERVED</option>

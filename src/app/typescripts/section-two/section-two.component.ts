@@ -93,7 +93,7 @@ export class SectionTwoComponent implements OnInit {
           if(value&&value.msg&&value.msg=="success"){
             this._storage.userDetail(params);
             // this._router.navigateByUrl('golf-course/section-3');
-            this.ApiService.userDetail('golf-course/section-3');
+            this.ApiService.userDetail('golf-course/section-three');
           }
         });
       }else{
@@ -101,7 +101,7 @@ export class SectionTwoComponent implements OnInit {
           if(value&&value.msg&&value.msg=="success"){
             this._storage.userDetail(params);
             // this._router.navigateByUrl('golf-course/section-3');
-            this.ApiService.userDetail('golf-course/section-3');
+            this.ApiService.userDetail('golf-course/section-three');
           }
         });
       }

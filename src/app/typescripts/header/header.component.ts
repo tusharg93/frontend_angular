@@ -22,7 +22,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this._storage.userChecker(false).then((val)=>{
-
+        if(val){
+          this.environment.random.userInfo = {id:val['id'],token:val['token'],source:val['source']};
+          this.environment.random.source = val['source'];
+          let d = new Date();
+          d.setTime(d.getTime() + (12*30*24*60*60*1000));
+          this._storage.storeCookies('id',this.environment.random.userInfo.id,d.toUTCString());
+          this._storage.storeCookies('token',this.environment.random.userInfo.token,d.toUTCString());
+          this._storage.storeCookies('source',this.environment.random.userInfo.source,d.toUTCString());
+        }
     })
 
   }

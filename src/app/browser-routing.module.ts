@@ -8,15 +8,19 @@ const routes:Routes = [
     //home
      { path: '', loadChildren: './typescripts/home/home.module#HomeModule', data: { name:'Home', type:'Page' },pathMatch: 'full'},
 
+     { path: 'login/:type', loadChildren: './typescripts/login/login.module#LoginModule', data: { name:'LoginModule', type:'Page' },pathMatch: 'full'},
+
+     { path: 'register/:type', loadChildren: './typescripts/login/login.module#LoginModule', data: { name:'LoginModule', type:'Page' },pathMatch: 'full'},
+
      { path: 'verify/:token', loadChildren: './typescripts/home/home.module#HomeModule', data: { name:'Email', type:'Verification' },pathMatch: 'full'},
 
-     { path: 'golf-course/section-1', loadChildren: './typescripts/section-one/section-one.module#SectionOneModule', data: { name:'Golf', type:'One' },pathMatch: 'full'},
+     { path: 'golf-course/section-one', loadChildren: './typescripts/section-one/section-one.module#SectionOneModule', data: { name:'Golf', type:'One' },pathMatch: 'full'},
 
-     { path: 'golf-course/section-2', loadChildren: './typescripts/section-two/section-two.module#SectionTwoModule', data: { name:'Golf', type:'Two' },pathMatch: 'full'},
+     { path: 'golf-course/section-two', loadChildren: './typescripts/section-two/section-two.module#SectionTwoModule', data: { name:'Golf', type:'Two' },pathMatch: 'full'},
 
-     { path: 'golf-course/section-3', loadChildren: './typescripts/section-three/section-three.module#SectionThreeModule', data: { name:'Golf', type:'Three' },pathMatch: 'full'},
+     { path: 'golf-course/section-three', loadChildren: './typescripts/section-three/section-three.module#SectionThreeModule', data: { name:'Golf', type:'Three' },pathMatch: 'full'},
 
-     { path: 'golf-course/section-4', loadChildren: './typescripts/section-four/section-four.module#SectionFourModule', data: { name:'Golf', type:'Four' },pathMatch: 'full'},
+     { path: 'golf-course/section-four', loadChildren: './typescripts/section-four/section-four.module#SectionFourModule', data: { name:'Golf', type:'Four' },pathMatch: 'full'},
     
      { path: 'golf-course/section-add-on', loadChildren: './typescripts/section-add-on/section-add-on.module#SectionAddOnModule', data: { name:'Golf', type:'AddOn' },pathMatch: 'full'},
 

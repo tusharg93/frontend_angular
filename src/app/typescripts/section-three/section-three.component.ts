@@ -71,7 +71,7 @@ export class SectionThreeComponent implements OnInit {
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
               // this._router.navigateByUrl('golf-course/section-4');
-              this.ApiService.userDetail('golf-course/section-4');
+              this.ApiService.userDetail('golf-course/section-four');
             }else{
               swal('Error', value.error,'error')
             }
@@ -80,7 +80,7 @@ export class SectionThreeComponent implements OnInit {
           this.ApiService.putApiMc4k('api/v1/forms/3',{seasons:params},0).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
               // this._router.navigateByUrl('golf-course/section-4');
-              this.ApiService.userDetail('golf-course/section-4');
+              this.ApiService.userDetail('golf-course/section-four');
             }else{
               swal('Error', value.error,'error')
             }

@@ -27,6 +27,7 @@ export class ManageSlotComponent implements OnInit {
   days:any;
   slots:any;
   is_hole_18:boolean;
+  is_hole_9:boolean;
   constructor(private _storage:StorageService,private router:Router,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
@@ -74,7 +75,10 @@ export class ManageSlotComponent implements OnInit {
       this.data['weekends'] = data.gc_basic_info.weekends.split(',');
       this.setCheck(this.data['weekends']);
     }
-    
+    this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
+
+    this.is_hole_9 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_9']?true:false;
+
     if(this.data.season_info.length==0){
       this.router.navigateByUrl('golf-course/section-3');
       swal('Error','You need to add slots first','error')
@@ -84,8 +88,6 @@ export class ManageSlotComponent implements OnInit {
       this.days = [{id:this.environment.random.keys['others']['weekend'],name:"Weekend"},{id:this.environment.random.keys['others']['weekday'],name:"Weekday"}]
       this.getdata();
     }
-    this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
-
 
     flatpickr('.cls',{enableTime:false});
 
@@ -110,6 +112,10 @@ export class ManageSlotComponent implements OnInit {
     let params = {};
     let holes_9 = this.slots[i].holes == '9'&&this.slots[i].slot_status=='OPEN';
     let holes_18 = this.slots[i].holes == '18'&&this.slots[i].slot_status1=='OPEN';
+    if(this.slots[i].holes == 'BOTH'){
+      this.slots[i].slot_status =this.slots[i].slot_status2;
+      this.slots[i].slot_status1 = this.slots[i].slot_status2;
+    }
 
     params['type'] = this.data.type;
     if(params['type']=='seasons'){
@@ -148,6 +154,7 @@ export class ManageSlotComponent implements OnInit {
     this.environment.random.showLoader = true;
     this.slots = new Array();
     var _self = this;
+
     setTimeout(function(){
       let param = 'type=seasons&season_id='+_self.current.name+'&day_type='+_self.current.date+'&day='+_self.current.days;
 
@@ -158,9 +165,12 @@ export class ManageSlotComponent implements OnInit {
         if(value&&value.data){
           let data = value.data;
           for(var i in data){
-            data[i].holes = '9';
-            data[i].slot_status = data[i].slot_status_9;
-            data[i].slot_status1 = data[i].slot_status_18;
+
+            data[i].holes = _self.is_hole_9?'9':'18';
+
+            data[i].slot_status = data[i].slot_status;
+            data[i].slot_status1 = data[i].slot_status;
+            data[i].slot_status2 = data[i].slot_status;
           }
           _self.slots = data;
           _self.environment.random.showLoader = false;

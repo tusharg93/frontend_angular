@@ -32,6 +32,7 @@ export class SectionFourComponent implements OnInit {
   next:number;
   closed:boolean;
   is_hole_18:boolean;
+  is_hole_9:boolean;
   constructor(private _storage:StorageService,private _router:Router,private renderer: Renderer, private ApiService: ApiService) {
     this.environment = environment;
     this.data = new Array();
@@ -134,6 +135,8 @@ export class SectionFourComponent implements OnInit {
     this.data = params;
 
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
+    this.is_hole_9 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_9']?true:false;
+
     this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']&&this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
     setTimeout(function(){
       let next = 0;
