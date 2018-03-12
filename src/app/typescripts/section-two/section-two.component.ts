@@ -147,8 +147,7 @@ export class SectionTwoComponent implements OnInit {
     }
 
     if(data.gc_basic_info.maintenance_day){
-      params['closed'] = data.gc_basic_info.maintenance_day?[{day:data.gc_basic_info.maintenance_day,fullday:data.gc_basic_info.maintenance_type}]:null;
-
+      params['closed'] = data.gc_basic_info.maintenance_day?[{day:data.gc_basic_info.maintenance_day,fullday:!data.gc_basic_info.maintenance_type}]:null;
   }
 
 
