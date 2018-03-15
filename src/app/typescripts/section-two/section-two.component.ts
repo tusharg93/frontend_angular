@@ -87,7 +87,7 @@ export class SectionTwoComponent implements OnInit {
         }
       }
 
-      let params = {weekdays:this.data.weekdays,weekends:this.data.weekends,closed:this.data.closed?[{day:this.data.closed,day_type:this.data.closed?this.data.day_type:'',fullday:this.data.full_day}]:null};
+      let params = {weekdays:this.data.weekdays,weekends:this.data.weekends,closed:this.data.closed?[{day:this.data.closed,day_type:this.data.closed?this.data.day_type:'',full_day:this.data.full_day}]:null};
       if(update){
         this.ApiService.putApiMc4k('api/v1/forms/2',params,0).then((value)=>{
           if(value&&value.msg&&value.msg=="success"){
@@ -166,7 +166,7 @@ export class SectionTwoComponent implements OnInit {
     if(params['closed']){
       this.data.closedK = true;
       this.data.closed = data.gc_basic_info.maintenance_day;
-      this.data.full_day = data.gc_basic_info.maintenance_type;
+      this.data.full_day = !data.gc_basic_info.maintenance_type;
       
     }
 

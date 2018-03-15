@@ -66,7 +66,7 @@ export class SectionThreeComponent implements OnInit {
         }
 
       }
-      if(total>=364){
+      if(total==365){
         if(!update){
           this.ApiService.postApiMc4k('api/v1/forms/3',{seasons:params},false,true).then((value)=>{
             if(value&&value.msg&&value.msg=="success"){
@@ -193,11 +193,12 @@ export class SectionThreeComponent implements OnInit {
   }
 
   dateDiff(_self,key){
-    var date1 = new Date(_self.data.season_info[key].start_date);
-    var date2 = new Date(_self.data.season_info[key].end_date);
-    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    _self.data.season_info[key].diff = diffDays+1;
+    var _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    var a = new Date(_self.data.season_info[key].start_date);
+    var b = new Date(_self.data.season_info[key].end_date);
+    var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    _self.data.season_info[key].diff = Math.floor((utc2 - utc1) / _MS_PER_DAY)+1;
   }
 
   setValue(){

@@ -13750,7 +13750,7 @@ table.dataTable.display tbody tr.even>.sorting_1,table.dataTable.display tbody t
     font-size:16px;
     position:absolute;
     cursor:auto;
-    top:10px;
+    /*top:10px;*/
     transition:.2s ease all;
     -moz-transition:.2s ease all;
     -webkit-transition:.2s ease all
@@ -15487,6 +15487,10 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 #checkboxes1 {
     display: none;
     border: 1px #dadada solid;
+    position: absolute;
+    background-color: white;
+    z-index: 99;
+    width: 200px;
 }
 #checkboxes1 label {
     display: block;
@@ -15498,10 +15502,14 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 #checkboxes2 {
     display: none;
     border: 1px #dadada solid;
+    position: absolute;
+    background-color: white;
+    z-index: 99;
+    width: 200px;
 }
 #checkboxes2 label {
     display: block;
-    position: relative;
+    position: absolute;
 }
 #checkboxes2 label:hover {
     background-color: #1e90ff;

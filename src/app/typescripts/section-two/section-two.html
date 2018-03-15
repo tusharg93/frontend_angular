@@ -85,7 +85,7 @@
 
 
                             <div class="form-group bk">
-                                <button  type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-1">Back</a></button>
+                                <button  type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-one">Back</a></button>
                                 <button style="    float: right;" type="submit" (click)="save_2(section2,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&!(environment.random.userDetail.weekends || environment.random.userDetail.gc_basic_info.weekdays)">Submit & Continue</button>
 
                                 <button style="    float: right;" type="submit" (click)="save_2(section2,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&(environment.random.userDetail.weekends || environment.random.userDetail.gc_basic_info.weekdays)">Update & Continue</button>

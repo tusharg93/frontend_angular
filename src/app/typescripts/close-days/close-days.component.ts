@@ -53,7 +53,7 @@ export class CloseDaysComponent implements OnInit {
       params['data'] = [];
       for(var i in this.data.maintenance){
         let closed_info = this.data.maintenance[i]
-        params['data'].push({full_day:closed_info.full_day,date:closed_info.date,start_time:closed_info.start_time,id:closed_info.id})
+        params['data'].push({full_day:closed_info.full_day,date:closed_info.date,start_time:closed_info.start_time,end_time:closed_info.end_time,id:closed_info.id})
       }
       
         if(type){
@@ -80,7 +80,7 @@ export class CloseDaysComponent implements OnInit {
     this.data.maintenance = new Array()
     let data = this.environment.random.userDetail;
     for(var i in data.closed_info){
-      this.data.maintenance.push({full_day:data.closed_info[i].full_day,date:data.closed_info[i].date,start_time:data.closed_info[i].start_time,id:data.closed_info[i].id})
+      this.data.maintenance.push({full_day:data.closed_info[i].full_day,date:data.closed_info[i].date,start_time:data.closed_info[i].start_time,end_time:data.closed_info[i].end_time,id:data.closed_info[i].id})
 
     }
 

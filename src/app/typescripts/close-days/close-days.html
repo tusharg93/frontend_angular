@@ -27,8 +27,11 @@
                             <ng-container *ngFor="let list of data.maintenance;let i=index">
                                 <div class="form-group m-b-5" >
                                     <input type="text" class="form-control cls" (ngInit)="ngInitFlact(i)" style="float:left;width:30%;background-color:white" placeholder="Date" [(ngModel)]="data.maintenance[i].date" name="holidays_date{{i}}"  id="holidays_date{{i}}">
+
                                     <span style="width:10px"></span>
-                                    <input type="text" [hidden]="data.maintenance[i].full_day" class="form-control cls_date"  style="float:left;width:30%;background-color:white" placeholder="Time" [(ngModel)]="data.maintenance[i].start_time" name="maintenance{{i}}"  id="maintenance{{i}}">
+                                    <input type="text" [hidden]="data.maintenance[i].full_day" class="form-control cls_date"  style="float:left;width:30%;background-color:white" placeholder="Start Time" [(ngModel)]="data.maintenance[i].start_time" name="maintenance{{i}}"  id="maintenance{{i}}">
+                                    <input type="text" [hidden]="data.maintenance[i].full_day" class="form-control cls_date"  style="float:left;width:30%;background-color:white" placeholder="End Time" [(ngModel)]="data.maintenance[i].end_time" name="end_maintenance{{i}}"  id="end_maintenance{{i}}">
+
                                     <span style="width:10px"></span>
                                     Full day  <input  type="checkbox"  [(ngModel)]="data.maintenance[i].full_day"  value="true" name="{{5+i}}" id="{{5+i}}" class="js-switch" data-color="#3d3b3b" />
 

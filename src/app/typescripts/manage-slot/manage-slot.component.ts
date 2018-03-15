@@ -94,13 +94,13 @@ export class ManageSlotComponent implements OnInit {
   }
   
   setCheck(val){
-
+    console.log(val)
     var _self = this;
+    _self.current.days = JSON.parse(JSON.stringify(val));
     setTimeout(function(){
       for(var i in val){
         $('#'+val[i]).attr('checked',true);
       }
-      _self.current.days = JSON.parse(JSON.stringify(val));
 
     },100);
 
@@ -110,21 +110,22 @@ export class ManageSlotComponent implements OnInit {
   save(i){
 
     let params = {};
-    let holes_9 = this.slots[i].holes == '9'&&this.slots[i].slot_status=='OPEN';
-    let holes_18 = this.slots[i].holes == '18'&&this.slots[i].slot_status1=='OPEN';
-    if(this.slots[i].holes == 'BOTH'){
-      this.slots[i].slot_status =this.slots[i].slot_status2;
-      this.slots[i].slot_status1 = this.slots[i].slot_status2;
+    let holes_9 = this.slots[i].holes == '9';
+    let holes_18 = this.slots[i].holes == '18';
+    if(this.slots[i].holes=='BOTH'){
+      holes_9 = true;
+      holes_18 = true;
     }
+    
 
     params['type'] = this.data.type;
     if(params['type']=='seasons'){
       params['day_type'] = this.current.date
       params['season_id'] = this.current.name;
       params['days'] = this.current.days;
-      params['slots'] = [{hole_9_status:this.slots[i].slot_status,hole_18_status:this.slots[i].slot_status1,tee_time:this.slots[i].tee_time,hole_9_price:parseInt(this.slots[i].hole_9_price),hole_18_price:parseInt(this.slots[i].hole_18_price)}];
+      params['slots'] = [{slot_status:this.slots[i].slot_status,tee_time:this.slots[i].tee_time,hole_9_price:holes_9?parseInt(this.slots[i].hole_9_price):null,hole_18_price:holes_18?parseInt(this.slots[i].hole_18_price):null}];
     }else{
-      params['slots'] = [{hole_9_status:this.slots[i].slot_status,hole_18_status:this.slots[i].slot_status1,id:this.slots[i].id,hole_9_price:parseInt(this.slots[i].hole_9_price),hole_18_price:parseInt(this.slots[i].hole_18_price)}]
+      params['slots'] = [{slot_status:this.slots[i].slot_status,id:this.slots[i].id,hole_9_price:holes_9?parseInt(this.slots[i].hole_9_price):null,hole_18_price:holes_18?parseInt(this.slots[i].hole_18_price):null}]
 
     }
 
@@ -133,7 +134,7 @@ export class ManageSlotComponent implements OnInit {
     }else{
       this.ApiService.putApiMc4k('api/v1/slots/filter',params,0).then((value)=>{
         if(value&&value.msg&&value.msg=="success"){
-          this.getdata();
+          $('#slot_tr').addClass('blue_tr')
         }else{
           swal('Error', value.error,'error')
         }
@@ -165,12 +166,7 @@ export class ManageSlotComponent implements OnInit {
         if(value&&value.data){
           let data = value.data;
           for(var i in data){
-
             data[i].holes = _self.is_hole_9?'9':'18';
-
-            data[i].slot_status = data[i].slot_status;
-            data[i].slot_status1 = data[i].slot_status;
-            data[i].slot_status2 = data[i].slot_status;
           }
           _self.slots = data;
           _self.environment.random.showLoader = false;

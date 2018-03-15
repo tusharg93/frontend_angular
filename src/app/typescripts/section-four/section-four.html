@@ -58,8 +58,8 @@
                                     <span class="bar"></span>
                                     <small class="form-text text-muted"></small>
                                 </div>
-                                <p class="text-muted m-b-30 font-13" [hidden]="closed">Maintenance Days</p>
-                                <div class="form-group m-b-40" [hidden]="!closed">
+                                <p class="text-muted m-b-30 font-13" *ngIf="closed">Maintenance Days</p>
+                                <div class="form-group m-b-40" *ngIf="closed">
                                     <p class="text-muted  font-13"></p>
                                     <div class="switchery-demo m-b-30">
                                         {{data[i].maintenance.start_time}}
@@ -71,8 +71,9 @@
                                     <span class="bar"></span>
                                     <small class="form-text text-muted"></small>
                                 </div>
+                                <div (click)="copyAll()">COPY ALL</div>
                                 <div class="form-group bk" *ngIf="next==i">
-                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-3">Back</a></button>
+                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-three">Back</a></button>
 
                                     <button style="float: right;" type="submit" (click)="save(section,i,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length > 0"><span *ngIf="i+1==next">Update &</span> Continue</button>
                                     <button style="float: right;" type="submit" (click)="save(section,i,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length == 0"><span *ngIf="i+1==next">Submit &</span> Continue</button>

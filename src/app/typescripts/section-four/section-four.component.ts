@@ -137,7 +137,7 @@ export class SectionFourComponent implements OnInit {
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
     this.is_hole_9 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_9']?true:false;
 
-    this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_day']?true:false;
+    this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
     setTimeout(function(){
       let next = 0;
       flatpickr('#start_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
@@ -146,6 +146,16 @@ export class SectionFourComponent implements OnInit {
       flatpickr('#end_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
     },50)
 
+  }
+
+  copyAll(){
+    for(var i =1;i<this.data.length;i++){
+      this.data[i]['start_time'] = this.data[0]['start_time'];
+      this.data[i]['end_time'] = this.data[0]['end_time'];
+      this.data[i]['interval'] = this.data[0]['interval'];
+      this.data[i]['maintenance'] = this.data[0]['maintenance'];
+    }
+  
   }
 
   
