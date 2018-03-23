@@ -1,23 +1,13 @@
 
-<!--<div id="wrapper">-->
-    <!--<tee-header></tee-header>-->
-    <!--<div id="page-wrapper" class="wht_back">-->
-        <!--<div class="loader_ww" hidden="{{!environment.random.showLoader}}"></div>-->
-        <!--<router-outlet></router-outlet>-->
-
-        <!--<footer class="footer text-center"> 2018 &copy; The PUTT </footer>-->
-    <!--</div>-->
-
-
-<!--</div>-->
-
 <tee-header></tee-header>
-<router-outlet></router-outlet>
-<footer class="footer text-center"> 2018 &copy; The PUTT </footer>
-<!--<div id="page-wrapper" class="wht_back">-->
-    <!--<div class="loader_ww" hidden="{{!environment.random.showLoader}}"></div>-->
-    <!--<router-outlet></router-outlet>-->
+<div style="
+    background-color: white;
+    /*height: 100%;overflow-y:scroll;*/
+">
+    <div class="loader_ww lds-roller" hidden="{{!environment.random.showLoader}}"></div>
+    <router-outlet></router-outlet>
 
-    <!--<footer class="footer text-center"> 2018 &copy; The PUTT </footer>-->
-<!--</div>-->
+</div>
+<!--<footer class="footer text-center"> 2018 &copy; The PUTT </footer>-->
+
 

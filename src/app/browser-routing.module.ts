@@ -24,6 +24,8 @@ const routes:Routes = [
     
      { path: 'golf-course/section-add-on', loadChildren: './typescripts/section-add-on/section-add-on.module#SectionAddOnModule', data: { name:'Golf', type:'AddOn' },pathMatch: 'full'},
 
+     { path: 'golf-course/price', loadChildren: './typescripts/section-add-on/section-add-on.module#SectionAddOnModule', data: { name:'Golf', type:'Price' },pathMatch: 'full'},
+
      { path: 'golf-course/dashboard', loadChildren: './typescripts/dashboard/dashboard.module#DashboardModule', data: { name:'Golf', type:'AddOn' },pathMatch: 'full'},
 
      { path: 'golf-course/update-profile', loadChildren: './typescripts/update-profile/update-profile.module#UpdateProfileModule', data: { name:'Golf', type:'Update' },pathMatch: 'full'},

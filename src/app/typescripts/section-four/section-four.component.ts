@@ -56,7 +56,7 @@ export class SectionFourComponent implements OnInit {
 
   save(form,i,update){
     if (form.valid){
-       if(this.data.length == this.next+1){
+
          let params = [];
          for(let i in this.data){
            params.push({uid:this.data[i].uid,id:this.data[i].id,start_time:this.data[i].start_time,end_time:this.data[i].end_time,interval:this.data[i].interval,rates:this.data[i].rates,maintenance:this.data[i].maintenance})
@@ -80,16 +80,7 @@ export class SectionFourComponent implements OnInit {
            });
          }
 
-       }else{
-         this.next = i +1;
-         let next = this.next;
-         setTimeout(function(){
-           flatpickr('#start_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-           flatpickr('#end_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-           flatpickr('#start_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-           flatpickr('#end_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-         },50)
-       }
+       
 
       }
 
@@ -133,17 +124,18 @@ export class SectionFourComponent implements OnInit {
 
     }
     this.data = params;
-
+    this.next = 0;
     this.is_hole_18 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_18']?true:false;
     this.is_hole_9 = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['is_hole_9']?true:false;
 
     this.closed = this.environment.random.userDetail&&this.environment.random.userDetail['gc_basic_info']&&this.environment.random.userDetail['gc_basic_info']['maintenance_type']?true:false;
     setTimeout(function(){
-      let next = 0;
-      flatpickr('#start_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-      flatpickr('#end_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-      flatpickr('#start_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
-      flatpickr('#end_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
+      // let next = 0;
+      // flatpickr('#start_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      // flatpickr('#end_time_slot'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      // flatpickr('#start_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
+      // flatpickr('#end_time_m'+next, {noCalendar: true, enableTime: true, time_24hr: true});
     },50)
 
   }

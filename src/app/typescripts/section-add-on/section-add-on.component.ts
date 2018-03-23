@@ -29,6 +29,7 @@ export class SectionAddOnComponent implements OnInit {
   days:any;
   others:boolean;
   minGolf:any;
+  column:string;
   constructor(private _storage:StorageService,private _router:Router, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
@@ -41,6 +42,11 @@ export class SectionAddOnComponent implements OnInit {
     let newcommodities = [{name:'Golf Cart',price:null},{name:'Caddy Fee',price:null},{name:'Golf Shoes',price:null},{name:'Golf Clubs',price:null}];
     this.data.pricecommodities = newcommodities;
     this.data.newcommodities = new Array();
+    if(this._router.url == '/golf-course/section-add-on'){
+      this.column = 'addon';
+    }else{
+      this.column = 'price';
+    }
   }
 
   ngOnInit() {
@@ -89,16 +95,14 @@ export class SectionAddOnComponent implements OnInit {
      if(update){
        this.ApiService.putApiMc4k('api/v1/forms/8',params,0).then((value)=>{
          if(value&&value.msg=='success'){
-           $('#rental-section').css('display','block');
-           $('#add-on-section').css('display','none')
+           this.ApiService.userDetail('golf-course/price');
          }
 
        });
      }else{
        this.ApiService.postApiMc4k('api/v1/forms/8',params,false,true).then((value)=>{
          if(value&&value.msg=='success'){
-           $('#rental-section').css('display','block');
-           $('#add-on-section').css('display','none')
+           this.ApiService.userDetail('golf-course/price');
          }
 
        });

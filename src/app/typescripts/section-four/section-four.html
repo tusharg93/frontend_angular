@@ -1,97 +1,89 @@
 
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail&&environment.random.keys&&environment.random.keys.others"></div>
+<div class="block_sea">
+    <ng-container *ngFor="let list of data;let i=index;" >
+        <span (click)="next=i" [class]="next==i?'brown_clr':''" style="border-bottom: 1px solid;text-align: center;"><span >{{ list.start_date}}</span>  TO: <span > {{list.end_date}}</span></span>
+        <span *ngIf="i+1!=data.length">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    </ng-container>
 
-<div class="container-fluid">
-    <div class="row bg-title">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">SECTION FOUR</h4>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="white-box p-l-20 p-r-20">
-                <h3 class="box-title m-b-0">Section 4</h3>
-                <p class="text-muted m-b-30 font-13"></p>
-                <div class="row">
-                    <div class="col-md-12" *ngFor="let list of data;let i=index;">
-                        <ng-container *ngIf="next>=i">
-                            <h3 class="box-title"> {{list.name}}  FROM: <span >{{ list.start_date}}</span>  TO: <span > {{list.end_date}}</span></h3>
-
-
-                            <form class="floating-labels " style="width: 100%;" #section="ngForm" name="section" id="section" >
-                                <ng-container *ngFor="let rates of list.rates;let j=index" >
-                                    <p class="text-muted m-b-30 font-13">{{rates.type | uppercase}} Rack Rate <code>Visitor/Online</code></p>
-
-                                    <div class="form-group m-b-40" *ngIf="is_hole_9">
-                                        <input type="number" [(ngModel)]="data[i].rates[j].hole_9_price" class="form-control" id="hole_9{{j}}_price" required="" name="hole_9_price">
-                                        <span class="highlight"></span> <span class="bar"></span>
-                                        <label for="hole_9{{j}}_price">9 Hole Price in {{environment.random.userDetail.gc_basic_info.currency}}</label>
-                                    </div>
-
-                                    <div class="form-group m-b-40" *ngIf="is_hole_18">
-
-                                        <input type="number" [(ngModel)]="data[i].rates[j].hole_18_price" class="form-control" id="hole_18{{j}}_price" required="" name="hole_18_price">
-                                        <span class="highlight"></span> <span class="bar"></span>
-                                        <label for="hole_18{{j}}_price">18 Hole Price in {{environment.random.userDetail.gc_basic_info.currency}}</label>
-                                    </div>
-                                    <!--<h3 class="box-title">Slot Detail</h3>-->
-
-
-
-
-                                </ng-container>
-                                <p class="text-muted m-b-30 font-13">Weekdays/Weekend Days</p>
-                                <div class="form-group m-b-40">
-                                    <p class="text-muted  font-13"></p>
-                                    <div class="switchery-demo m-b-30">
-                                        First Tee Time: <input type="text" [(ngModel)]="data[i].start_time"  class="flatpickr cls_set cls"  placeholder="Select Time" id="start_time_slot{{i}}" name="start_time_slot{{i}}"  />
-
-                                        Last Tee Time: <input type="text" [(ngModel)]="data[i].end_time" class="flatpickr cls_set cls"  placeholder="Select Time" id="end_time_slot{{i}}" name="end_time_slot{{i}}"/>
-
-                                        Per slot Time
-                                        <select class="form-control p-0"  style="width: 30%;float: right;" [(ngModel)]="data[i].interval" name="season{{i}}" required>
-                                            <ng-container *ngFor="let list of slotTime;let j=index">
-                                                <option value="{{list}}">{{list}}</option>
-                                            </ng-container>
-                                        </select>
-                                    </div>
-                                    <span class="bar"></span>
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                                <p class="text-muted m-b-30 font-13" *ngIf="closed">Maintenance Days</p>
-                                <div class="form-group m-b-40" *ngIf="closed">
-                                    <p class="text-muted  font-13"></p>
-                                    <div class="switchery-demo m-b-30">
-                                        {{data[i].maintenance.start_time}}
-                                        First Tee Time: <input type="text"  [(ngModel)]="data[i].maintenance.start_time"  class="flatpickr cls_set cls"  placeholder="Select Time" id="start_time_m{{i}}" name="start_time_main{{i}}"/>
-
-                                        Last Tee Time: <input type="text" [(ngModel)]="data[i].maintenance.end_time" class="flatpickr cls_set cls"  placeholder="Select Time" id="end_time_m{{i}}" name="end_time_main{{i}}"  />
-
-                                    </div>
-                                    <span class="bar"></span>
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                                <div (click)="copyAll()">COPY ALL</div>
-                                <div class="form-group bk" *ngIf="next==i">
-                                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-three">Back</a></button>
-
-                                    <button style="float: right;" type="submit" (click)="save(section,i,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length > 0"><span *ngIf="i+1==next">Update &</span> Continue</button>
-                                    <button style="float: right;" type="submit" (click)="save(section,i,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length == 0"><span *ngIf="i+1==next">Submit &</span> Continue</button>
-
-                                </div>
-
-
-                            </form>
-
-                        </ng-container>
-                          </div>
+</div>
+<form #section="ngForm" name="section" id="section">
+<div *ngFor="let list of data;let i=index;" [hidden]="!(next==i)">
+    <!--<h3 class="box-title" style="text-align: center;">FROM:  <span >{{ list.start_date}}</span>  TO: <span > {{list.end_date}}</span></h3>-->
+    <div>
+        <div style="width:50%;float:left" *ngFor="let rates of list.rates;let j=index">
+            <div>
+                <div class="add-events-top-section-text wid_90">{{rates.type | uppercase}} Rack Rate</div>
+                <div>
+                    <div class="event_left mrng_btm_date wid_90" *ngIf="is_hole_9">
+                        <input [(ngModel)]="data[i].rates[j].hole_9_price"  name="hole_9_price{{j}}" type="text" class="event_input wid_90" placeholder="9 Holes Price in {{environment.random.userDetail.gc_basic_info.currency}}">
+                    </div>
+                    <div class="event_left mrng_btm_date wid_90" *ngIf="is_hole_18">
+                        <input [(ngModel)]="data[i].rates[j].hole_18_price"  name="hole_18_price{{j}}" type="text" class="event_input wid_90" placeholder="18 Holes Price in {{environment.random.userDetail.gc_basic_info.currency}}">
                     </div>
                 </div>
+
+                <!--<span class="event-supporting-text">(add a price)</span>-->
             </div>
+
+        </div>
+
+    </div>
+    <div>
+        <div style="width:50%;float:left">
+            <div>
+                <div class="add-events-top-section-text wid_90">Weekdays/Weekend Days</div>
+                <div class="event_left mrng_btm_date wid_40">
+                    <input  type="text" [(ngModel)]="data[i].start_time"  class="flatpickr cls_set cls event_input wid_90"  placeholder=" First Tee Time" id="start_time_slot{{i}}" name="start_time_slot{{i}}"  >
+                </div>
+                <div class="event_left mrng_btm_date wid_40">
+                    <input  type="text" [(ngModel)]="data[i].end_time"  class="flatpickr cls_set cls event_input wid_90"  placeholder=" Last Tee Time" id="end_time_slot{{i}}" name="end_time_slot{{i}}"  >
+                </div>
+                <div class="event_lft_mrgn wid_90">
+                    <div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="slots" onclick="$('#slots').toggleClass('open')" >
+                        <span class="current">{{data[i].interval?data[i].interval:'Interval'}}</span>
+                        <ul class="list">
+                            <ng-container *ngFor="let list of slotTime">
+                                <li  (click)="data[i].interval=list" [class]="data[i].interval==list?'option selected focus':'option'" >{{list}} </li>
+
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+                <!--<span class="event-supporting-text">(choose time per interval )</span>-->
+            </div>
+
+
+        </div>
+        <div style="width:50%;float:left;height:200px" *ngIf="closed">
+            <div>
+                <div class="add-events-top-section-text wid_90">Maintenance Days</div>
+                <div class="event_left mrng_btm_date wid_40">
+                    <input  type="text" [(ngModel)]="data[i].maintenance.start_time"  class="flatpickr cls_set cls event_input wid_90"  placeholder=" Maintenance Start Time" id="start_time_m{{i}}" name="start_time_main{{i}}"  >
+                </div>
+                <div class="event_left mrng_btm_date wid_40">
+                    <input  type="text" [(ngModel)]="data[i].maintenance.end_time"  class="flatpickr cls_set cls event_input wid_90"  placeholder="Maintenance End Time" id="end_time_m{{i}}" name="end_time_main{{i}}"  >
+                </div>
+                <!--<span class="event-supporting-text">(choose time per interval )</span>-->
+            </div>
+
         </div>
     </div>
-<div (ngInit)="setValue()" *ngIf="environment.random.userDetail&&environment.random.keys&&environment.random.keys.others"></div>
+    <div class="cl_height_15"></div>
+    <div class="add_gray_full_wrapper">
+        <div class="content_container">
 
+            <button type="button" class="event-preview"><a routerLink="/golf-course/section-three">Back</a></button>
 
+            <button type="button" (click)="save(section,i,true)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length > 0"><span *ngIf="i+1==next">Update &</span> Continue</button>
+            <button  type="button" (click)="save(section,i,false)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length == 0"><span *ngIf="i+1==next">Submit &</span> Continue</button>
+            <button type="button" (click)="copyAll()" class="event-save-continue" [hidden]="!(next==0)">Same for All Seasons</button>
+
+        </div>
+    </div>
+
+</div>
+
+</form>
 
 

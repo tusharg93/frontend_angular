@@ -1,113 +1,23 @@
-<!--<nav class="navbar navbar-default navbar-static-top m-b-0" style="background-color: #03a9f3;">-->
-    <!--<div class="navbar-header" *ngIf="environment.random.userInfo"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>-->
-        <!--<div class="top-left-part">-->
-            <!--<a style="color:green" class="logo"  href="javascript:void(0);" *ngIf="environment.random.userInfo" onclick="$('#menu').toggle();$('#page-wrapper').toggleClass('loggedIn');$('footer').toggleClass('footer_left');">-->
-                <!--MENU-->
-            <!--</a>-->
-
-            <!--<a class="logo" routerLink="/">-->
-                <!--<img src="/assets/image/logo.png" style="height: 50px;" alt="home" class="light-logo" />-->
-            <!--</a>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="navbar-header"  *ngIf="!environment.random.userInfo"></div>-->
-
-<!--</nav>-->
-
-<!--<div class="navbar-default sidebar" id="menu" style="display: none;" role="navigation" *ngIf="environment.random.userInfo" >-->
-    <!--<div class="sidebar-nav navbar-collapse slimscrollsidebar">-->
-        <!--<div class="user-profile" *ngIf="environment.random.userInfo&&environment.random.userInfo.source=='golf_course'" >-->
-            <!--<div class="dropdown user-pro-body" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info">-->
-                <!--<div><img id="logoImg" src="{{environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.logo_url?environment.random.userDetail.gc_basic_info.logo_url:'/assets/css/icons/user.png'}}" alt="user-img" class="img-circle"></div>-->
-                <!--<a href="javascript:void(0)" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{environment.random.userDetail.gc_basic_info.name}} <span class="caret"></span></a>-->
-                <!--<ul class="dropdown-menu animated flipInY">-->
-                    <!--<li><a routerLink="/golf-course/dashboard"><i class="ti-user"></i> Dashboard</a></li>-->
-                    <!--<li><a routerLink="/golf-course/update-profile"><i class="ti-user"></i> Update Profile</a></li>-->
-                    <!--<li role="separator" class="divider"></li>-->
-                    <!--<li><a href="javascript:void(0)" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="user-profile" *ngIf="environment.random.userInfo&&environment.random.userInfo.source=='vendor'" >-->
-            <!--<div class="dropdown user-pro-body" *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info">-->
-                <!--<div><img id="logoImg" src="{{environment.random.userDetail&&environment.random.userDetail.basic_info&&environment.random.userDetail.basic_info.logo_url?environment.random.userDetail.basic_info.logo_url:'/assets/css/icons/user.png'}}" alt="user-img" class="img-circle"></div>-->
-                <!--<a href="javascript:void(0)" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{environment.random.userDetail.basic_info.company_name}} <span class="caret"></span></a>-->
-                <!--<ul class="dropdown-menu animated flipInY">-->
-                    <!--<li><a routerLink="/vendor/dashboard"><i class="ti-user"></i> Dashboard</a></li>-->
-                    <!--<li><a routerLink="/vendor/update-profile"><i class="ti-user"></i> Update Profile</a></li>-->
-                    <!--<li role="separator" class="divider"></li>-->
-                    <!--<li><a href="javascript:void(0)" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<ul class="nav" id="side-menu">-->
-            <!--<ng-container *ngIf="environment.random.userInfo&&environment.random.userInfo.source=='golf_course'" (ngInit)="dashboard()">-->
-                <!--<li class="nav-small-cap m-t-10">-&#45;&#45; Golf Course</li>-->
-                <!--<li> <a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i>-->
-                    <!--<span class="hide-menu"> Dashboard</span>-->
-                <!--</a>-->
-                    <!--<ul class="nav nav-second-level">-->
-                        <!--<li> <a routerLink="/golf-course/section-1">Section 1</a> </li>-->
-                        <!--<li> <a routerLink="/golf-course/section-2">Section 2</a> </li>-->
-                        <!--<li> <a routerLink="/golf-course/section-3">Section 3</a> </li>-->
-                        <!--<li> <a routerLink="/golf-course/section-4">Section 4</a> </li>-->
-                        <!--<li role="separator" class="divider"></li>-->
-                        <!--<li> <a routerLink="/golf-course/section-add-on">Add on Rentals</a> </li>-->
-                        <!--<ng-container *ngIf="environment.random.userDetail&&environment.random.userDetail.rates_info&&environment.random.userDetail.rates_info.length>0">-->
-                            <!--<li> <a routerLink="/golf-course/public-holiday">Holidays</a> </li>-->
-                            <!--<li> <a routerLink="/golf-course/close-days">Closed Days</a> </li>-->
-                            <!--<li> <a routerLink="/golf-course/manage-slot">Manage Slots</a> </li>-->
-                            <!--<li> <a routerLink="/golf-course/manage-vendors">Manage Vendors</a> </li>-->
-                        <!--</ng-container>-->
 
 
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ng-container>-->
-            <!--<ng-container *ngIf="environment.random.userInfo&&environment.random.userInfo.source=='vendor'">-->
-                <!--<li class="nav-small-cap m-t-10" (ngInit)="vdahboard()">-&#45;&#45; Vendor Section</li>-->
-                <!--<li> <a href="javascript:void(0)" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i>-->
-                    <!--<span class="hide-menu"> Dashboard</span>-->
-                <!--</a>-->
-                    <!--<ul class="nav nav-second-level">-->
-                        <!--<li> <a routerLink="/vendor/update-profile">Profile</a> </li>-->
-                        <!--<li> <a routerLink="/vendor/manage-golf-course">Manage Golf Course</a> </li>-->
-
-                    <!--</ul>-->
-                <!--</li>-->
-             <!--</ng-container>-->
-            <!--<li> <a href="javascript:void(0);" class="waves-effect">-->
-                <!--<i class="linea-icon linea-basic fa-fw text-danger" data-icon="7"></i> <span class="hide-menu text-danger"> Multipurpose-->
-                <!--</span>-->
-            <!--</a>-->
-                <!--<ul class="nav nav-second-level">-->
-                    <!--<li> <a routerLink="/">About Us</a> </li>-->
-                    <!--<li> <a routerLink="/">Contact Us</a> </li>-->
-                    <!--<li> <a routerLink="/">Terms & Condition</a> </li>-->
-                    <!--<li role="separator" class="divider"></li>-->
-                    <!--<li> <a routerLink="/">Pricing</a> </li>-->
-                    <!--<li> <a routerLink="/">Partners</a> </li>-->
-
-                <!--</ul>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-<!--</div>-->
-
-
-<div style="background-color: white;height: 70px;">
+<div style="background-color: #e9ebee;height: 100px;">
     <div style="
     font-size: 24px;
-    /* margin-top: 10px; */
+    margin-top: 10px;
     padding-top: 15px;
     color: white;
-    padding-left: 30px;">
-        <a routerLink="/" style="color:#4cb7ef">THE PUTT</a>
+    padding-left: 30px;
+    ">
+        <h1 style="text-shadow:#ffffff 3px 3px 0px, rgba(0, 0, 0, 0.2) 6px 6px 0px;margin-left: 20px;color:brown;">THE PUTT</h1>
+
     </div>
     <div onclick="$('#menu').css('display','block')" style="
     float: right;
-    margin-top: -30px;
-    margin-right: 11px;background-color:#4cb7ef">
+    margin-top: -49px;
+    margin-right: 40px;
+    background-color: brown;
+
+    ">
         <img src="/assets/image/hamburger.svg">
     </div>
 </div>
@@ -118,7 +28,7 @@
     z-index: 5000;
     width: 100%;
     height: 100%;
-    background: rgba(15,54,83,0.8);
+    background: darkolivegreen;
     overflow-x: scroll;">
 
     <div onclick="$('#menu').css('display','none')" style="color: white;

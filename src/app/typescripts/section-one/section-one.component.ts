@@ -56,11 +56,18 @@ export class SectionOneComponent implements OnInit {
     //currency
     this.ApiService.getApiMc4k('assets/json/currency.json',1).then((value)=>{
         this.currency = value.data;
+        setTimeout(function(){
+          $(".chosen").chosen();
+        },200)
+
       
     });
     //time zone
     this.ApiService.getApiMc4k('assets/json/time-zone.json',1).then((value)=>{
       this.timezone = value.data;
+      setTimeout(function(){
+        $(".chosen").chosen();
+      },200)
     });
     let slots = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
     this.slotMonths = slots;
@@ -151,6 +158,16 @@ export class SectionOneComponent implements OnInit {
     }else if(!removed&&this.data.tee.length==2){
       swal('You can select max 2 tee','','error');
       $('#slots_'+key).attr('checked',false);
+    }
+  }
+
+  setTimeZone(){
+    for(var i in this.timezone){
+      if(this.data.timezone=this.timezone[i].offset){
+        this.data.timezoneName = this.timezone[i].text;
+        break;
+      }
+
     }
   }
 
