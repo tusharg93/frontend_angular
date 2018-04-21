@@ -3,121 +3,217 @@
 
 
 
-<div style="height: 650px;">
+<!--<div style="height: 650px;">-->
 
-    <form #section_1="ngForm" name="section_1" id="section_1">
-        <div>
+    <!--<form #section_1="ngForm" name="section_1" id="section_1">-->
+        <!--<div>-->
 
-            <div style="float:left;width:50%">
+            <!--<div style="float:left;width:50%">-->
 
 
-                <div >
-                    <div class="add-events-top-section-text wid_90">Choose a currency</div>
+                <!--<div >-->
+                    <!--<div class="add-events-top-section-text wid_90">Choose a currency</div>-->
 
-                    <div class="event_lft_mrgn wid_90">
-                        <div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="currency" onclick="$('#currency').toggleClass('open')">
-                            <span class="current">{{data.currency?data.currency:'Currency'}}</span>
-                            <ul class="list">
-                                <li *ngFor="let list of currency"  (click)="data.currency=list" [class]="data.currency==list?'option selected focus':'option'" value="{{list}}">{{list}}</li>
-                            </ul>
+                    <!--<div class="event_lft_mrgn wid_90">-->
+                        <!--<div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="currency" onclick="$('#currency').toggleClass('open')">-->
+                            <!--<span class="current">{{data.currency?data.currency:'Currency'}}</span>-->
+                            <!--<ul class="list">-->
+                                <!--<li *ngFor="let list of currency"  (click)="data.currency=list" [class]="data.currency==list?'option selected focus':'option'" value="{{list}}">{{list}}</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<span class="event-supporting-text">(choose a currency for price)</span>-->
+                <!--</div>-->
+                <!--<div >-->
+                    <!--<div class="add-events-top-section-text wid_90">Choose a time zone</div>-->
+                    <!--<div class="event_lft_mrgn wid_90">-->
+                        <!--<div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="timezone" onclick="$('#timezone').toggleClass('open')">-->
+                            <!--<span class="current">{{data.timezoneName?data.timezoneName:'Time Zone'}}</span>-->
+                            <!--<ul class="list">-->
+                                <!--<li *ngFor="let list of timezone"  (click)="data.timezone=list.offset;data.timezoneName=list.text" [class]="data.timezone==list.offset?'option selected focus':'option'" >{{list.text}}</li>-->
+                            <!--</ul>-->
+                            <!--<span *ngIf="data.timezone&&timezone.length>0" (ngInit)="setTimeZone()"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<span class="event-supporting-text">(choose a timezone)</span>-->
+                <!--</div>-->
+                <!--<div >-->
+                    <!--<div class="add-events-top-section-text wid_90">Choose type of holes</div>-->
+                    <!--<div class="switchery-demo m-b-30">-->
+                        <!--<div class="lft_chk">9 holes </div><div class="center_t"><input   type="checkbox" (change)="setCheckBox(true)" [(ngModel)]="data.hole_9" [value]="true"  id="hole_9" name="9_holes" class="js-switch" data-color="#3d3b3b" /></div>-->
+                    <!--</div>-->
+                    <!--<div class="switchery-demo m-b-30">-->
+                        <!--<div class="lft_chk"> 18 holes </div><div class="center_t"><input type="checkbox" (change)="setCheckBox(true)" [(ngModel)]="data.hole_18" [value]="true"  id="hole_18" name="18_holes" class="js-switch" data-color="#3d3b3b" /></div>-->
+                    <!--</div>-->
+                    <!--<span class="event-supporting-text">(choose type of holes)</span>-->
+                <!--</div>-->
+
+
+            <!--</div>-->
+            <!--<div style="float:left;width:50%">-->
+                <!--<div >-->
+                    <!--<div class="add-events-top-section-text wid_90">Choose slots</div>-->
+
+                    <!--<div class="event_lft_mrgn wid_90">-->
+                        <!--<div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="slots" onclick="$('#slots').toggleClass('open')" >-->
+                            <!--<span class="current">{{data.duration?data.duration+' Months':'Duration'}}</span>-->
+                            <!--<ul class="list">-->
+                                <!--<ng-container *ngFor="let list of slotMonths">-->
+                                    <!--<li   (click)="data.duration=list" [class]="data.duration==list?'option selected focus':'option'"  *ngIf="list<13">{{list}} Months</li>-->
+
+                                <!--</ng-container>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<span class="event-supporting-text">(choose month from when booking can be made )</span>-->
+                <!--</div>-->
+
+                <!--<div >-->
+                    <!--<div class="add-events-top-section-text wid_90">Select Tee</div>-->
+
+                    <!--<div class="event_lft_mrgn wid_90">-->
+                        <!--<div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="tee_slot" onclick="$('#tee_slot').toggleClass('open')">-->
+                            <!--<span class="current">-->
+                                <!--<ng-container *ngFor="let list of data.tee;let i=index;">-->
+                                    <!--{{i==0?list:", "+list}}-->
+                                <!--</ng-container>-->
+                            <!--</span>-->
+                            <!--<ul class="list">-->
+                                <!--<li *ngFor="let list of slotMonths">-->
+                                    <!--<label for="slots_{{list}}" >-->
+                                        <!--<input type="checkbox" (click)="clickMulti(list)"  id="slots_{{list}}" />{{list}}-->
+                                    <!--</label>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                    <!--<span class="event-supporting-text">(choose max 2 tee slot)</span>-->
+                <!--</div>-->
+                <!--<div >-->
+                    <!--<div class="add-events-top-section-text wid_90">Players Type</div>-->
+                    <!--<div class="switchery-demo m-b-30">-->
+                        <!--<div class="lft_chk">Online </div><div class="center_t"><input type="checkbox" [(ngModel)]="data.online" [value]="true" name="online" id="online" class="js-switch" data-color="#3d3b3b" /></div>-->
+                    <!--</div>   <div class="switchery-demo m-b-30">-->
+                        <!--<div class="lft_chk"> Member </div><div class="center_t"><input type="checkbox" [(ngModel)]="data.member" [value]="true" name="member" id="member" class="js-switch" data-color="#3d3b3b" /></div>-->
+                    <!--</div>        <div class="switchery-demo m-b-30">-->
+                        <!--<div class="lft_chk"> Guest </div><div class="center_t"><input type="checkbox" [(ngModel)]="data.guest" [value]="true" name="guest" id="guest" class="js-switch" data-color="#3d3b3b" /></div>-->
+                    <!--</div>-->
+                    <!--<span class="event-supporting-text">(choose the type of players allowed)</span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+        <!--<div class="cl_height_15"></div>-->
+        <!--<div class="add_gray_full_wrapper">-->
+            <!--<div class="content_container">-->
+
+                <!--<button type="button" (click)="save_1(section_1)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.time_zone">Submit & Continue</button>-->
+
+                <!--<button  type="button" (click)="update(section_1)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.time_zone">Update & Continue</button>-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</form>-->
+
+<!--</div>-->
+
+
+
+
+<section id="wrapper">
+    <div class="login-register">
+        <div class="login-box card">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">This is section 1</h4>
+                    <form class="form p-t-20"  #section="ngForm" name="section" id="section">
+                        <div class="form-group">
+                            <label>Select Currency</label>
+                            <div>
+                                <select class="form-control" [(ngModel)]="data.currency" name="currency">
+                                    <option *ngFor="let list of currency" value="{{list}}">{{list}}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <span class="event-supporting-text">(choose a currency for price)</span>
-                </div>
-                <div >
-                    <div class="add-events-top-section-text wid_90">Choose a time zone</div>
-                    <div class="event_lft_mrgn wid_90">
-                        <div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="timezone" onclick="$('#timezone').toggleClass('open')">
-                            <span class="current">{{data.timezoneName?data.timezoneName:'Time Zone'}}</span>
-                            <ul class="list">
-                                <li *ngFor="let list of timezone"  (click)="data.timezone=list.offset;data.timezoneName=list.text" [class]="data.timezone==list.offset?'option selected focus':'option'" >{{list.text}}</li>
-                            </ul>
-                            <span *ngIf="data.timezone&&timezone.length>0" (ngInit)="setTimeZone()"></span>
+                        <div class="form-group">
+                            <label>Select Timezone</label>
+                            <div>
+                                <select class="form-control" [(ngModel)]="data.timezone" name="timezone">
+                                    <option  *ngFor="let list of timezone" value="{{list.offset}}">{{list.text}}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <span class="event-supporting-text">(choose a timezone)</span>
-                </div>
-                <div >
-                    <div class="add-events-top-section-text wid_90">Choose type of holes</div>
-                    <div class="switchery-demo m-b-30">
-                        <div class="lft_chk">9 holes </div><div class="center_t"><input   type="checkbox" (change)="setCheckBox(true)" [(ngModel)]="data.hole_9" [value]="true"  id="hole_9" name="9_holes" class="js-switch" data-color="#3d3b3b" /></div>
-                    </div>
-                    <div class="switchery-demo m-b-30">
-                        <div class="lft_chk"> 18 holes </div><div class="center_t"><input type="checkbox" (change)="setCheckBox(true)" [(ngModel)]="data.hole_18" [value]="true"  id="hole_18" name="18_holes" class="js-switch" data-color="#3d3b3b" /></div>
-                    </div>
-                    <span class="event-supporting-text">(choose type of holes)</span>
-                </div>
+                        <div class="form-group row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label>Holes</label>
+                                <div class="col-xs-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input [(ngModel)]="data.hole_9" value="true" type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">9 Holes</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input [(ngModel)]="data.hole_18" value="true" type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <label class="custom-control-label" for="customCheck2">18 Holes</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox" (click)="data.hole_18=true;data.hole_9=true;">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <label class="custom-control-label" for="customCheck3">9 & 18 Holes</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <label>Player Types</label>
+                                <div class="col-xs-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input [(ngModel)]="data.online" [value]="true" type="checkbox" class="custom-control-input" id="customCheck11">
+                                        <label class="custom-control-label" for="customCheck11">Online/Visitor/Non Resident</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input [(ngModel)]="data.member" [value]="true" type="checkbox" class="custom-control-input" id="customCheck22">
+                                        <label class="custom-control-label" for="customCheck22">Member/Resident</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input [(ngModel)]="data.guest" [value]="true" type="checkbox" class="custom-control-input" id="customCheck33">
+                                        <label class="custom-control-label" for="customCheck33">Member Guest</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Start Tee</label>
+                            <div>
+                                <select class="form-control">
+                                    <li *ngFor="let list of slotMonths">
+                                        <label for="slots_{{list}}" >
+                                            <input type="checkbox" (click)="clickMulti(list)"  id="slots_{{list}}" />{{list}}
+                                        </label>
+                                    </li>
+                                </select>
+                            </div>
+                        </div>
 
-
+                        <div class="form-group">
+                            <label>Show slots for</label>
+                            <div>
+                                <select class="form-control" [(ngModel)]="data.duration">
+                                    <option *ngFor="let list of slotMonths" value="{{list}}">{{list}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="button-group text-right">
+                            <!--<a href="javascript:void(0)" class="btn waves-effect waves-light btn-outline-secondary">Back</a>-->
+                            <a (click)="save_1(section)" href="javascript:void(0)"  class="btn waves-effect waves-light btn-info">Save &amp; Next</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div style="float:left;width:50%">
-                <div >
-                    <div class="add-events-top-section-text wid_90">Choose slots</div>
-
-                    <div class="event_lft_mrgn wid_90">
-                        <div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="slots" onclick="$('#slots').toggleClass('open')" >
-                            <span class="current">{{data.duration?data.duration+' Months':'Duration'}}</span>
-                            <ul class="list">
-                                <ng-container *ngFor="let list of slotMonths">
-                                    <li   (click)="data.duration=list" [class]="data.duration==list?'option selected focus':'option'"  *ngIf="list<13">{{list}} Months</li>
-
-                                </ng-container>
-                            </ul>
-                        </div>
-                    </div>
-                    <span class="event-supporting-text">(choose month from when booking can be made )</span>
-                </div>
-
-                <div >
-                    <div class="add-events-top-section-text wid_90">Select Tee</div>
-
-                    <div class="event_lft_mrgn wid_90">
-                        <div class="wid_90 nice-select nice-select-evnt " tabindex="0" id="tee_slot" onclick="$('#tee_slot').toggleClass('open')">
-                            <span class="current">
-                                <ng-container *ngFor="let list of data.tee;let i=index;">
-                                    {{i==0?list:", "+list}}
-                                </ng-container>
-                            </span>
-                            <ul class="list">
-                                <li *ngFor="let list of slotMonths">
-                                    <label for="slots_{{list}}" >
-                                        <input type="checkbox" (click)="clickMulti(list)"  id="slots_{{list}}" />{{list}}
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-                    <span class="event-supporting-text">(choose max 2 tee slot)</span>
-                </div>
-                <div >
-                    <div class="add-events-top-section-text wid_90">Players Type</div>
-                    <div class="switchery-demo m-b-30">
-                        <div class="lft_chk">Online </div><div class="center_t"><input type="checkbox" [(ngModel)]="data.online" [value]="true" name="online" id="online" class="js-switch" data-color="#3d3b3b" /></div>
-                    </div>   <div class="switchery-demo m-b-30">
-                        <div class="lft_chk"> Member </div><div class="center_t"><input type="checkbox" [(ngModel)]="data.member" [value]="true" name="member" id="member" class="js-switch" data-color="#3d3b3b" /></div>
-                    </div>        <div class="switchery-demo m-b-30">
-                        <div class="lft_chk"> Guest </div><div class="center_t"><input type="checkbox" [(ngModel)]="data.guest" [value]="true" name="guest" id="guest" class="js-switch" data-color="#3d3b3b" /></div>
-                    </div>
-                    <span class="event-supporting-text">(choose the type of players allowed)</span>
-                </div>
-            </div>
-
         </div>
+    </div>
+</section>
 
-        <div class="cl_height_15"></div>
-        <div class="add_gray_full_wrapper">
-            <div class="content_container">
-
-                <button type="button" (click)="save_1(section_1)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&!environment.random.userDetail.gc_basic_info.time_zone">Submit & Continue</button>
-
-                <button  type="button" (click)="update(section_1)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.gc_basic_info&&environment.random.userDetail.gc_basic_info.time_zone">Update & Continue</button>
-
-            </div>
-        </div>
-
-    </form>
-
-</div>
 
 

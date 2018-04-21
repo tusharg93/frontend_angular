@@ -1,28 +1,6 @@
-
+<div class="tee_menu"></div>
 <section id="wrapper" class="login-register">
     <div class="login-box">
-        <!--<div class="white-box loggin_page" style="display: block;" id="centerForm">-->
-            <!--<div class="reg_parent" >-->
-                <!--<div class="reg_left">-->
-                    <!--<h2>Golf Course</h2>-->
-                    <!--<div class="log_box">-->
-                        <!--<a href="javascript:void(0)" (click)="environment.random.source ='golf_course'" onclick="flipCom('loginform','centerForm')" >LOGIN</a>-->
-                    <!--</div>-->
-                    <!--<div class="regis_box">-->
-                        <!--<a href="javascript:void(0)"  (click)="_getCountry();" onclick="flipCom('registerform','centerForm')">REGISTER</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="reg_right">-->
-                    <!--<h2>Tee Times Seller</h2>-->
-                    <!--<div class="log_box">-->
-                        <!--<a href="javascript:void(0)" (click)="environment.random.source ='vendor'" onclick="flipCom('loginform','centerForm')">LOGIN</a>-->
-                    <!--</div>-->
-                    <!--<div class="regis_box">-->
-                        <!--<a href="javascript:void(0)" (click)="_getCountry();" onclick="flipCom('registerVForm','centerForm')">REGISTER</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
 
         <div class="white-box" style="display: none" id="loginform">
 
@@ -105,24 +83,33 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-12" *ngIf="!data.country">
-                        <input class="form-control" type="text"  [(ngModel)]="all.search" placeholder="Search Country" name="countrysearch"   />
-                        <div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;"  *ngIf="all.search&&all.search!=''">
-                            <ul class="select2-results">
-                                <ng-container *ngFor="let list of environment.random.countries | FilterPipe:'name':all.search">
-                                <li (click)="_getRegion(list.code,list.name);data.country=list.name;data.country_code=list.code;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">
-                                    <div class="select2-result-label"  role="option">
-                                        <span class="select2-match"></span>{{list.name}}
-                                    </div>
-                                </li>
-                                </ng-container>
-                            </ul>
+                    <!--<div class="col-xs-12" *ngIf="!data.country">-->
+                        <!--<input class="form-control" type="text"  [(ngModel)]="all.search" placeholder="Search Country" name="countrysearch"   />-->
+                        <!--<div class="select2-drop select2-drop-multi select2-display-none select2-drop-active" style="left: 270px;  top: 403px; bottom: auto; display: block;"  *ngIf="all.search&&all.search!=''">-->
+                            <!--<ul class="select2-results">-->
+                                <!--<ng-container *ngFor="let list of environment.random.countries | FilterPipe:'name':all.search">-->
+                                <!--<li (click)="_getRegion(list.code,list.name);data.country=list.name;data.country_code=list.code;" class="select2-results-dept-0 select2-result select2-result-unselectable select2-result-with-children ms-hover" role="presentation">-->
+                                    <!--<div class="select2-result-label"  role="option">-->
+                                        <!--<span class="select2-match"></span>{{list.name}}-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                                <!--</ng-container>-->
+                            <!--</ul>-->
 
-                        </div>
-                     </div>
+                        <!--</div>-->
+                     <!--</div>-->
 
-                    <div class="col-xs-12" *ngIf="data.country" (click)="data.country=null;data.region=null;data.city=null;">
-                        <input disabled  class="form-control" type="text"  [(ngModel)]="data.country" placeholder="Select Country" name="country"   />
+                    <!--<div class="col-xs-12" *ngIf="data.country" (click)="data.country=null;data.region=null;data.city=null;">-->
+                        <!--<input disabled  class="form-control" type="text"  [(ngModel)]="data.country" placeholder="Select Country" name="country"   />-->
+                    <!--</div>-->
+
+                    <div class="col-xs-12">
+                        <select class="chosen" [(ngModel)]="data.country" name="country" (change)="_getRegion(data.country)">
+                            <ng-container *ngFor="let list of environment.random.countries">
+                                <option value="{{list.name}}" (click)="_getRegion(list.code,list.name);data.country=list.name;data.country_code=list.code;">
+                                    {{list.name}}</option>
+                            </ng-container>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group" *ngIf="data.country">

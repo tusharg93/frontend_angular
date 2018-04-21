@@ -1,78 +1,174 @@
 
 
 
-<div class="container-fluid">
-    <div class="row bg-title">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">SECTION THREE</h4>
-        </div>
+<!--<div class="container-fluid">-->
+    <!--<div class="row bg-title">-->
+        <!--<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
+            <!--<h4 class="page-title">SECTION THREE</h4>-->
+        <!--</div>-->
 
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="white-box p-l-20 p-r-20">
-                <h3 class="box-title m-b-0">Section 3</h3>
-                <p class="text-muted m-b-30 font-13"></p>
-                <div class="row">
-                    <div class="col-md-12">
-                        <form class="floating-labels " #section="ngForm" name="section" id="section">
-                            <div class="form-group m-b-40">
-                                <h4 class="box-title"> No. of seasons</h4>
-                                <p class="text-muted  font-13"></p>
-                                <div class="switchery-demo m-b-30">
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-12">-->
+            <!--<div class="white-box p-l-20 p-r-20">-->
+                <!--<h3 class="box-title m-b-0">Section 3</h3>-->
+                <!--<p class="text-muted m-b-30 font-13"></p>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                        <!--<form class="floating-labels " #section="ngForm" name="section" id="section">-->
+                            <!--<div class="form-group m-b-40">-->
+                                <!--<h4 class="box-title"> No. of seasons</h4>-->
+                                <!--<p class="text-muted  font-13"></p>-->
+                                <!--<div class="switchery-demo m-b-30">-->
 
-                                    <div class="str_rdio" *ngFor="let list of environment.random.keys.seasons;let i=index">
-                                        <input type="radio" [(ngModel)]="data.noseason"  [value]="i+1" name="full_day"  id="selection_season{{i}}" (change)="setSeason(i)"/>
-                                        <label for="selection_season{{i}}">
-                                            <h2>{{i+1}}</h2>
-                                            <!--<p>{{list.name}}</p>-->
-                                        </label>
-                                    </div>
+                                    <!--<div class="str_rdio" *ngFor="let list of environment.random.keys.seasons;let i=index">-->
+                                        <!--<input type="radio" [(ngModel)]="data.noseason"  [value]="i+1" name="full_day"  id="selection_season{{i}}" (change)="setSeason(i)"/>-->
+                                        <!--<label for="selection_season{{i}}">-->
+                                            <!--<h2>{{i+1}}</h2>-->
+                                            <!--&lt;!&ndash;<p>{{list.name}}</p>&ndash;&gt;-->
+                                        <!--</label>-->
+                                    <!--</div>-->
 
 
+                                <!--</div>-->
+                                <!--<span class="bar"></span>-->
+                                <!--<small class="form-text text-muted">Choose </small>-->
+                            <!--</div>-->
+
+
+                            <!--<div class="form-group m-b-40" *ngFor="let list of data.seasonList;let i=index;">-->
+                                <!--<h4 class="box-title">Season {{i+1}}</h4>-->
+                                <!--<p class="text-muted  font-13"></p>-->
+                                <!--<div class="switchery-demo m-b-30">-->
+                                    <!--<select class="form-control p-0" (change)="disabledSeason(i)" style="width: 30%;float: left;" (ngInit)="initSeason(i,data.season_info[i].id)" [(ngModel)]="data.season_info[i].id" name="season_name{{i}}" required>-->
+                                        <!--<ng-container *ngFor="let list of environment.random.keys.seasons;let j=index">-->
+                                            <!--<option required value="{{list.id}}"  class="season_cls{{list.id}}" id="season_cls{{i}}" selected="data.season_info[i].id==list.id">{{list.name}}</option>-->
+                                        <!--</ng-container>-->
+                                    <!--</select>-->
+
+                                        <!--Start Date: <input type="text" required (change)="setEnd(i,'start_date','end_date'+i);"  (ngInit)="initFlatpicker('start_date',i)" [(ngModel)]="data.season_info[i].start_date" class="flatpickr cls start_time{{i}}" placeholder="Select Date" name="start_time{{i}}" id="start_date{{i}}" />-->
+
+                                        <!--End Date: <input type="text" required  (change)="setEnd(i,'end_date','start_date'+(i+1),true);" (ngInit)="initFlatpicker('end_date',i)" [(ngModel)]="data.season_info[i].end_date" class="flatpickr cls end_date{{i}}" placeholder="Select Date" name="end_time{{i}}" id="end_date{{i}}" />-->
+                                        <!--<div style="display: none;">DATE:{{data.season_info[i].diff}}</div>-->
+                                <!--</div>-->
+                                <!--<span class="bar"></span>-->
+                                <!--<small class="form-text text-muted"></small>-->
+                            <!--</div>-->
+
+
+
+                            <!--<div class="form-group bk">-->
+                                <!--<button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-two">Back</a></button>-->
+
+                                <!--<button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info&&environment.random.userDetail.seasons_info.length == 0">Submit & Continue</button>-->
+
+                                <!--<button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info && environment.random.userDetail.seasons_info.length > 0">Update & Continue</button>-->
+
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+<!--</div>-->
+<!--<div (ngInit)="setValue()" *ngIf="environment.random.userDetail&&environment.random.keys&&environment.random.keys['others']"></div>-->
+
+<!--<div>-->
+    <!--<form class="floating-labels " #section="ngForm" name="section" id="section">-->
+        <!--<div class="pad_20">-->
+            <!--<div >-->
+                <!--<div class="add-events-top-section-text wid_90"> Number of seasons </div>-->
+                <!--<div class="width_20prnct" *ngFor="let list of environment.random.keys.seasons;let i=index">-->
+                    <!--<input id="radio-{{i}}" [(ngModel)]="data.noseason"  [value]="i+1" name="season_num" class="radio-custom"  type="radio" (change)="setSeason(i)">-->
+                    <!--<label for="radio-{{i}}" class="radio-custom-label radiolabel-event">{{i+1}}</label>-->
+                <!--</div>-->
+
+
+
+            <!--</div>-->
+            <!--<span class="event-supporting-text">(Have many seasons do you have?)</span>-->
+        <!--</div>-->
+        <!--<div class="cl_height_15"></div>-->
+        <!--<div class="add_gray_full_wrapper">-->
+            <!--<div class="content_container">-->
+                <!--<button type="button" class="event-preview"><a routerLink="/golf-course/section-two">Back</a></button>-->
+
+                <!--<button type="button" (click)="save(section,false)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info&&environment.random.userDetail.seasons_info.length == 0">Submit & Continue</button>-->
+
+                <!--<button type="button" (click)="save(section,false)" class="event-filled_button" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info && environment.random.userDetail.seasons_info.length > 0">Update & Continue</button>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+
+<section id="wrapper">
+    <div class="login-register">
+        <div class="login-box card">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">This is section 3</h4>
+                    <form class="form p-t-20"  #section="ngForm" name="section" id="section">
+                        <div class="form-group">
+                            <label>No. of seasons</label>
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                    <button onclick="$('.season_count').removeClass('active');$(this).addClass('active');" id="season_count{{list}}" *ngFor="let list of environment.random.keys.seasons;let i=index" [(ngModel)]="data.noseason"  [value]="i+1" type="button" class="btn btn-secondary season_count">{{i+1}}</button>
                                 </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted">Choose </small>
+
                             </div>
-
-
-                            <div class="form-group m-b-40" *ngFor="let list of data.seasonList;let i=index;">
-                                <h4 class="box-title">Season {{i+1}}</h4>
-                                <p class="text-muted  font-13"></p>
-                                <div class="switchery-demo m-b-30">
-                                    <select class="form-control p-0" (change)="disabledSeason(i)" style="width: 30%;float: left;" (ngInit)="initSeason(i,data.season_info[i].id)" [(ngModel)]="data.season_info[i].id" name="season_name{{i}}" required>
-                                        <ng-container *ngFor="let list of environment.random.keys.seasons;let j=index">
-                                            <option required value="{{list.id}}"  class="season_cls{{list.id}}" id="season_cls{{i}}" selected="data.season_info[i].id==list.id">{{list.name}}</option>
-                                        </ng-container>
+                        </div>
+                        <div class="form-group row" *ngFor="let list of data.seasonList;let i=index;">
+                            <div class="col-sm-4">
+                                <label>Season {{i+1}}</label>
+                                <div>
+                                    <select class="form-control" (change)="data.season_info[i].id">
+                                        <option *ngFor="let list of environment.random.keys.seasons;let j=index" value="{{list.id}}">{{list.name}}</option>
                                     </select>
-
-                                        Start Date: <input type="text" required (change)="setEnd(i,'start_date','end_date'+i);"  (ngInit)="initFlatpicker('start_date',i)" [(ngModel)]="data.season_info[i].start_date" class="flatpickr cls start_time{{i}}" placeholder="Select Date" name="start_time{{i}}" id="start_date{{i}}" />
-
-                                        End Date: <input type="text" required  (change)="setEnd(i,'end_date','start_date'+(i+1),true);" (ngInit)="initFlatpicker('end_date',i)" [(ngModel)]="data.season_info[i].end_date" class="flatpickr cls end_date{{i}}" placeholder="Select Date" name="end_time{{i}}" id="end_date{{i}}" />
-                                        <div style="display: none;">DATE:{{data.season_info[i].diff}}</div>
                                 </div>
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
                             </div>
-
-
-
-                            <div class="form-group bk">
-                                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><a routerLink="/golf-course/section-two">Back</a></button>
-
-                                <button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info&&environment.random.userDetail.seasons_info.length == 0">Submit & Continue</button>
-
-                                <button style="    float: right;" type="submit" (click)="save(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.seasons_info && environment.random.userDetail.seasons_info.length > 0">Update & Continue</button>
-
+                            <div class="col-sm-4">
+                                <label>From:</label>
+                                <div>
+                                    <select class="form-control" style="width:60px;padding: .375rem 5px;">
+                                        <option>MM</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                    <select class="form-control" style="width:60px;padding: .375rem 5px;">
+                                        <option>DD</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-sm-4">
+                                <label>To:</label>
+                                <div>
+                                    <select class="form-control" style="width:60px;padding: .375rem 5px;">
+                                        <option>DD</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                    <select class="form-control" style="width:60px;padding: .375rem 5px;">
+                                        <option>MM</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-group text-right">
+                            <a routerLink="/golf-course/section-two" class="btn waves-effect waves-light btn-outline-secondary">Back</a>
+                            <a (click)="save(section,false)" href="javascript:void(0)" class="btn waves-effect waves-light btn-info">Save &amp; Next</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
-<div (ngInit)="setValue()" *ngIf="environment.random.userDetail&&environment.random.keys&&environment.random.keys['others']"></div>
-
-
+</section>

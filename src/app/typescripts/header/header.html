@@ -1,145 +1,145 @@
 
 
-<div style="background-color: #e9ebee;height: 100px;">
-    <div style="
-    font-size: 24px;
-    /*margin-top: 10px;*/
-    padding-top: 15px;
-    color: white;
-    padding-left: 30px;
-    ">
-        <h1 style="text-shadow:#ffffff 3px 3px 0px, rgba(0, 0, 0, 0.2) 6px 6px 0px;margin-left: 20px;color:brown;">THE PUTT</h1>
+<!--<div style="background-color: #e9ebee;height: 100px;">-->
+    <!--<div style="-->
+    <!--font-size: 24px;-->
+    <!--/*margin-top: 10px;*/-->
+    <!--padding-top: 15px;-->
+    <!--color: white;-->
+    <!--padding-left: 30px;-->
+    <!--">-->
+        <!--<h1 style="text-shadow:#ffffff 3px 3px 0px, rgba(0, 0, 0, 0.2) 6px 6px 0px;margin-left: 20px;color:brown;">THE PUTT</h1>-->
 
-    </div>
-    <div onclick="$('#menu').css('display','block')" style="
-    float: right;
-    margin-top: -49px;
-    margin-right: 40px;
-    background-color: brown;
+    <!--</div>-->
+    <!--<div onclick="$('#menu').css('display','block')"   style="-->
+    <!--float: right;-->
+    <!--margin-top: -49px;-->
+    <!--margin-right: 40px;-->
+    <!--background-color: brown;-->
 
-    ">
-        <img src="/assets/image/hamburger.svg">
-    </div>
-</div>
-<div id="menu" style="display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 5000;
-    width: 100%;
-    height: 100%;
-    background: darkolivegreen;
-    overflow-x: scroll;">
+    <!--" >-->
+        <!--<img *ngIf="environment.random.userInfo&&environment.random.source" src="/assets/image/hamburger.svg">-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div id="menu" style="display: none;-->
+    <!--position: fixed;-->
+    <!--top: 0;-->
+    <!--left: 0;-->
+    <!--z-index: 5000;-->
+    <!--width: 100%;-->
+    <!--height: 100%;-->
+    <!--background: darkolivegreen;-->
+    <!--overflow-x: scroll;">-->
 
-    <div onclick="$('#menu').css('display','none')" style="color: white;
-    float: right;
-    font-size: 24px;
-    margin-top: 50px;
-    margin-right: 50px;">X</div>
-    <ng-container *ngIf="environment.random.userInfo&&environment.random.source == 'vendor'">
-        <div>
-            <div style="margin-top: 10%;
-    margin-left: 10%;
-    color: white;
-    width: 20%;float:left;">
-                <ul>
-                    <li>
-                        <a style="    color: beige;
-    font-size: 16px;" routerLink="/vendor/dashboard">DASHBOARD</a>
-                    </li>
-                    <li>
-                        <a style="    color: beige;
-    font-size: 16px;" routerLink="/vendor/manage-golf-course">MANAGE GOLF COURSE</a>
-                    </li>
-                    <li>
-                        <a style="    color: beige;
-    font-size: 16px;" routerLink="/vendor/update-profile">UPDATE PROFILE</a>
-                    </li>
+    <!--<div onclick="$('#menu').css('display','none')" style="color: white;-->
+    <!--float: right;-->
+    <!--font-size: 24px;-->
+    <!--margin-top: 50px;-->
+    <!--margin-right: 50px;">X</div>-->
+    <!--<ng-container *ngIf="environment.random.userInfo&&environment.random.source == 'vendor'">-->
+        <!--<div>-->
+            <!--<div style="margin-top: 10%;-->
+    <!--margin-left: 10%;-->
+    <!--color: white;-->
+    <!--width: 20%;float:left;">-->
+                <!--<ul>-->
+                    <!--<li>-->
+                        <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/vendor/dashboard">DASHBOARD</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/vendor/manage-golf-course">MANAGE GOLF COURSE</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/vendor/update-profile">UPDATE PROFILE</a>-->
+                    <!--</li>-->
 
-                    <li>
-                        <a style="    color: beige;
-    font-size: 26px;" (click)="logout()">LOGOUT</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </ng-container>
-    <ng-container *ngIf="environment.random.userInfo&&environment.random.source == 'golf_course'">
-     <div onclick="$('#menu').css('display','none');">
-         <div style="    margin-top: 10%;
-    margin-left: 10%;
-    color: white;
-    width: 20%;float:left;">
-             <ul>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/section-one">SECTION ONE</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/section-two">SECTION TWO</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/section-three">SECTION THREE</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/section-four">SECTION FOUR</a>
-                 </li>
-             </ul>
-         </div>
-         <div style="    margin-top: 10%;
-    margin-left: 10%;
-    color: white;
-    width: 20%;float:left;">
-             <ul>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/closed-days">CLOSED DAYS</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/public-holiday">HOLIDAYS</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/section-add-on">ADD ON/RENTALS</a>
-                 </li>
-                 <li>
-                     <a style="display:block;color: beige;
-    font-size: 26px;" (click)="logout()">LOGOUT</a>
-                 </li>
+                    <!--<li>-->
+                        <!--<a style="    color: beige;-->
+    <!--font-size: 26px;" (click)="logout()">LOGOUT</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</ng-container>-->
+    <!--<ng-container *ngIf="environment.random.userInfo&&environment.random.source == 'golf_course'">-->
+     <!--<div onclick="$('#menu').css('display','none');">-->
+         <!--<div style="    margin-top: 10%;-->
+    <!--margin-left: 10%;-->
+    <!--color: white;-->
+    <!--width: 20%;float:left;">-->
+             <!--<ul>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/section-one">SECTION ONE</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/section-two">SECTION TWO</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/section-three">SECTION THREE</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/section-four">SECTION FOUR</a>-->
+                 <!--</li>-->
+             <!--</ul>-->
+         <!--</div>-->
+         <!--<div style="    margin-top: 10%;-->
+    <!--margin-left: 10%;-->
+    <!--color: white;-->
+    <!--width: 20%;float:left;">-->
+             <!--<ul>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/closed-days">CLOSED DAYS</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/public-holiday">HOLIDAYS</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/section-add-on">ADD ON/RENTALS</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="display:block;color: beige;-->
+    <!--font-size: 26px;" (click)="logout()">LOGOUT</a>-->
+                 <!--</li>-->
 
-             </ul>
-         </div>
-         <div style="    margin-top: 10%;
-    margin-left: 10%;
-    color: white;
-    width: 20%;float:left;">
-             <ul>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/dashboard">DASHBOARD</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/update-profile">UPDATE PROFILE</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/manage-slot">MANAGE SLOTS</a>
-                 </li>
-                 <li>
-                     <a style="    color: beige;
-    font-size: 16px;" routerLink="/golf-course/manage-vendors">MANAGE VENDORS</a>
-                 </li>
-             </ul>
-         </div>
-     </div>
+             <!--</ul>-->
+         <!--</div>-->
+         <!--<div style="    margin-top: 10%;-->
+    <!--margin-left: 10%;-->
+    <!--color: white;-->
+    <!--width: 20%;float:left;">-->
+             <!--<ul>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/dashboard">DASHBOARD</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/update-profile">UPDATE PROFILE</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/manage-slot">MANAGE SLOTS</a>-->
+                 <!--</li>-->
+                 <!--<li>-->
+                     <!--<a style="    color: beige;-->
+    <!--font-size: 16px;" routerLink="/golf-course/manage-vendors">MANAGE VENDORS</a>-->
+                 <!--</li>-->
+             <!--</ul>-->
+         <!--</div>-->
+     <!--</div>-->
 
-    </ng-container>
+    <!--</ng-container>-->
 
-</div>
+<!--</div>-->
 <div (ngInit)="vdahboard()" *ngIf="environment.random.source == 'vendor'&&environment.random.userInfo"></div>
 <div (ngInit)="dashboard()" *ngIf="environment.random.source == 'golf_course'&&environment.random.userInfo"></div>

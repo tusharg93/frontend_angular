@@ -179,6 +179,9 @@ export class LoginComponent implements OnInit {
     $.getJSON(url,function(countries) {
       _self.environment.random.countries = countries;
       _self.all['countries'] = countries;
+      setTimeout(()=>{
+        $('.chosen').chosen()
+      },200)
     });
     if(!this.environment.random.countries){
       this.ApiService.getApiMc4k('https://restcountries.eu/rest/v2/all',1).then((value)=>{

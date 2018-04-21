@@ -483,7 +483,7 @@ hr{
     color:#9675ce!important
 }
 .text-primary{
-    color:#337ab7!important
+    color:brown!important
 }
 .text-megna{
     color:#01c0c8!important
@@ -774,7 +774,9 @@ label{
 }
 #wrapper{
     width:100%;
-    margin-top:-120px;
+    position: absolute;
+    margin-top: -900px;
+    background-color: transparent;
 }
 #page-wrapper{
     padding:0 0 60px;
@@ -855,7 +857,7 @@ label{
 }
 .navbar-header{
     width:100%;
-    background:#03a9f3;
+    background:brown;
     border:0
 }
 .navbar-default{
@@ -1029,13 +1031,13 @@ label{
     border:1px solid #00c292
 }
 .btn-info,.btn-info.disabled{
-    background:#03a9f3;
-    border:1px solid #03a9f3
+    background:brown;
+    border:1px solid brown
 }
 .btn-info.disabled.focus,.btn-info.disabled:focus,.btn-info.disabled:hover,.btn-info.focus,.btn-info:focus,.btn-info:hover{
-    background:#03a9f3;
+    background:brown;
     opacity:.8;
-    border:1px solid #03a9f3
+    border:1px solid brown;
 }
 .btn-warning,.btn-warning.disabled{
     background:#fec107;
@@ -3514,9 +3516,9 @@ table.focus-on tbody tr.focused td,table.focus-on tbody tr.focused th{
     position:fixed
 }
 .login-box{
-    background:#fff;
-    width:400px;
-    margin:10% auto 0;
+    background: transparent;
+    width: 400px;
+    margin: 10% auto 0 50px;
     border: 1px solid;
 }
 .login-box .footer{
@@ -15694,7 +15696,7 @@ input[type="search"]:valid + label {
 
     border: 16px solid #f3f3f3;
     border-radius: 50%;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid brown;
     width: 120px;
     height: 120px;
     margin-top: 40%;
@@ -15778,7 +15780,7 @@ input[type="search"]:valid + label {
 
 .lds-roller {
     display: inline-block;
-    position: relative;
+    /*position: relative;*/
     width: 64px;
     height: 64px;
 }
@@ -17484,4 +17486,6 @@ input:checked + .add-event-slider:before 				    {-webkit-transform: translateX(
     color:brown;
 }
 
-
+.beig_clr{
+    color: beige;
+}

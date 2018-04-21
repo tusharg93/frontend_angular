@@ -32,7 +32,7 @@ const routes:Routes = [
 
      { path: 'golf-course/public-holiday', loadChildren: './typescripts/public-holiday/public-holiday.module#PublicHolidayModule', data: { name:'Golf', type:'Update' },pathMatch: 'full'},
 
-     { path: 'golf-course/close-days', loadChildren: './typescripts/close-days/close-days.module#CloseDaysModule', data: { name:'Golf', type:'Update' },pathMatch: 'full'},
+     { path: 'golf-course/closed-days', loadChildren: './typescripts/close-days/close-days.module#CloseDaysModule', data: { name:'Golf', type:'Update' },pathMatch: 'full'},
 
      { path: 'golf-course/manage-slot', loadChildren: './typescripts/manage-slot/manage-slot.module#ManageSlotModule', data: { name:'Golf', type:'Update' },pathMatch: 'full'},
 
