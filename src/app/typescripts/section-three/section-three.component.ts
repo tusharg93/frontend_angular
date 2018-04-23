@@ -31,12 +31,13 @@ export class SectionThreeComponent implements OnInit {
   minGolf:any;
   constructor(private ref:ChangeDetectorRef,private _storage:StorageService,private _router:Router, private ApiService: ApiService) {
     this.environment = environment;
-    this.environment.headerChild = [];
+    
     this.data = new Array();
     this.currency = new Array();
     this.timezone = new Array();
     this.slotTime = new Array(5,10,15,20);
     this.minGolf = new Array(1,2,3,4);
+    let calender = [31,28,31,30,31,30,31,31,30,31,30,31]
   }
 
   ngOnInit() {
@@ -97,7 +98,7 @@ export class SectionThreeComponent implements OnInit {
 
   setSeason(){
     let self = this;
-   if(this.data.seasonList.length>0){
+   if(this.data.seasonList&&this.data.seasonList.length>0){
      swal({
            title: "Are you sure?",
            text: "All previous data will be erased",
@@ -182,13 +183,13 @@ export class SectionThreeComponent implements OnInit {
   
 
   setNext(){
-    var _self = this;
-    setTimeout(function(){
-      for(var i=0;i < _self.data['noseason'];i++){
-        flatpickr('#start_date'+i, {enableTime:false});
-        flatpickr('#end_date'+i, {enableTime:false});
-      }
-    },100)
+    // var _self = this;
+    // setTimeout(function(){
+    //   for(var i=0;i < _self.data['noseason'];i++){
+    //     flatpickr('#start_date'+i, {enableTime:false});
+    //     flatpickr('#end_date'+i, {enableTime:false});
+    //   }
+    // },100)
 
   }
 

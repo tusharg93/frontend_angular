@@ -11,6 +11,7 @@ declare var $:any;
   encapsulation:ViewEncapsulation.None,
   selector:'home',
   templateUrl: './home.html',
+  styleUrls:['../../../assets/css/new/login-register-lock.css']
 })
 
 

@@ -1,0 +1,143 @@
+#home-page {
+    background: #f7f9ff;
+}
+
+#home-page .home-banner {
+    background: url('https://images.unsplash.com/photo-1514480573427-1f96cbed6a27?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2b330e486b2c0d92fda6b563ae596230&auto=format&fit=crop&w=1646&q=80') 0% 90% no-repeat;
+    height: 50vh;
+    width: 100%;
+    text-align: center;
+}
+
+.logo {
+    float: left;
+    width: 150px;
+    margin: 20px;
+}
+
+.home-page-heading {
+    margin: 15% 0 0;
+    color: #fff;
+    clear: both;
+    display: block;
+}
+
+.home-card {
+    /*background: #fff; */
+    /*padding: 0px 0px 120px; */
+    /*text-align: center; */
+    margin: 0 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+.shadow-box {
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.28) !important;
+}
+
+.shift-up-60 {
+    margin-top: -60px;
+}
+
+.forced-inline {
+    display: inline-block !important;
+}
+
+.actions.btn-list {
+    width: 100%;
+}
+
+.actions.btn-list ul {
+    list-style: none;
+    text-align: right;
+}
+
+.actions.btn-list ul li {
+    display: inline;
+    list-style: none;
+    margin-left: 10px;
+}
+
+.left-container {
+    left: 0%;
+    background-image: url('/assets/image/left-bg.jpg');
+}
+
+.right-container {
+    right: 0%;
+    background-image: url('/assets/image/right-bg.jpg');
+    background-position: top left !important;
+}
+
+.main-container {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: top center;
+}
+
+.absolute-center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.absolute-bottom-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 155px 40px !important;
+    width: 100%;
+}
+
+.content-bg {
+    background: rgba(45, 45, 45, 0.55);
+    padding: 60px 40px;
+    text-align: center;
+    color: #fff;
+}
+
+.centered-box {
+    width: 350.4px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -300.2px;
+    margin-left: -175.2px;
+    text-align: center;
+}
+
+.login-register {
+    padding: 3% 0;
+}
+
+.tooltip-item {
+    background: transparent !important;
+}
+
+.multi-select .bootstrap-select {
+    width: 100% !important;
+}
+
+.multi-select .bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    color: #2f3238;
+}
+
+.btn-group.btn-group-toggle .btn-outline-dark {
+    padding: 7px 30px !important;
+}
+
+.card-header-panal {
+    margin: -30px -20px 0;
+    background: #fc9677;
+    padding: 15px;
+    color: #fff;
+}

@@ -1,129 +1,68 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <base href="/">
-  <!-- DNS pre-fetch start -->
-
-  <meta http-equiv="x-dns-prefetch-control" content="on">
-  <!--<link rel="dns-prefetch" href="https://www.mycity4kids.com">-->
-  <!-- DNS pre-fetch end -->
-
-  <title></title>
- <link rel="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
-    <link href="../assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css" rel="stylesheet">
-    <link href="../assets/plugins/bower_components/switchery/dist/switchery.min.css" rel="stylesheet">
-    <!-- animation CSS -->
-    <link href="assets/css/animate.css" rel="stylesheet">
-    <!--&lt;!&ndash; Custom CSS &ndash;&gt;-->
-    <link href="assets/css/style.css?v=1" rel="stylesheet">
-    <!--&lt;!&ndash; color CSS &ndash;&gt;-->
-    <!--<link href="assets/css/colors/default.css" id="theme" rel="stylesheet">-->
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <link href="../assets/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
-    <!--<link href="../assets/css/select.css" rel="stylesheet" type="text/css">-->
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-
-    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
-      <script src="../assets/plugins/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/plugins/bower_components/switchery/dist/switchery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
-
-
-    <script src="../assets/bootstrap/dist/js/tether.min.js"></script>
-  <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
-  <!--<script src="../assets/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>-->
-    <!--<script src="../assets/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js"></script>-->
-    <script src="../assets/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
-    <script src="../assets/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
-    <!-- Menu Plugin JavaScript -->
-  <!--<script src="../assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>-->
-  <!--slimscroll JavaScript -->
-  <script src="../assets/js/jquery.slimscroll.js"></script>
-    <script src="../assets/plugins/bower_components/summernote/dist/summernote.min.js"></script>
-
-    <!--<link href="../assets/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="../assets/plugins/bower_components/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">-->
-
-    <!--<link href="../assets/plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">-->
-    <script src="../assets/js/flatpicker.js"></script>
-    <link href="../assets/css/flatpicker.css" rel="stylesheet">
-    <link href="../assets/plugins/bower_components/summernote/dist/summernote.css" rel="stylesheet" />
-    <!--<script src="../assets/js/select.js"></script>-->
-    <!--Wave Effects -->
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
+    <base href="/" >
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <!--<title>Elite Admin Template - The Ultimate Multipurpose admin template</title>-->
 
-    <!-- page css -->
-    <link href="/assets/css/pages/login-register-lock.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="/assets/css/style.min.css" rel="stylesheet">
-    <link href="/assets/css/putt-style.css" rel="stylesheet">
+    <!--<link href="/assets/css/new/login-register-lock.css" rel="stylesheet">-->
 
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link href="/assets/css/new/style.min.css" rel="stylesheet">
+    <link href="/assets/css/new/putt-style.css" rel="stylesheet">
 
 </head>
-<body>
-  <app-root>
-  </app-root>
-  <script>
-      function setSelect(){
-          $(".custom-select").each(function() {
-              var classes = $(this).attr("class"),
-                      id      = $(this).attr("id"),
-                      name    = $(this).attr("name");
-              var template =  '<div class="' + classes + '">';
-              template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-              template += '<div class="custom-options">';
-              $(this).find("option").each(function() {
-                  template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-              });
-              template += '</div></div>';
 
-              $(this).wrap('<div class="custom-select-wrapper"></div>');
-              $(this).hide();
-              $(this).after(template);
-          });
+<body id="home-page">
 
-      }
-      $(".custom-option:first-of-type").hover(function() {
-          $(this).parents(".custom-options").addClass("option-hover");
-      }, function() {
-          $(this).parents(".custom-options").removeClass("option-hover");
-      });
-      $(".custom-select-trigger").on("click", function() {
-          $('html').one('click',function() {
-              $(".custom-select").removeClass("opened");
-          });
-          $(this).parents(".custom-select").toggleClass("opened");
-          event.stopPropagation();
-      });
-      $(".custom-option").on("click", function() {
-          $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
-          $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-          $(this).addClass("selection");
-          $(this).parents(".custom-select").removeClass("opened");
-          $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-      });
 
-  </script>
+<app-root></app-root>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function setSelect(){
+        $(".custom-select").each(function() {
+            var classes = $(this).attr("class"),
+                    id      = $(this).attr("id"),
+                    name    = $(this).attr("name");
+            var template =  '<div class="' + classes + '">';
+            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+            template += '<div class="custom-options">';
+            $(this).find("option").each(function() {
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+            });
+            template += '</div></div>';
+
+            $(this).wrap('<div class="custom-select-wrapper"></div>');
+            $(this).hide();
+            $(this).after(template);
+        });
+
+    }
+    $(".custom-option:first-of-type").hover(function() {
+        $(this).parents(".custom-options").addClass("option-hover");
+    }, function() {
+        $(this).parents(".custom-options").removeClass("option-hover");
+    });
+    $(".custom-select-trigger").on("click", function() {
+        $('html').one('click',function() {
+            $(".custom-select").removeClass("opened");
+        });
+        $(this).parents(".custom-select").toggleClass("opened");
+        event.stopPropagation();
+    });
+    $(".custom-option").on("click", function() {
+        $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+        $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+        $(this).addClass("selection");
+        $(this).parents(".custom-select").removeClass("opened");
+        $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+    });
+
+</script>
 <script>
     function showId(id){
         var el = document.getElementById(id);
@@ -145,14 +84,14 @@
         $("#"+from).fadeIn();
         $("#"+from).css('display','block');
     }
-   function switchMaker(id){
+    function switchMaker(id){
         var val = id?'.'+id:'.js-switch';
         var elems = Array.prototype.slice.call(document.querySelectorAll(val));
 
-            $(val).each(function () {
-                new Switchery($(this)[0], $(this).data());
+        $(val).each(function () {
+            new Switchery($(this)[0], $(this).data());
 
-            });
+        });
     }
 
     function switchId(id){
@@ -191,7 +130,7 @@
         $('[rel=tooltip]').tooltip('destroy');
         $('.note-editable').html(val)
     }
-   function showCheckboxes(id) {
+    function showCheckboxes(id) {
         var checkboxes = document.getElementById(id);
         if (checkboxes.style.display=='block') {
             checkboxes.style.display = "none";
@@ -201,5 +140,8 @@
     }
 
 </script>
-<script type="text/javascript" src="inline.1522430953434.bundle.js" defer></script><script type="text/javascript" src="styles.bundle.map" defer></script><script type="text/javascript" src="vendor.1522430953434.bundle.js" defer></script><script type="text/javascript" src="client.1522430953434.bundle.js" defer></script></body>
+<script type="text/javascript" src="inline.1524496492117.bundle.js" defer></script><script type="text/javascript" src="styles.bundle.map" defer></script><script type="text/javascript" src="vendor.1524496492117.bundle.js" defer></script><script type="text/javascript" src="client.1524496492117.bundle.js" defer></script></body>
+
+
 </html>
+

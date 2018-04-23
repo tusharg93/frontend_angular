@@ -15,6 +15,7 @@ var BATTUTA_KEY="00000000000000000000000000000000";
   encapsulation:ViewEncapsulation.None,
   selector:'home',
   templateUrl: './login.html',
+  styleUrls:['../../../assets/css/new/login-register-lock.css'],
   providers: [ApiService,StorageService],
 })
 

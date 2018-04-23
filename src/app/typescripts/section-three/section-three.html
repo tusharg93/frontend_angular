@@ -116,7 +116,7 @@
                             <label>No. of seasons</label>
                             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
-                                    <button onclick="$('.season_count').removeClass('active');$(this).addClass('active');" id="season_count{{list}}" *ngFor="let list of environment.random.keys.seasons;let i=index" [(ngModel)]="data.noseason"  [value]="i+1" type="button" class="btn btn-secondary season_count">{{i+1}}</button>
+                                    <button onclick="$('.season_count').removeClass('active');$(this).addClass('active');" id="season_count{{list}}" *ngFor="let list of environment.random.keys.seasons;let i=index"  (click)="data.noseason=i+1;setSeason(i)"  type="button" class="btn btn-secondary season_count">{{i+1}}</button>
                                 </div>
 
                             </div>
