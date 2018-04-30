@@ -1,0 +1,139 @@
+
+@font-face{
+    font-family:FontAwesome;
+    src:url(/assets/less/icons/font-awesome/fonts/fontawesome-webfont.eot?v=4.5.0);
+    src:url(/assets/less/icons/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.5.0) format('embedded-opentype'),
+    url(/assets/less/icons/font-awesome/fonts/fontawesome-webfont.woff2?v=4.5.0) format('woff2'),
+    url(/assets/less/icons/font-awesome/fonts/fontawesome-webfont.woff?v=4.5.0) format('woff'),
+    url(/assets/less/icons/font-awesome/fonts/fontawesome-webfont.ttf?v=4.5.0) format('truetype'),
+    url(/assets/less/icons/font-awesome/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular) format('svg');
+    font-weight:400;
+    font-style:normal
+}
+
+.fa{
+    display:inline-block;
+    font:normal normal normal 14px/1 FontAwesome;
+    font-size:inherit;
+    text-rendering:auto;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale
+}
+.fa-magic:before{
+    content:"\f0d0"
+}
+
+
+.fa-font:before{
+    content:"\f031"
+}
+.fa-bold:before{
+    content:"\f032"
+}
+.fa-italic:before{
+    content:"\f033"
+}
+.fa-text-height:before{
+    content:"\f034"
+}
+.fa-text-width:before{
+    content:"\f035"
+}
+.fa-align-left:before{
+    content:"\f036"
+}
+.fa-align-center:before{
+    content:"\f037"
+}
+.fa-align-right:before{
+    content:"\f038"
+}
+.fa-align-justify:before{
+    content:"\f039"
+}
+.fa-list:before{
+    content:"\f03a"
+}
+.fa-dedent:before,.fa-outdent:before{
+    content:"\f03b"
+}
+.fa-indent:before{
+    content:"\f03c"
+}
+.fa-video-camera:before{
+    content:"\f03d"
+}
+.fa-image:before,.fa-photo:before,.fa-picture-o:before{
+    content:"\f03e"
+}
+.fa-pencil:before{
+    content:"\f040"
+}
+.fa-map-marker:before{
+    content:"\f041"
+}
+.fa-adjust:before{
+    content:"\f042"
+}
+.fa-tint:before{
+    content:"\f043"
+}
+.fa-edit:before,.fa-pencil-square-o:before{
+    content:"\f044"
+}
+.fa-share-square-o:before{
+    content:"\f045"
+}
+.fa-check-square-o:before{
+    content:"\f046"
+}
+.fa-arrows:before{
+    content:"\f047"
+}
+.fa-step-backward:before{
+    content:"\f048"
+}
+.fa-fast-backward:before{
+    content:"\f049"
+}
+
+.fa-underline:before{
+    content:"\f0cd"
+}
+.fa-table:before{
+    content:"\f0ce"
+}
+.fa-magic:before{
+    content:"\f0d0"
+}
+
+.fa-strikethrough:before{
+    content:"\f0cc"
+}
+
+.fa-superscript:before{
+    content:"\f12b"
+}
+.fa-subscript:before{
+    content:"\f12c"
+}
+.fa-eraser:before{
+    content:"\f12d"
+}
+.fa-puzzle-piece:before{
+    content:"\f12e"
+}
+
+.fa-list-ul:before{
+    content:"\f0ca"
+}
+.fa-list-ol:before{
+    content:"\f0cb"
+}
+.note-codable{
+    height: 0px;
+    width:0px;
+}
+.note-editable {
+    border:1px solid black;
+}

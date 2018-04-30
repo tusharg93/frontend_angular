@@ -12,7 +12,7 @@ import { StorageService } from './../services/storage.service';
   encapsulation:ViewEncapsulation.None,
   selector: 'image-tee',
   template: `
-  <div class="ovrlay" id="ImgCrop" style="display:none;">
+  <div class="ovrlay" id="ImgCrop" style="display:none;    margin-left: 30%;">
     <div class="overlay-close" onclick="hideId('ImgCrop');" style="float: right;font-size: 40px;">X</div>
     <div class="crop-image-div">
         <div class="cropArea">
@@ -149,7 +149,7 @@ export class ImageComponent implements OnInit {
     this.ApiService.imageApi(link,fileData).then((value)=>{
       if(value && value['data'] && value['data'] && value['data']){
         $('#ImgCrop').css('display','none');
-        $('#logoImg').attr('src',value['data']['url'])
+        // $('#logoImg').attr('src',value['data']['url'])
         this.updateImage.emit(value['data']['url']);
 
       }else{

@@ -178,15 +178,45 @@ export class ApiService {
     this.getApiMc4k('api/v1/vendors/dashboard',0,true).then((value)=>{
       if(value&&value.data){
         this.environment.random.userDetail = value.data;
-        if(link){
-          this.router.navigateByUrl(link);
-        }
+        // if(link){
+        //   this.router.navigateByUrl(link);
+        // }
+
+
         this.default(value.data.defaults);
       }
     })
   }
 
   default(value){
+      var zz = {  "defaults":{
+              "seasons":[
+                  {
+                      "id":1,
+                      "name":"summer"
+                  },
+                  {
+                      "id":2,
+                      "name":"winter"
+                  },
+                  {
+                      "id":3,
+                      "name":"autumn"
+                  }
+              ],
+              "days":[
+                  {
+                      "id":"w1",
+                      "name":"weekday"
+                  },
+                  {
+                      "id":"w2",
+                      "name":"weekend"
+                  }
+              ]
+          }};
+      value = zz.defaults;
+      console.log(value)
     this.environment.random.keys = value;
     this.environment.random.keys['others'] = new Array();
     let param = [];
@@ -197,6 +227,7 @@ export class ApiService {
       }
 
     }
+
     this.environment.random.keys['others']  = param;
   }
   

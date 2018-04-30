@@ -392,6 +392,7 @@
             </div>
         </div>
     </div>
+    <!--Register as Golf course-->
     <div class="login-register" id="registerform" style="display: none">
         <div class="login-box card">
 
@@ -408,24 +409,26 @@
                         <div class="form-group">
                             <label>Golf Course Name</label>
                             <div>
-                                <input type="text" placeholder="Enter name here" required  name="name" [(ngModel)]="data.name2" class="form-control">
+                                <input type="text" placeholder="Enter name here" required  name="name" [(ngModel)]="data.name" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Country</label>
                             <div>
                                 <select class="form-control" [(ngModel)]="data.country" name="country">
-                                    <option>India</option>
-                                    <option>England</option>
+                                    <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                        {{list.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>City</label>
                             <div>
-                                <select class="form-control" [(ngModel)]="data.city" name="city">
-                                    <option>Noida</option>
-                                    <option>England</option>
+                                <select class="form-control" [(ngModel)]="data.city" name="country">
+                                    <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                        {{list.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -433,8 +436,9 @@
                             <label>Mobile</label>
                             <div>
                                 <select style="max-width: 75px;" name="code" class="form-control" [(ngModel)]="data.country_code">
-                                    <option>+91</option>
-                                    <option>+92</option>
+                                    <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                        {{list.code}}
+                                    </option>
                                 </select>
                                 <input type="number" [(ngModel)]="data.mobile" placeholder="Enter mobile here" name="mobile" style="width:82%;" class="form-control">
                             </div>
@@ -475,17 +479,24 @@
 
                     <form class="form p-t-20"  #registerVForm="ngForm" name="registerVForm">
                         <div class="form-group">
-                            <label>Golf Course Name</label>
+                            <label>Company Name</label>
                             <div>
                                 <input type="text" placeholder="Enter name here" required  name="name" [(ngModel)]="data.name2" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Website</label>
+                            <div>
+                                <input type="text" ng-pattern="^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$" placeholder="Enter website here" required  name="website" [(ngModel)]="data.website" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Country</label>
                             <div>
                                 <select class="form-control" [(ngModel)]="data.country" name="country">
-                                    <option>India</option>
-                                    <option>England</option>
+                                    <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                        {{list.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -493,8 +504,9 @@
                             <label>City</label>
                             <div>
                                 <select class="form-control" [(ngModel)]="data.city" name="city">
-                                    <option>Noida</option>
-                                    <option>England</option>
+                                    <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                        {{list.name}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -502,10 +514,11 @@
                             <label>Mobile</label>
                             <div>
                                 <select style="max-width: 75px;" name="code" class="form-control" [(ngModel)]="data.country_code">
-                                    <option>+91</option>
-                                    <option>+92</option>
+                                    <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                        {{list.code}}
+                                    </option>
                                 </select>
-                                <input type="number" [(ngModel)]="data.mobile" placeholder="Enter mobile here" name="mobile" style="width:82%;" class="form-control">
+                                <input type="number" [(ngModel)]="data.mobile1" placeholder="Enter mobile here" name="mobile" style="width:82%;" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -522,7 +535,7 @@
                         </div>
 
 
-                        <a href="javascript:void(0)" (click)="registerMeIn(registerVForm)" class="btn btn-success btn-lg waves-effect waves-light m-r-10">
+                        <a href="javascript:void(0)" (click)="registerVendor(registerVForm)" class="btn btn-success btn-lg waves-effect waves-light m-r-10">
                             Submit
                         </a>
                     </form>

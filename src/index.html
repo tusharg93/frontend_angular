@@ -14,14 +14,15 @@
 
     <link href="/assets/css/new/style.min.css" rel="stylesheet">
     <link href="/assets/css/new/putt-style.css" rel="stylesheet">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body id="home-page">
 
 
 <app-root></app-root>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
     function setSelect(){
         $(".custom-select").each(function() {
@@ -106,29 +107,48 @@
     }
 
     function summernode(val){
-        $('.summernote').summernote({
-            height: 200, // set editor height
-            minHeight: null, // set minimum height of editor
-            maxHeight: null, // set maximum height of editor
-            focus: false, // set focus to editable area after initializing summernote
-            toolbar: [
-                [ 'style', [ 'style' ] ],
-                [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
-                [ 'fontname', [ 'fontname' ] ],
-                [ 'fontsize', [ 'fontsize' ] ],
-                [ 'color', [ 'color' ] ],
-                [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
-                [ 'table', [ 'table' ] ],
-                [ 'insert', [ 'link'] ],
-                [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
-            ]
+        var linkElem = document.createElement('link');
+        linkElem.rel = 'stylesheet';
+        linkElem.type = 'text/css';
+        linkElem.href = '/assets/css/new/fa.icon.css';
+        document.getElementsByTagName('head')[0].appendChild(linkElem);
+        // var linkElem1 = document.createElement('link');
+        // linkElem1.rel = 'stylesheet';
+        // linkElem1.type = 'text/css';
+        // linkElem1.href = ';
+        // document.getElementsByTagName('head')[0].appendChild(linkElem1);
+
+
+        $.getScript("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js", function() {
+
+            $.getScript("/assets/plugins/bower_components/summernote/dist/summernote.js", function () {
+
+                $('.summernote').summernote({
+                    height: 200, // set editor height
+                    minHeight: null, // set minimum height of editor
+                    maxHeight: null, // set maximum height of editor
+                    focus: false, // set focus to editable area after initializing summernote
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                        ['fontname', ['fontname']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ol', 'ul', 'paragraph', 'height']],
+                        ['table', ['table']],
+                        ['insert', ['link']],
+                        ['view', ['undo', 'redo', 'fullscreen', 'codeview', 'help']]
+                    ]
+                });
+
+                $('[rel=tooltip]').tooltip()
+                $('[rel=tooltip]').tooltip('disable')
+                $('[rel=tooltip]').tooltip('enable')
+                $('[rel=tooltip]').tooltip('destroy');
+                $('.note-editable').html(val)
+            });
         });
 
-        $('[rel=tooltip]').tooltip()
-        $('[rel=tooltip]').tooltip('disable')
-        $('[rel=tooltip]').tooltip('enable')
-        $('[rel=tooltip]').tooltip('destroy');
-        $('.note-editable').html(val)
     }
     function showCheckboxes(id) {
         var checkboxes = document.getElementById(id);

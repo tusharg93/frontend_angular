@@ -1,122 +1,222 @@
 
+<image-tee (updateImage)="updateImageParent($event)"></image-tee>
+<!--<div class="container-fluid">-->
+    <!--<div class="row bg-title">-->
+        <!--<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
+            <!--<h4 class="page-title">UPDATE PROFILE</h4>-->
+        <!--</div>-->
 
-<div class="container-fluid">
-    <div class="row bg-title">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">UPDATE PROFILE</h4>
-        </div>
+    <!--</div>-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-12">-->
+            <!--<div class="white-box p-l-20 p-r-20">-->
+                <!--<div class="row">-->
+                    <!--<div class="col-md-12">-->
+                        <!--<form class="floating-labels " #section="ngForm" name="section" id="section">-->
 
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="white-box p-l-20 p-r-20">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form class="floating-labels " #section="ngForm" name="section" id="section">
-                            <div class="col-sm-12">
-                                <h3 class="box-title">About</h3>
-                                <div >
-                                    <input class="summernote" type="text"  [(ngModel)]="data.about" id="about" name="about" />
-                                </div>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <div *ngFor="let list of ">
-                                    <input type="text" [(ngModel)]="data.website_url" class="form-control" id="website_url" name="website_url">
+                            <!--<div class="form-group m-b-40">-->
+                                <!--<input type="number" [(ngModel)]="data.mobile" class="form-control" id="contact_mobile"  name="contact_mobile">-->
 
-                                    <span class="bar"></span>
-                                    <small class="form-text text-muted"></small>
-                                    <label for="website_url">Website</label>
-                                </div>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <input type="text" [(ngModel)]="data.name" class="form-control" id="contact_name"  name="contact_name">
+                                <!--<span class="bar"></span>-->
+                                <!--<small class="form-text text-muted"></small>-->
+                                <!--<label for="contact_mobile">Mobile</label>-->
+                            <!--</div>-->
 
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="contact_name">Contact Name</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <div *ngFor="let list of ">
-                                    <input type="text" [(ngModel)]="data.designation" class="form-control" id="designation"  name="designation">
 
-                                    <span class="bar"></span>
-                                    <small class="form-text text-muted"></small>
-                                    <label for="designation">Designation</label>
-                                </div>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <input type="number" [(ngModel)]="data.mobile" class="form-control" id="contact_mobile"  name="contact_mobile">
+                            <!--<div class="form-group bk">-->
+                                <!--<button style="    float: right;" type="submit" (click)="_saveAll(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info&&environment.random.userDetail.basic_info.about">Update & Continue</button>-->
 
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="contact_mobile">Mobile</label>
-                            </div>
+                                <!--<button style="    float: right;" type="submit" (click)="_saveAll(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info&&!environment.random.userDetail.basic_info.about">Submit & Continue</button>-->
+                            <!--</div>-->
+                        <!--</form>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
-                            <div class="form-group m-b-40">
-                                <textarea [(ngModel)]="data.address_line_1" class="form-control" id="address_line_1"  name="address_line_1"></textarea>
+<!--</div>-->
 
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="address_line_1">Address 1</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <textarea [(ngModel)]="data.address_line_2" class="form-control" id="address_line_2"  name="address_line_2"></textarea>
+<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
 
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="address_line_2">Address 2</label>
-                            </div>
+<form class="floating-labels " #section="ngForm" name="section" id="section">
 
-                            <div class="form-group m-b-40">
-                                <input type="text" pattern='(^https://www.facebook.com/[A-Za-z0-9._%+-]+$|"")' [(ngModel)]="data.facebook_url" class="form-control" id="facebook_url"  name="facebook_url">
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
 
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="facebook_url">Facebook URL</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <input type="text" pattern='(^https://www.twitter.com/[A-Za-z0-9._%+-]+$|"")' [(ngModel)]="data.twitter_url" class="form-control" id="twitter_url" name="twitter_url">
-
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="twitter_url">Twitter URL</label>
-                            </div>
-                            <div class="form-group m-b-40">
-                                <input type="text" pattern='(^https://www.instagram.com/[0-9A-z._-]+$|"")' [(ngModel)]="data.insta_url" class="form-control" id="insta_url" name="insta_url">
-
-                                <span class="bar"></span>
-                                <small class="form-text text-muted"></small>
-                                <label for="insta_url">Instagram URL</label>
-                            </div>
-
-                            <h3 class="box-title">Week days Working Hours</h3>
-                            <div class="form-group m-b-40">
-                                <input type="text" placeholder="Start Time" style="float:left;width:45%"  [(ngModel)]="data.weekday_hrs.start_time" class="form-control cls_set cls" id="weekday_hrs_start_time" name="weekday_hrs_start_time">
-
-                                <input type="text" placeholder="End Time" style="right:right;width:45%"  [(ngModel)]="data.weekday_hrs.end_time" class="form-control cls_set cls" id="weekday_hrs_end_time" name="weekday_hrs_end_time">
-                            </div>
-                            <h3 class="box-title">Weekend Working Hours</h3>
-                            <div class="form-group m-b-40">
-                                <input type="text" placeholder="Start Time" style="float:left;width:45%"  [(ngModel)]="data.weekend_hrs.start_time" class="form-control cls_set cls" id="weekend_hrs_start_time" name="weekend_hrs_start_time">
-                                <input type="text" placeholder="End Time" style="right:right;width:45%"  [(ngModel)]="data.weekend_hrs.end_time" class="form-control cls_set cls" id="weekend_hrs_end_time" name="weekend_hrs_end_time">
-                            </div>
-                            <div class="form-group m-b-40">
-                                <input type="file" placeholder="Logo"  [(ngModel)]="image" name="logo" (change)="changeImg($event)" class="form-control">
-                            </div>
-                            <div class="form-group bk">
-                                <button style="    float: right;" type="submit" (click)="_saveAll(section,true)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info&&environment.random.userDetail.basic_info.about">Update & Continue</button>
-
-                                <button style="    float: right;" type="submit" (click)="_saveAll(section,false)" class="btn btn-success waves-effect waves-light m-r-10" *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info&&!environment.random.userDetail.basic_info.about">Submit & Continue</button>
-                            </div>
-                        </form>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Profile Update</h4>
+                        <h6 class="card-subtitle">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum."
+                        </h6>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h5 class="card-title">Logo upload</h5>
+                            <input type="file" placeholder="Logo"  [(ngModel)]="image" name="logo" (change)="changeImg($event)"  class="form-control" id="exampleInputFile" aria-describedby="fileHelp">
+                        </div>
+
+                        <div class="form-group">
+                            <h5 class="card-title">About Golf Course</h5>
+                            <input type="text" class="textarea_editor form-control summernote" [(ngModel)]="data.about" id="about" name="about"  placeholder="Enter text ...">
+                        </div>
+                        <br />
+                        <div class="row">
+
+
+                            <div class="col-sm-6  m-t-20">
+                                <div class="form-group">
+                                    <h5 class="card-title">Vendor Information</h5>
+                                    <div class=" g-course-info">
+
+                                        <div class="first">
+                                            <div class="text">Website </div>
+                                            <input type="text"  [(ngModel)]="data.website_url"  name="website_url" placeholder="Website" class="form-control textbox">
+                                        </div>
+                                        <div class="first">
+                                            <div class="text">Name </div>
+                                            <input type="text" [(ngModel)]="data.name" name="name" placeholder="Name" class="form-control textbox">
+                                        </div>
+                                        <div class="first">
+                                            <div class="text">Designation </div>
+                                            <input type="text" [(ngModel)]="data.designation" name="designation" placeholder="Designation" class="form-control textbox">
+                                        </div>
+                                        <!--<div class="first">-->
+                                        <!--<div class="text">LinkedIn </div>-->
+                                        <!--<input type="text" placeholder="" class="form-control textbox">-->
+                                        <!--</div>-->
+                                        <!--<div class="first">-->
+                                        <!--<div class="text">Google+ </div>-->
+                                        <!--<input type="text" placeholder="" class="form-control textbox">-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <br/>
+                        <div class="form-group">
+                            <h5 class="card-title">Address 1</h5>
+                            <textarea type="text" class="textarea_editor form-control " [(ngModel)]="data.address_line_1" name="address_line_1"  rows="3" placeholder="Enter address ..."></textarea>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <h5 class="card-title">Address 2</h5>
+                            <textarea type="text" class="textarea_editor form-control "  [(ngModel)]="data.address_line_2"  name="address_line_2" rows="3"  placeholder="Enter address ..."></textarea>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <h5 class="card-title">Mobile</h5>
+                            <select style="max-width: 75px;" name="code" class="form-control" [(ngModel)]="data.country_code">
+                                <option  *ngFor="let list of environment.random.countries" value="{{list.code}}">
+                                    {{list.code}}
+                                </option>
+                            </select>
+                            <input style="    max-width: 90%;" type="number" class="textarea_editor form-control "  [(ngModel)]="data.mobile"   name="mobile"  placeholder="Enter mobile ...">
+                        </div>
+                        <br />
+
+                        <div class="form-group">
+                            <h5 class="card-title">Operating Hours</h5>
+                            <div class="row g-course-info">
+                                <div class="col-sm-6">
+                                    <h5>Weekday :</h5>
+                                    <select style="max-width: 75px;" class="form-control" [(ngModel)]="data.weekday_hrs.start_time" name="start_time">
+                                        <option *ngFor="let list of time" value="{{list}}">{{list}}</option>
+                                    </select>AM/PM
+
+                                    <span style="padding: 0 10px;">to</span>
+                                    <select style="max-width: 75px;" class="form-control" [(ngModel)]="data.weekday_hrs.end_time" name="end_time">
+                                        <option *ngFor="let list of time" value="{{list}}">{{list}}</option>
+
+                                    </select> AM/PM
+                                </div>
+                                <div class="col-sm-6">
+                                    <h5>Weekend :</h5>
+                                    <select style="max-width: 75px;" class="form-control" [(ngModel)]="data.weekend_hrs.start_time" name="start_time_w">
+                                        <option *ngFor="let list of time" value="{{list}}">{{list}}</option>
+
+                                    </select> AM/PM
+                                    <span style="padding: 0 10px;">to</span>
+                                    <select style="max-width: 75px;" class="form-control" [(ngModel)]="data.weekend_hrs.end_time" name="end_time_w">
+                                        <option *ngFor="let list of time" value="{{list}}">{{list}}</option>
+
+                                    </select> AM/PM
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-sm-6  m-t-20">
+                                <div class="form-group">
+                                    <h5 class="card-title">Follow Us</h5>
+                                    <div class=" g-course-info">
+
+                                        <div class="first">
+                                            <div class="text">Facebook </div>
+                                            <input type="text" pattern='(^https://(www.)?facebook.com/[A-Za-z0-9._%+-]+$|"")' [(ngModel)]="data.facebook_url"  name="facebook_url" placeholder="Facebook" class="form-control textbox">
+                                        </div>
+                                        <div class="first">
+                                            <div class="text">Twitter </div>
+                                            <input type="text" pattern='(^https://(www.)?twitter.com/[A-Za-z0-9._%+-]+$|"")' [(ngModel)]="data.twitter_url" name="twitter_url" placeholder="Twitter" class="form-control textbox">
+                                        </div>
+                                        <div class="first">
+                                            <div class="text">Instagram </div>
+                                            <input type="text" pattern='(^https://(www.)?instagram.com/[0-9A-z._-]+$|"")' [(ngModel)]="data.insta_url" name="insta_url" placeholder="Instagram" class="form-control textbox">
+                                        </div>
+                                        <!--<div class="first">-->
+                                            <!--<div class="text">LinkedIn </div>-->
+                                            <!--<input type="text" placeholder="" class="form-control textbox">-->
+                                        <!--</div>-->
+                                        <!--<div class="first">-->
+                                            <!--<div class="text">Google+ </div>-->
+                                            <!--<input type="text" placeholder="" class="form-control textbox">-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="button-group text-center">
+                            <a *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info&&environment.random.userDetail.basic_info.about"> href="javascript:void(0)" class="btn waves-effect waves-light btn-info" (click)="_saveAll(section,true)">Update</a>
+
+                            <a *ngIf="environment.random.userDetail&&environment.random.userDetail.basic_info&&!environment.random.userDetail.basic_info.about" href="javascript:void(0)" class="btn waves-effect waves-light btn-info" (click)="_saveAll(section,false)">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+
+
+
+
+
+
     </div>
 
+
 </div>
-<div (ngInit)="setValue()" *ngIf="environment.random.userDetail"></div>
+</form>
 
 
 

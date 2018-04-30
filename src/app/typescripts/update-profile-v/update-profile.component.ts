@@ -27,12 +27,14 @@ export class UpdateProfileComponent implements OnInit {
   image:string;
   facilities:any;
   course:any;
+  time:any;
   constructor(private _storage:StorageService,private _router:Router, private ApiService: ApiService) {
     this.environment = environment;
     this.environment.headerChild = [];
     this.data = new Array();
     this.data.weekday_hrs = {start_time:null,end_time:null};
     this.data.weekend_hrs = {start_time:null,end_time:null};
+    this.time = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 
   }
 
@@ -53,6 +55,7 @@ export class UpdateProfileComponent implements OnInit {
 
   _saveAll(form,update){
 
+      console.log(form)
 
     if(form.valid){
       let params = {};
@@ -63,11 +66,6 @@ export class UpdateProfileComponent implements OnInit {
         }
 
       }
-
-      // params['weekday_hrs']['start_time'] = params['weekday_hrs']['start_time']>12?params['weekday_hrs']['start_time']-12+'pm':params['weekday_hrs']['start_time']+'am';
-      // params['weekday_hrs']['end_time'] =params['weekday_hrs']['end_time']>12?params['weekday_hrs']['end_time']-12+'pm':params['weekday_hrs']['end_time']+'am';
-      // params['weekend_hrs']['start_time'] =params['weekend_hrs']['start_time']>12?params['weekend_hrs']['start_time']-12+'pm':params['weekend_hrs']['start_time']+'am';
-      // params['weekend_hrs']['end_time'] =params['weekend_hrs']['end_time']>12?params['weekend_hrs']['end_time']-12+'pm':params['weekend_hrs']['end_time']+'am';
       params['about'] = $('.note-editable').html();
       params['logo'] = this.image;
       if(!update){
@@ -107,10 +105,6 @@ export class UpdateProfileComponent implements OnInit {
 
     this.data = params;
     
-
-    setTimeout(function(){
-      flatpickr('.cls', {noCalendar: true, enableTime: true, time_24hr: true});
-    },50)
 
 
     summernode(this.data.about);

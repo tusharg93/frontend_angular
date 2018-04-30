@@ -3,7 +3,6 @@ import { environment } from '../../../environments/environment';
 import { ApiService } from './../common/services/api.service';
 import { StorageService } from './../common/services/storage.service';
 import { Router,ActivatedRoute, Params } from '@angular/router';
-
 import { isBrowser, isNode } from 'angular2-universal';
 
 declare var $:any;

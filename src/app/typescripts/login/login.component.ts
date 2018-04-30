@@ -47,9 +47,9 @@ export class LoginComponent implements OnInit {
       if(params['type']&& params['type'].trim() != ''){
         this.environment.random.source = params['type'];
         if(this._router.url.indexOf('register') >-1 && params['type'] == 'golf_course') {
-          flipCom('registerform','centerForm')
+          flipCom('registerform','centerForm');this._getCountry();
         }else if(this._router.url.indexOf('register') >-1 && params['type'] == 'vendor'){
-          flipCom('registerVForm','centerForm')
+          flipCom('registerVForm','centerForm');this._getCountry();
         }else if(this._router.url.indexOf('login')>-1){
           flipCom('loginform','centerForm')
         }
@@ -112,6 +112,7 @@ export class LoginComponent implements OnInit {
   
 
   registerMeIn(form){
+
     if(form.valid){
       this.environment.random.source ='golf_course';
       let code = this.data.country_code?this.data.country_code:this.data.country_code2;
@@ -123,6 +124,7 @@ export class LoginComponent implements OnInit {
         }
       }
       let params = {name:this.data.name,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:countryCode, email:this.data.email1, password:this.data.password1}
+
       this.ApiService.postApiMc4k('api/v1/forms/register',params).then((value)=>{
         if(value&&value.msg=='success'){
           flipCom('loginform','registerform')
@@ -137,7 +139,11 @@ export class LoginComponent implements OnInit {
   }
 
   registerVendor(form){
-    if(form.valid) {
+    console.log(this.data);
+      let params = {name:this.data.name2,country:this.data.country, city:this.data.city, mobile:this.data.mobile, country_code:this.data.country_code, email:this.data.email, password:this.data.password, website_url:this.data.website}
+      console.log(params);
+
+      if(form.valid) {
       this.environment.random.source ='vendor';
       let code = this.data.country_code?this.data.country_code:this.data.country_code2;
       let countryCode;
@@ -148,14 +154,14 @@ export class LoginComponent implements OnInit {
         }
       }
       let params = {name:this.data.name2,country:this.data.country2, city:this.data.city2, mobile:this.data.mobile2, country_code:countryCode, email:this.data.email2, password:this.data.password2, website_url:this.data.website_url2}
-      this.ApiService.postApiMc4k('api/v1/vendors/register', params).then((value)=> {
-        if(value&&value.msg=='success'){
-          flipCom('loginform','registerVform')
-          swal("Success", value.msg, "success")
-        }else{
-          swal("Error", value.error, "error")
-        }
-      });
+      // this.ApiService.postApiMc4k('api/v1/vendors/register', params).then((value)=> {
+      //   if(value&&value.msg=='success'){
+      //     flipCom('loginform','registerVform')
+      //     swal("Success", value.msg, "success")
+      //   }else{
+      //     swal("Error", value.error, "error")
+      //   }
+      // });
 
     }
   }
@@ -180,9 +186,9 @@ export class LoginComponent implements OnInit {
     $.getJSON(url,function(countries) {
       _self.environment.random.countries = countries;
       _self.all['countries'] = countries;
-      setTimeout(()=>{
-        $('.chosen').chosen()
-      },200)
+      // setTimeout(()=>{
+      //   $('.chosen').chosen()
+      // },200)
     });
     if(!this.environment.random.countries){
       this.ApiService.getApiMc4k('https://restcountries.eu/rest/v2/all',1).then((value)=>{
